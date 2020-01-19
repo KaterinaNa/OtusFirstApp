@@ -15,19 +15,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-    /*fun onClickfirstButton(view: View?) {
-        val Podrobnee = Toast.makeText(this, "Hello world!", Toast.LENGTH_SHORT)
 
-        Podrobnee.show()
-    }
-
-    fun onClicksecondButton(view: View?) {
-        val countString = textView.text.toString()
-        var count: Int = Integer.parseInt(countString)
-        count++
-        textView.text = count.toString()
-    }
-*/
     fun onClickButton(view: View?) {
 
         val textId = when (view?.id) {
