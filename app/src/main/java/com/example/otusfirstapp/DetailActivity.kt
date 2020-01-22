@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.CheckBox
 import android.widget.EditText
@@ -22,28 +23,20 @@ class DetailActivity : AppCompatActivity() {
         sendIntent.action = Intent.ACTION_SEND
         sendIntent.putExtra(Intent.EXTRA_TEXT, textMessage)
         sendIntent.type = "text/plain"
-        val chooser = Intent.createChooser(sendIntent, title)
         val title = resources.getString(R.string.chooser)
+        val chooser = Intent.createChooser(sendIntent, title)
         val let = sendIntent.resolveActivity(packageManager)?.let {
             startActivity(chooser)
         }
     }
 
-    fun onCheckBoxClicked (view: View?) {
-        val mycheckBox = findViewById<CheckBox>(R.id.СheckBox)
-        editText = findViewById(R.layout.activity_detail)
+   fun onCheckBoxClicked (view: View?) {
+        val mycheckBox = findViewById<CheckBox>(R.id.mycheckBox)
+        val editText = findViewById<EditText>(R.id.editText)
         editText.isEnabled = true
-        editText.text = editText.getText()
+        Log.i("Text", editText.text.toString())
 
     }
-
-
-
-
-
-    }
-
-
 
 
 }

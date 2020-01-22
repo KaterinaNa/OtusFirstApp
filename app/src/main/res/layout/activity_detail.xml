@@ -35,7 +35,7 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
         android:onClick="onClickinvite"
-        app:srcCompact="@drawable/ic_android_black_24px"
+
         android:text="Пригласи друга"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
