@@ -1,10 +1,13 @@
 package com.example.otusfirstapp
 
 import android.content.Intent
+import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.CheckBox
+import android.widget.EditText
+import kotlinx.android.synthetic.main.activity_detail.*
 
 class DetailActivity : AppCompatActivity() {
 
@@ -19,20 +22,28 @@ class DetailActivity : AppCompatActivity() {
         sendIntent.action = Intent.ACTION_SEND
         sendIntent.putExtra(Intent.EXTRA_TEXT, textMessage)
         sendIntent.type = "text/plain"
-        /*val title = resources.getString(R.string.chooser_title)
-        // Создаем Intent для отображения диалога выбора.
         val chooser = Intent.createChooser(sendIntent, title)
-        // Проверяем, что intent может быть успешно обработан*/
-        sendIntent.resolveActivity(packageManager)?.let {
-                startActivity(sendIntent)
-            }
+        val title = resources.getString(R.string.chooser)
+        val let = sendIntent.resolveActivity(packageManager)?.let {
+            startActivity(chooser)
         }
-
-
-
-    val checkBox = findViewById<CheckBox>(R.id.checkBox)
-    if (checkBox.isChecked()) {
-        checkBox.setChecked(false);
     }
+
+    fun onCheckBoxClicked (view: View?) {
+        val mycheckBox = findViewById<CheckBox>(R.id.СheckBox)
+        editText = findViewById(R.layout.activity_detail)
+        editText.isEnabled = true
+        editText.text = editText.getText()
+
+    }
+
+
+
+
+
+    }
+
+
+
 
 }
