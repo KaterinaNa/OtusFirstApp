@@ -36,8 +36,6 @@ class MainActivity : AppCompatActivity() {
 
 
     fun onClickButton(view: View?) {
-
-
         val textId = when (view?.id) {
             R.id.button -> R.id.textView
             R.id.button2 -> R.id.textView2
