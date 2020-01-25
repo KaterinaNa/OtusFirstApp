@@ -30,7 +30,7 @@
         android:layout_width="122dp"
         android:layout_height="50dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:onClick="onClickButton"
         android:text="Podrobnee"
         app:layout_constraintStart_toStartOf="parent"

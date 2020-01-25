@@ -1,20 +1,22 @@
 package com.example.otusfirstapp
 
+import android.app.Activity
 import android.content.Intent
-import android.content.res.Configuration
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.CheckBox
 import android.widget.EditText
-import kotlinx.android.synthetic.main.activity_detail.*
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 
 class DetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
+        var editText =findViewById<EditText>(R.id.editText)
+        editText.isEnabled = false
     }
 
     fun onClickinvite(view: View?) {
@@ -32,11 +34,15 @@ class DetailActivity : AppCompatActivity() {
 
    fun onCheckBoxClicked (view: View?) {
         val mycheckBox = findViewById<CheckBox>(R.id.mycheckBox)
-        val editText = findViewById<EditText>(R.id.editText)
-        editText.isEnabled = true
-        Log.i("Text", editText.text.toString())
+        val textField = findViewById<TextView>(R.id.editText)
+        textField.isEnabled = mycheckBox.isChecked
+        Log.i("Text", textField.text.toString())
+        val intent = Intent()
+        intent.putExtra(ANSWER_CODE, textField.text.toString())
+        setResult(Activity.RESULT_OK, intent)
 
-    }
+
+   }
 
 
 }
