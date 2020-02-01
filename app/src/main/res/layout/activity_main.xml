@@ -59,9 +59,9 @@
         app:srcCompat="@drawable/littleboy" />
 
     <TextView
-        style="@style/textView"
         android:id="@+id/textView3"
-        android:text="@string/flm1"
+        style="@style/textView"
+        android:text="@string/flm3"
         app:layout_constraintStart_toStartOf="@+id/imageView3"
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 

@@ -15,23 +15,23 @@
 
 
     <TextView
-        style="@style/imageView"
         android:id="@+id/textView4"
+        style="@style/imageView"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
         android:text="Французский полицейский Юбер Фиорентини, исполняя последнюю волю когда-то любимой им женщины, вынужден отправиться в далекую Японию, где ему приходится встретиться со старым другом и дочерью, о существовании которой он даже не подозревал."
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView4"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        style="@style/button"
         android:id="@+id/button4"
+        style="@style/button"
+        android:layout_marginTop="24dp"
+        android:drawableStart="@drawable/ic_person_add_24px"
         android:onClick="onClickinvite"
         android:text="@string/chooser"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        android:drawableStart="@drawable/ic_person_add_24px"/>
+        app:layout_constraintStart_toStartOf="@+id/imageView4"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
     <CheckBox
         android:id="@+id/mycheckBox"
@@ -53,8 +53,6 @@
         android:enabled="false"
         android:hint="@string/comment"
         android:inputType="textShortMessage|textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/mycheckBox" />
 </androidx.constraintlayout.widget.ConstraintLayout>
