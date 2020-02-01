@@ -1,11 +1,13 @@
 package com.example.otusfirstapp
 
 import android.app.Activity
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 
 const val REQUEST_CODE = 42
@@ -78,6 +80,28 @@ class MainActivity : AppCompatActivity() {
         textView2.setTextColor(resources.getColor(android.R.color.secondary_text_light))
         val textView3 = findViewById<TextView>(R.id.textView3)
         textView3.setTextColor(resources.getColor(android.R.color.secondary_text_light))
+    }
+
+
+
+    override fun onBackPressed() {
+        val bld: AlertDialog.Builder = AlertDialog.Builder(this)
+        val no_lst =
+            DialogInterface.OnClickListener { dialog,
+                                              which ->
+                dialog.dismiss()
+            }
+        val yes_lst =
+            DialogInterface.OnClickListener { dialog,
+                                              which ->
+                super.onBackPressed()
+            }
+        bld.setMessage("Вы уверены, что хотите выйти?")
+        bld.setTitle("Выход?")
+        bld.setNegativeButton("Нет", no_lst)
+        bld.setPositiveButton("Выход", yes_lst)
+        val dialog: AlertDialog = bld.create()
+        dialog.show()
     }
 }
 
