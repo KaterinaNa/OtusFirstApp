@@ -14,7 +14,7 @@ class PosterAdapter(val inflater: LayoutInflater, val items: List<Film>) :
     override fun getItemCount() = items.size
 
     override fun onBindViewHolder(holder: PosterViewHolder, position: Int) {
-        holder.bind(items[position - 1])
+        holder.bind(items[position])
     }
 
 }

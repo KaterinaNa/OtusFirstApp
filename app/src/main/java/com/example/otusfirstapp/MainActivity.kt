@@ -5,22 +5,42 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 const val REQUEST_CODE = 42
 const val ANSWER_CODE = "Answer"
 
 
 class MainActivity : AppCompatActivity() {
+    val items = arrayListOf<Film>(
+        Film("Фильм 1", R.drawable.breakinghead, "Детали"),
+        Film("Фильм 2", R.drawable.club_lovers, "Детали"),
+        Film("Фильм 3", R.drawable.littleboy, "Детали")
+
+    )
 
     private var buttonId: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        initRecycler()
+    }
+
+    fun initRecycler() {
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+        val layoutManager = GridLayoutManager(this, 2)
+        recyclerView.layoutManager = layoutManager
+        recyclerView.adapter = PosterAdapter(LayoutInflater.from(this), items)
+
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
