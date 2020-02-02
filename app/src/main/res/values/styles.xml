@@ -11,6 +11,7 @@
         <item name="android:layout_width">180dp</item>
         <item name="android:layout_height">200dp</item>
         <item name="android:layout_marginStart">24dp</item>
+        <item name="android:layout_marginEnd">24dp</item>
         <item name="android:layout_marginTop">24dp</item>
     </style>
 
@@ -20,11 +21,13 @@
         <item name="android:layout_height">20dp</item>
         <item name="android:fontFamily">casual</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
     </style>
 
     <style name="button">
         <item name="android:layout_width">125dp</item>
         <item name="android:layout_marginTop">24dp</item>
+        <item name="android:layout_marginBottom">24dp</item>
         <item name="android:layout_height">50dp</item>
         <item name="android:fontFamily">casual</item>
         <item name="android:textStyle">bold</item>
