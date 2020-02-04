@@ -7,10 +7,11 @@
     tools:context=".MainActivity">
 
     <ImageView
-        style="@style/imageView"
         android:id="@+id/imageView"
-        app:layout_constraintStart_toStartOf="parent"
+        style="@style/imageView"
+        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@color/colorPrimary" />
 
@@ -30,6 +31,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView" />
+
+    <ImageView
+        android:id="@+id/setLike"
+        app:srcCompat="@drawable/ic_favorite_border_24px"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/textView"
+        app:layout_constraintLeft_toLeftOf="@id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+
+        android:onClick="onClickLike"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

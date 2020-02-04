@@ -3,6 +3,7 @@ package com.example.otusfirstapp
 import android.app.Activity
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -20,9 +21,9 @@ const val ANSWER_CODE = "Answer"
 
 class MainActivity : AppCompatActivity() {
     val items = arrayListOf<Film>(
-        Film("Фильм 1", R.drawable.breakinghead, "Детали"),
-        Film("Фильм 2", R.drawable.club_lovers, "Детали"),
-        Film("Фильм 3", R.drawable.littleboy, "Детали")
+        Film("Фильм 1", R.drawable.breakinghead, "Детали", false),
+        Film("Фильм 2", R.drawable.club_lovers, "Детали", true),
+        Film("Фильм 3", R.drawable.littleboy, "Детали", false)
 
     )
 
@@ -42,6 +43,39 @@ class MainActivity : AppCompatActivity() {
         recyclerView.adapter = PosterAdapter(LayoutInflater.from(this), items)
 
     }
+
+
+    /*fun initRecyclerLike() {
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+        val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        recyclerView.layoutManager = layoutManager
+        recyclerView.adapter = PosterAdapter(LayoutInflater.from(this), items)
+
+        findViewById<View>(R.id.buttonlike).setOnClickListener {
+            items.add(2, poster("New item", "----", Color.MAGENTA))
+            recyclerView.adapter?.notifyItemInserted(2)
+        }
+        findViewById<View>(R.id.removeBtn).setOnClickListener() {
+            items.removeAt(2)
+            recyclerView.adapter?.notifyItemRemoved(2)
+        }
+
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                if ((recyclerView.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition() == items.size - 1) {
+                    items.add(Newitem("Pagination new item", "+++++", Color.BLACK))
+                    items.add(Newitem("Pagination new item", "+++++", Color.BLACK))
+                    items.add(Newitem("Pagination new item", "+++++", Color.BLACK))
+                    items.add(Newitem("Pagination new item", "+++++", Color.BLACK))
+                    items.add(Newitem("Pagination new item", "+++++", Color.BLACK))
+
+                    recyclerView.adapter?.notifyItemRangeInserted(items.size - 5, 5)
+                }
+            }
+        })
+    }
+
+    }*/
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
@@ -72,6 +106,14 @@ class MainActivity : AppCompatActivity() {
         val ClickButtonIntent = Intent(this, DetailActivity::class.java)
         startActivityForResult(ClickButtonIntent, REQUEST_CODE)
     }
+
+    fun onClickLike(view: View?){
+        /*
+        initRecyclerLike()*/
+
+    }
+
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int,
                                   data: Intent?) {
