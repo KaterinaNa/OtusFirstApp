@@ -7,5 +7,5 @@
     <string name="flm3">Film 3</string>
     <string name="comment">Your comment</string>
     <string name="like">Like it</string>
-
+    <string name="favorites">Favorites</string>
 </resources>

@@ -8,9 +8,11 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.view.menu.ActionMenuItemView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,14 +20,14 @@ import androidx.recyclerview.widget.RecyclerView
 const val REQUEST_CODE = 42
 const val ANSWER_CODE = "Answer"
 
+val items = arrayListOf<Film>(
+    Film("Фильм 1", R.drawable.breakinghead, "Детали", false),
+    Film("Фильм 2", R.drawable.club_lovers, "Детали", true),
+    Film("Фильм 3", R.drawable.littleboy, "Детали", false)
+
+)
 
 class MainActivity : AppCompatActivity() {
-    val items = arrayListOf<Film>(
-        Film("Фильм 1", R.drawable.breakinghead, "Детали", false),
-        Film("Фильм 2", R.drawable.club_lovers, "Детали", true),
-        Film("Фильм 3", R.drawable.littleboy, "Детали", false)
-
-    )
 
     private var buttonId: Int = 0
 
@@ -34,6 +36,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         initRecycler()
+        findViewById<Button>(R.id.Likes).setOnClickListener{
+            onFavorites(it)
+        }
     }
 
     fun initRecycler() {
@@ -44,38 +49,16 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    /*fun onLike (itemView:  View?) {
+        if ( val like == true) {
+            like = false}
+        else {
+            like = true}
+        }*/
 
-    /*fun initRecyclerLike() {
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
-        val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = PosterAdapter(LayoutInflater.from(this), items)
 
-        findViewById<View>(R.id.buttonlike).setOnClickListener {
-            items.add(2, poster("New item", "----", Color.MAGENTA))
-            recyclerView.adapter?.notifyItemInserted(2)
-        }
-        findViewById<View>(R.id.removeBtn).setOnClickListener() {
-            items.removeAt(2)
-            recyclerView.adapter?.notifyItemRemoved(2)
-        }
 
-        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                if ((recyclerView.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition() == items.size - 1) {
-                    items.add(Newitem("Pagination new item", "+++++", Color.BLACK))
-                    items.add(Newitem("Pagination new item", "+++++", Color.BLACK))
-                    items.add(Newitem("Pagination new item", "+++++", Color.BLACK))
-                    items.add(Newitem("Pagination new item", "+++++", Color.BLACK))
-                    items.add(Newitem("Pagination new item", "+++++", Color.BLACK))
 
-                    recyclerView.adapter?.notifyItemRangeInserted(items.size - 5, 5)
-                }
-            }
-        })
-    }
-
-    }*/
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
@@ -107,12 +90,10 @@ class MainActivity : AppCompatActivity() {
         startActivityForResult(ClickButtonIntent, REQUEST_CODE)
     }
 
-    fun onClickLike(view: View?){
-        /*
-        initRecyclerLike()*/
-
+    fun onFavorites(view: View?) {
+        val ClickButtonIntent = Intent(this, LikeActivity::class.java)
+        startActivity(ClickButtonIntent)
     }
-
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int,

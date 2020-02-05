@@ -21,6 +21,7 @@ class PosterViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
             button.setOnClickListener {
                 Log.i("poster", "click")
             }
+            setLike.setOnClickListener { (it) }
             imageView.setImageDrawable(ContextCompat.getDrawable(itemView.context, item.posterId))
             if (item.like) {
                 setLike.setImageDrawable(ContextCompat.getDrawable(itemView.context, R.drawable.ic_favorite_24px))

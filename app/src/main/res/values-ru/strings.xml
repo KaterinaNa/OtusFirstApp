@@ -7,4 +7,5 @@
     <string name="flm3">Фильм 3</string>
     <string name="comment">Ваш комментарий</string>
     <string name="like">Нравится</string>
+    <string name="favorites">Избранное</string>
 </resources>
