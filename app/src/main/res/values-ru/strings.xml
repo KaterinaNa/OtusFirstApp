@@ -8,4 +8,6 @@
     <string name="comment">Ваш комментарий</string>
     <string name="like">Нравится</string>
     <string name="favorites">Избранное</string>
+    <string name="addPoster">Добавить</string>
+    <string name="delPoster">Удалить</string>
 </resources>

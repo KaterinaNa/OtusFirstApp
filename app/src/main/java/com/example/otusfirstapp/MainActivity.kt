@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.RecyclerView
 const val REQUEST_CODE = 42
 const val ANSWER_CODE = "Answer"
 
-val items = arrayListOf<Film>(
+var items = arrayListOf<Film>(
     Film("Фильм 1", R.drawable.breakinghead, "Детали", false),
     Film("Фильм 2", R.drawable.club_lovers, "Детали", true),
     Film("Фильм 3", R.drawable.littleboy, "Детали", false)

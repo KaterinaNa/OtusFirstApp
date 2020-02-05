@@ -8,4 +8,6 @@
     <string name="comment">Your comment</string>
     <string name="like">Like it</string>
     <string name="favorites">Favorites</string>
+    <string name="addPoster">Add</string>
+    <string name="delPoster">Delete</string>
 </resources>
