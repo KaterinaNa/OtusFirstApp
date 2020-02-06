@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -16,6 +17,7 @@ import androidx.appcompat.view.menu.ActionMenuItemView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.poster.*
 
 const val REQUEST_CODE = 42
 const val ANSWER_CODE = "Answer"
@@ -43,20 +45,18 @@ class MainActivity : AppCompatActivity() {
 
     fun initRecycler() {
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+        val likeListener = { id: Int ->
+            items[id].like = !items[id].like
+            recyclerView.adapter?.notifyItemChanged(id)
+        }
+
+
+
         val layoutManager = GridLayoutManager(this, 2)
         recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = PosterAdapter(LayoutInflater.from(this), items)
+        recyclerView.adapter = PosterAdapter(LayoutInflater.from(this), items, likeListener)
 
     }
-
-    /*fun onLike (itemView:  View?) {
-        if ( val like == true) {
-            like = false}
-        else {
-            like = true}
-        }*/
-
-
 
 
 

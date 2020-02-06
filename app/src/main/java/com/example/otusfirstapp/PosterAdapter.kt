@@ -4,11 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class PosterAdapter(val inflater: LayoutInflater, val items: List<Film>) :
+class PosterAdapter(val inflater: LayoutInflater, val items: List<Film>, val likeListener: (Int) -> Unit? ) :
     RecyclerView.Adapter<PosterViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PosterViewHolder {
-        return PosterViewHolder(inflater.inflate(R.layout.poster, parent, false))
+        return PosterViewHolder(inflater.inflate(R.layout.poster, parent, false), likeListener)
     }
 
     override fun getItemCount() = items.size

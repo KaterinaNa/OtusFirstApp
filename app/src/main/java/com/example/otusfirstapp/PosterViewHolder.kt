@@ -6,9 +6,12 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.os.persistableBundleOf
 import androidx.recyclerview.widget.RecyclerView
 
-class PosterViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+
+
+class PosterViewHolder(itemView: View, val likeListener: (Int) -> Unit?): RecyclerView.ViewHolder(itemView){
         val imageView = itemView.findViewById<ImageView>(R.id.imageView)
         val textView = itemView.findViewById<TextView>(R.id.textView)
         val button = itemView.findViewById<Button>(R.id.button)
@@ -21,8 +24,11 @@ class PosterViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
             button.setOnClickListener {
                 Log.i("poster", "click")
             }
-            setLike.setOnClickListener { (it) }
+            setLike.setOnClickListener {
+                likeListener(getAdapterPosition())
+            }
             imageView.setImageDrawable(ContextCompat.getDrawable(itemView.context, item.posterId))
+
             if (item.like) {
                 setLike.setImageDrawable(ContextCompat.getDrawable(itemView.context, R.drawable.ic_favorite_24px))
             } else {

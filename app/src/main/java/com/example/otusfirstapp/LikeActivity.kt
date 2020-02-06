@@ -31,7 +31,7 @@ class LikeActivity : AppCompatActivity() {
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recyclerView.layoutManager = layoutManager
         val inflater = LayoutInflater.from(this)
-        recyclerView.adapter = PosterAdapter(inflater, likedFilms)
+        recyclerView.adapter = PosterAdapter(inflater, likedFilms, {})
 
 
         findViewById<View>(R.id.addPoster).setOnClickListener {
@@ -40,23 +40,15 @@ class LikeActivity : AppCompatActivity() {
         }
 
         findViewById<View>(R.id.delPoster).setOnClickListener() {
-            likedFilms.removeAt(2)
-            recyclerView.adapter?.notifyItemRemoved(2)
+            if(likedFilms.size > 0) {
+                val position = likedFilms.size - 1
+                likedFilms.removeAt(position)
+                recyclerView.adapter?.notifyItemRemoved(position)
+            }
         }
 
 
-/*        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                if ((recyclerView.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition() == items.size - 1) {
-                    items.add(Film("Фильм 5", R.drawable.genius, "Детали", true))
-                    items.add(Film("Фильм 6", R.drawable.lalaland, "Детали", true))
-                    items.add(Film("Фильм 7", R.drawable.genius, "Детали", true))
-                    recyclerView.adapter?.notifyItemRangeInserted(items.size - 5, 5)
-                }
 
-            }
-
-        })*/
     }
 }
 
