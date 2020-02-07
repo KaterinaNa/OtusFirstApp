@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
@@ -33,10 +34,15 @@ class LikeActivity : AppCompatActivity() {
         val inflater = LayoutInflater.from(this)
         recyclerView.adapter = PosterAdapter(inflater, likedFilms, {})
 
+        val itemDecor = PosterItemDecoreation(this, DividerItemDecoration.HORIZONTAL)
+        itemDecor.setDrawable(getDrawable(R.drawable.myline)!!)
+        recyclerView.addItemDecoration(itemDecor)
+
 
         findViewById<View>(R.id.addPoster).setOnClickListener {
             likedFilms.add(Film("Фильм 4", R.drawable.lalaland, "Детали", true))
             recyclerView.adapter?.notifyItemInserted(likedFilms.size)
+            recyclerView.addItemDecoration(itemDecor)
         }
 
         findViewById<View>(R.id.delPoster).setOnClickListener() {

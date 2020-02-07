@@ -1,9 +1,12 @@
 package com.example.otusfirstapp
 
 import android.app.Activity
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.Rect
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,6 +17,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.menu.ActionMenuItemView
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -50,14 +54,16 @@ class MainActivity : AppCompatActivity() {
             recyclerView.adapter?.notifyItemChanged(id)
         }
 
-
-
         val layoutManager = GridLayoutManager(this, 2)
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = PosterAdapter(LayoutInflater.from(this), items, likeListener)
 
-    }
+        val itemDecor = PosterItemDecoreation(this, DividerItemDecoration.HORIZONTAL)
+        itemDecor.setDrawable(getDrawable(R.drawable.myline)!!)
+        recyclerView.addItemDecoration(itemDecor)
 
+
+    }
 
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
@@ -146,6 +152,8 @@ class MainActivity : AppCompatActivity() {
         val dialog: AlertDialog = bld.create()
         dialog.show()
     }
+
+
 }
 
 
