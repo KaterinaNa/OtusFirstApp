@@ -7,38 +7,31 @@
     tools:context=".DetailActivity">
 
     <ImageView
+        style="@style/imageView"
         android:id="@+id/imageView4"
-        android:layout_width="180dp"
-        android:layout_height="200dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/wasabi" />
+        app:srcCompat="@drawable/wasabi"/>
+
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="150dp"
-        android:layout_height="200dp"
-        android:layout_marginStart="16dp"
+        style="@style/imageView"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
         android:text="Французский полицейский Юбер Фиорентини, исполняя последнюю волю когда-то любимой им женщины, вынужден отправиться в далекую Японию, где ему приходится встретиться со старым другом и дочерью, о существовании которой он даже не подозревал."
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView4"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
+        style="@style/button"
+        android:layout_marginTop="24dp"
+        android:drawableStart="@drawable/ic_person_add_24px"
         android:onClick="onClickinvite"
-
-        android:text="Пригласи друга"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        android:text="@string/chooser"
+        app:layout_constraintStart_toStartOf="@+id/imageView4"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
     <CheckBox
         android:id="@+id/mycheckBox"
@@ -47,7 +40,7 @@
         android:layout_marginTop="20dp"
         android:checked="false"
         android:onClick="onCheckBoxClicked"
-        android:text="Нравится"
+        android:text="@string/like"
         app:layout_constraintEnd_toEndOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
@@ -58,10 +51,8 @@
         android:layout_marginTop="28dp"
         android:ems="10"
         android:enabled="false"
-        android:hint="Ваш комментарий"
+        android:hint="@string/comment"
         android:inputType="textShortMessage|textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/mycheckBox" />
 </androidx.constraintlayout.widget.ConstraintLayout>

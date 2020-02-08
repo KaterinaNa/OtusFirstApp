@@ -7,69 +7,80 @@
     tools:context=".MainActivity">
 
     <ImageView
-        style="@style/imageView"
         android:id="@+id/imageView"
+        style="@style/imageView"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/club_lovers" />
 
     <TextView
-        style="@style/textView"
         android:id="@+id/textView"
+        style="@style/textView"
+        android:layout_marginTop="24dp"
         android:text="@string/flm1"
         app:layout_constraintStart_toStartOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <Button
-        style="@style/button"
         android:id="@+id/button"
+        style="@style/button"
+        android:layout_marginTop="24dp"
         android:onClick="onClickButton"
         android:text="@string/podrobnee"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <ImageView
-        style="@style/imageView"
         android:id="@+id/imageView2"
-        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/imageView"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toEndOf="@+id/imageView3"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/breakinghead" />
 
     <TextView
-        style="@style/textView"
         android:id="@+id/textView2"
+        style="@style/textView"
+        android:layout_marginTop="24dp"
         android:text="@string/flm2"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintStart_toStartOf="@+id/imageView3"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
     <Button
         android:id="@+id/button2"
         style="@style/button"
-        android:fontFamily="casual"
+        android:layout_marginTop="24dp"
         android:onClick="onClickButton"
         android:text="@string/podrobnee"
         app:layout_constraintStart_toStartOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <ImageView
-        style="@style/imageView"
         android:id="@+id/imageView3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button"
+        style="@style/imageView"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/littleboy" />
 
     <TextView
         android:id="@+id/textView3"
         style="@style/textView"
+        android:layout_marginTop="24dp"
         android:text="@string/flm3"
-        app:layout_constraintStart_toStartOf="@+id/imageView3"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintStart_toStartOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <Button
-        style="@style/button"
         android:id="@+id/button3"
+        style="@style/button"
+        android:layout_marginTop="24dp"
         android:onClick="onClickButton"
-        android:text="Podrobnee"
+        android:text="@string/podrobnee"
         app:layout_constraintStart_toStartOf="@+id/textView3"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 

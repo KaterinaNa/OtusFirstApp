@@ -1,5 +1,11 @@
 <resources>
-    <string name="app_name">KaterinaFirstApp</string>
-    <string name="podrobnee">Podrobnee</string>
-    <string name="chooser">Пригласи друга</string>
+    <string name="app_name">Films</string>
+    <string name="podrobnee">Details</string>
+    <string name="chooser">Invite friend</string>
+    <string name="flm1">Film 1</string>
+    <string name="flm2">Film 2</string>
+    <string name="flm3">Film 3</string>
+    <string name="comment">Your comment</string>
+    <string name="like">Like it</string>
+
 </resources>
