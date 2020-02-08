@@ -7,7 +7,7 @@ import android.view.View
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 
-class PosterItemDecoreation(context: Context, orintation: Int): DividerItemDecoration(context, orintation) {
+class PosterItemDecoration(context: Context, orientation: Int): DividerItemDecoration(context, orientation) {
    override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         super.onDrawOver(c, parent, state)
     }
@@ -17,13 +17,13 @@ class PosterItemDecoreation(context: Context, orintation: Int): DividerItemDecor
     }
 
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-        {
+       /*{
             val offset = 25
             outRect.top = offset
             outRect.left = offset
             outRect.right = offset/2
 
-        }
+        }*/
         super.getItemOffsets(outRect, view, parent, state)
     }
 

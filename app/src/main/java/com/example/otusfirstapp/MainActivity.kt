@@ -1,27 +1,19 @@
 package com.example.otusfirstapp
 
 import android.app.Activity
-import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Rect
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.view.menu.ActionMenuItemView
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.poster.*
 
 const val REQUEST_CODE = 42
 const val ANSWER_CODE = "Answer"
@@ -58,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = PosterAdapter(LayoutInflater.from(this), items, likeListener)
 
-        val itemDecor = PosterItemDecoreation(this, DividerItemDecoration.HORIZONTAL)
+        val itemDecor = PosterItemDecoration(this, DividerItemDecoration.HORIZONTAL)
         itemDecor.setDrawable(getDrawable(R.drawable.myline)!!)
         recyclerView.addItemDecoration(itemDecor)
 
