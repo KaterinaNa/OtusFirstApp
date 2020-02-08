@@ -32,7 +32,7 @@ class LikeActivity : AppCompatActivity() {
         val inflater = LayoutInflater.from(this)
         recyclerView.adapter = PosterAdapter(inflater, likedFilms, {})
 
-        val itemDecor = PosterItemDecoration(this, DividerItemDecoration.HORIZONTAL)
+        val itemDecor = PosterItemDecoration(this, DividerItemDecoration.VERTICAL)
         itemDecor.setDrawable(getDrawable(R.drawable.myline)!!)
         recyclerView.addItemDecoration(itemDecor)
 

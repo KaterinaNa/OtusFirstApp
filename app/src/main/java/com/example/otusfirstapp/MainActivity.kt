@@ -50,9 +50,13 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = PosterAdapter(LayoutInflater.from(this), items, likeListener)
 
-        val itemDecor = PosterItemDecoration(this, DividerItemDecoration.HORIZONTAL)
+        val itemDecor = PosterItemDecoration(this, DividerItemDecoration.VERTICAL)
         itemDecor.setDrawable(getDrawable(R.drawable.myline)!!)
         recyclerView.addItemDecoration(itemDecor)
+
+        val itemDecor2 = PosterItemDecoration(this, DividerItemDecoration.HORIZONTAL)
+        itemDecor2.setDrawable(getDrawable(R.drawable.myline2)!!)
+        recyclerView.addItemDecoration(itemDecor2)
 
 
     }
