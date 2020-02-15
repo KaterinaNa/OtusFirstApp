@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         initRecycler()
-        findViewById<Button>(R.id.Likes).setOnClickListener{
+        findViewById<Button>(R.id.Favorites).setOnClickListener{
             onFavorites(it)
         }
     }

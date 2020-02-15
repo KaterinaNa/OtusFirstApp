@@ -18,7 +18,7 @@
         />
     <Button
         style="@style/button"
-        android:id="@+id/Likes"
+        android:id="@+id/Favorites"
         android:text="@string/favorites"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
