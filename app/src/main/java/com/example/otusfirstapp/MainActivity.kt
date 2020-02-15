@@ -48,39 +48,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        initRecycler()
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragmentContainer, FilmsListFragment(), FilmsListFragment.TAG)
+            .commit()
+
         findViewById<Button>(R.id.Favorites).setOnClickListener{
             onFavorites(it)
         }
     }
-
-    fun initRecycler() {
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
-        val likeListener = { id: Int ->
-            items[id].like = !items[id].like
-            recyclerView.adapter?.notifyItemChanged(id)
-        }
-        val detailsListener = { id: Int ->
-            val openDetailsIntent = Intent(this, DetailActivity::class.java)
-            openDetailsIntent.putExtra("FilmId", id)
-            startActivityForResult(openDetailsIntent, REQUEST_CODE)
-        }
-
-        val layoutManager = GridLayoutManager(this, 2)
-        recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = PosterAdapter(LayoutInflater.from(this), items, likeListener, detailsListener)
-
-        val itemDecor = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
-        itemDecor.setDrawable(getDrawable(R.drawable.myline)!!)
-        recyclerView.addItemDecoration(itemDecor)
-
-        val itemDecor2 = DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL)
-        itemDecor2.setDrawable(getDrawable(R.drawable.myline2)!!)
-        recyclerView.addItemDecoration(itemDecor2)
-
-
-    }
-
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
@@ -99,7 +75,6 @@ class MainActivity : AppCompatActivity() {
         startActivity(ClickButtonIntent)
     }
 
-
     override fun onActivityResult(requestCode: Int, resultCode: Int,
                                   data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -110,11 +85,11 @@ class MainActivity : AppCompatActivity() {
                     answer = it.getStringExtra(ANSWER_CODE)
             }
             }
-            Log.i("main_activity", "the answer is:$answer")
+            Log.i(TAG, "the answer is:$answer")
         }
     }
 
-   private fun highlightText(textId: Int) {
+    private fun highlightText(textId: Int) {
         shadeAllText()
         val textView = findViewById<TextView>(textId)
         textView.setTextColor(resources.getColor(R.color.colorAccent))
@@ -128,8 +103,6 @@ class MainActivity : AppCompatActivity() {
         val textView3 = findViewById<TextView>(R.id.textView3)
         textView3.setTextColor(resources.getColor(android.R.color.secondary_text_light))*/
     }
-
-
 
     override fun onBackPressed() {
         val bld: AlertDialog.Builder = AlertDialog.Builder(this)
@@ -151,6 +124,9 @@ class MainActivity : AppCompatActivity() {
         dialog.show()
     }
 
+    companion object {
+        const val TAG = "MainActivity"
+    }
 
 }
 
