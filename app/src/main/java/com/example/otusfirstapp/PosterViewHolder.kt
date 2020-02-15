@@ -1,28 +1,28 @@
 package com.example.otusfirstapp
 
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.core.os.persistableBundleOf
 import androidx.recyclerview.widget.RecyclerView
 
 
 
-class PosterViewHolder(itemView: View, val likeListener: (Int) -> Unit?): RecyclerView.ViewHolder(itemView){
+class PosterViewHolder(itemView: View,
+                       val likeListener: (Int) -> Unit?,
+                       val detailslistener: (Int)-> Unit?): RecyclerView.ViewHolder(itemView){
         val imageView = itemView.findViewById<ImageView>(R.id.imageView)
         val textView = itemView.findViewById<TextView>(R.id.textView)
-        val button = itemView.findViewById<Button>(R.id.button)
+        val openDescr = itemView.findViewById<Button>(R.id.openDescr)
         val setLike = itemView.findViewById<ImageView>(R.id.setLike)
 
 
 
         fun bind(item: Film) {
             textView.text = item.name
-            button.setOnClickListener {
-                Log.i("poster", "click")
+            openDescr.setOnClickListener {
+                detailslistener(getAdapterPosition())
             }
             setLike.setOnClickListener {
                 likeListener(getAdapterPosition())

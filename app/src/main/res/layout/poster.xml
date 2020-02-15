@@ -25,8 +25,7 @@
 
     <Button
         style="@style/button"
-        android:id="@+id/button"
-        android:onClick="onClickButton"
+        android:id="@+id/openDescr"
         android:text="@string/podrobnee"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -42,7 +41,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:onClick="onLike"/>
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
