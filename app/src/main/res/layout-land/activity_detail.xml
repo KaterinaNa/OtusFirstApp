@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        style="@style/imageView"
+        style="@style/filmImageStyle"
         android:id="@+id/filmImage"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -29,7 +29,7 @@
 
     <TextView
         android:id="@+id/filmDescr"
-        style="@style/imageView"
+        style="@style/filmImageStyle"
         android:layout_width="480dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"

@@ -2,9 +2,6 @@
     <string name="app_name">Фильмотека</string>
     <string name="podrobnee">Детали</string>
     <string name="chooser">Пригласи друга</string>
-    <string name="flm1">Фильм 1</string>
-    <string name="flm2">Фильм 2</string>
-    <string name="flm3">Фильм 3</string>
     <string name="comment">Ваш комментарий</string>
     <string name="like">Нравится</string>
     <string name="favorites">Избранное</string>

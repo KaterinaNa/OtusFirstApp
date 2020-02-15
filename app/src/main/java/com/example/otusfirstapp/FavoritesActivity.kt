@@ -46,18 +46,24 @@ class FavoritesActivity : AppCompatActivity() {
         recyclerView.addItemDecoration(itemDecor)
 
         findViewById<View>(R.id.addPoster).setOnClickListener {
-            likedFilms.add(Film("Ла ла ленд", R.drawable.lalaland, "Это история любви старлетки, которая между прослушиваниями подает кофе состоявшимся кинозвездам, и фанатичного джазового музыканта, вынужденного подрабатывать в заштатных барах. Но пришедший к влюбленным успех начинает подтачивать их отношения.", true))
+            likedFilms.add(
+                Film(
+                    "Ла ла ленд",
+                    R.drawable.lalaland,
+                    "Это история любви старлетки, которая между прослушиваниями подает кофе состоявшимся кинозвездам, и фанатичного джазового музыканта, вынужденного подрабатывать в заштатных барах. Но пришедший к влюбленным успех начинает подтачивать их отношения.",
+                    true
+                )
+            )
             recyclerView.adapter?.notifyItemInserted(likedFilms.size)
         }
 
         findViewById<View>(R.id.delPoster).setOnClickListener() {
-            if(likedFilms.size > 0) {
+            if (likedFilms.size > 0) {
                 val position = likedFilms.size - 1
                 likedFilms.removeAt(position)
                 recyclerView.adapter?.notifyItemRemoved(position)
             }
         }
-
 
 
     }

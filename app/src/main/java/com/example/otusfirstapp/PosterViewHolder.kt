@@ -13,7 +13,7 @@ class PosterViewHolder(itemView: View,
                        val likeListener: (Int) -> Unit?,
                        val detailslistener: (Int)-> Unit?): RecyclerView.ViewHolder(itemView){
         val imageView = itemView.findViewById<ImageView>(R.id.imageView)
-        val textView = itemView.findViewById<TextView>(R.id.textView)
+        val textView = itemView.findViewById<TextView>(R.id.filmName)
         val openDescr = itemView.findViewById<Button>(R.id.openDescr)
         val setLike = itemView.findViewById<ImageView>(R.id.setLike)
 

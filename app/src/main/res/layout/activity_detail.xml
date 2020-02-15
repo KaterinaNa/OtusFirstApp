@@ -21,7 +21,7 @@
 
     <ImageView
         android:id="@+id/filmImage"
-        style="@style/imageView"
+        style="@style/filmImageStyle"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,7 +30,7 @@
 
     <TextView
         android:id="@+id/filmDescr"
-        style="@style/imageView"
+        style="@style/filmImageStyle"
         android:layout_width="340dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
