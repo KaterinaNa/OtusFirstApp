@@ -53,8 +53,11 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.fragmentContainer, FilmsListFragment(), FilmsListFragment.TAG)
             .commit()
 
-        findViewById<Button>(R.id.Favorites).setOnClickListener{
-            onFavorites(it)
+        findViewById<Button>(R.id.Favorites).setOnClickListener {
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.fragmentContainer, FavoritesFragment(), FavoritesFragment.TAG)
+                .commit()
         }
     }
 
@@ -68,11 +71,6 @@ class MainActivity : AppCompatActivity() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putInt("buttonId", buttonId)
-    }
-
-    fun onFavorites(view: View?) {
-        val ClickButtonIntent = Intent(this, FavoritesActivity::class.java)
-        startActivity(ClickButtonIntent)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int,
