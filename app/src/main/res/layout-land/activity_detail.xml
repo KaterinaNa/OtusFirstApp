@@ -12,6 +12,8 @@
         android:layout_height="28dp"
         android:layout_marginTop="20dp"
         tools:text="Название фильма"
+        android:textStyle="bold"
+        android:textSize="16dp"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toEndOf="@id/filmImage"
         app:layout_constraintEnd_toEndOf="parent"

@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onFavorites(view: View?) {
-        val ClickButtonIntent = Intent(this, LikeActivity::class.java)
+        val ClickButtonIntent = Intent(this, FavoritesActivity::class.java)
         startActivity(ClickButtonIntent)
     }
 

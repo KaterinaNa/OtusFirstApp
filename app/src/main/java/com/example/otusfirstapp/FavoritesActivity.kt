@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 
-class LikeActivity : AppCompatActivity() {
+class FavoritesActivity : AppCompatActivity() {
 
     private var buttonId: Int = 0
 
@@ -21,6 +21,8 @@ class LikeActivity : AppCompatActivity() {
         addPosterButton.setVisibility(View.VISIBLE)
         val delPosterButton = findViewById<Button>(R.id.delPoster)
         delPosterButton.setVisibility(View.VISIBLE)
+
+
         initRecyclerLike()
     }
 
@@ -38,7 +40,7 @@ class LikeActivity : AppCompatActivity() {
 
 
         findViewById<View>(R.id.addPoster).setOnClickListener {
-            likedFilms.add(Film("Фильм 4", R.drawable.lalaland, "Детали", true))
+            likedFilms.add(Film("Ла ла ленд", R.drawable.lalaland, "Это история любви старлетки, которая между прослушиваниями подает кофе состоявшимся кинозвездам, и фанатичного джазового музыканта, вынужденного подрабатывать в заштатных барах. Но пришедший к влюбленным успех начинает подтачивать их отношения.", true))
             recyclerView.adapter?.notifyItemInserted(likedFilms.size)
         }
 

@@ -18,7 +18,10 @@
     <TextView
         style="@style/textView"
         android:id="@+id/textView"
+        android:layout_height="wrap_content"
         android:text="@string/flm1"
+        android:textStyle="bold"
+        android:textSize="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageView" />
@@ -34,7 +37,7 @@
     <ImageView
         android:id="@+id/setLike"
         app:srcCompat="@drawable/ic_favorite_border_24px"
-        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/textView"
         app:layout_constraintLeft_toLeftOf="@id/textView"
