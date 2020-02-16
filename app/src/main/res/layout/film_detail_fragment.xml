@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailActivity">
+    >
 
 
     <TextView
@@ -52,30 +52,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/filmImage" />
 
-    <CheckBox
-        android:id="@+id/mycheckBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:checked="false"
-        android:onClick="onCheckBoxClicked"
-        android:text="@string/like"
-        app:layout_constraintTop_toBottomOf="@+id/filmDescr"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        />
-
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="305dp"
-        android:layout_height="63dp"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:enabled="false"
-        android:hint="@string/comment"
-        android:inputType="textShortMessage|textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mycheckBox" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

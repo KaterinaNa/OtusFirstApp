@@ -57,6 +57,15 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.fragmentContainer, FavoritesFragment(), FavoritesFragment.TAG)
+                .addToBackStack(null)
+                .commit()
+        }
+
+        findViewById<Button>(R.id.openDescr).setOnClickListener {
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.fragmentContainer, DetailsFragment(), DetailsFragment.TAG)
+                .addToBackStack(null)
                 .commit()
         }
     }
