@@ -30,14 +30,14 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var filmId = intent.getIntExtra("FilmId", 0)
+        val filmId = arguments?.getInt(EXTRA_ID, 0)?:0
 
         val filmName = view.findViewById<TextView>(R.id.filmName)
         val filmImage = view.findViewById<ImageView>(R.id.filmImage)
         val filmDescr = view.findViewById<TextView>(R.id.filmDescr)
 
         filmName.text = items[filmId].name
-        filmImage.setImageDrawable(context.getDrawable(items[filmId].posterId))
+        filmImage.setImageDrawable(context?.getDrawable(items[filmId].posterId))
         filmDescr.text = items[filmId].detail
 
     }
@@ -49,9 +49,21 @@ class DetailsFragment : Fragment() {
     }
 
     companion object {
-        const val TAG = "DetailsFragment"
-    }
+        const val TAG = "DetailFragment"
 
+        const val EXTRA_ID = "EXTRA_ID"
+
+        fun newInstance(filmId: Int) : DetailsFragment {
+            val fragment = DetailsFragment()
+
+            val bundle = Bundle()
+            bundle.putInt(EXTRA_ID, filmId)
+
+            fragment.arguments = bundle
+
+            return fragment
+        }
+    }
 
 
 

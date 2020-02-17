@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -60,15 +61,19 @@ class MainActivity : AppCompatActivity() {
                 .addToBackStack(null)
                 .commit()
         }
-
-        findViewById<Button>(R.id.openDescr).setOnClickListener {
-            supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.fragmentContainer, DetailsFragment(), DetailsFragment.TAG)
-                .addToBackStack(null)
-                .commit()
-        }
     }
+
+
+    fun openNewsDetailed(filmId: Int) {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragmentContainer, DetailsFragment.newInstance(filmId), DetailsFragment.TAG)
+            .addToBackStack(null)
+            .commit()
+    }
+
+
+
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
