@@ -41,7 +41,7 @@ var items = arrayListOf<Film>(
 
 )
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), FilmsListFragment.OnNewsClickListener  {
 
     private var buttonId: Int = 0
 
@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    fun openNewsDetailed(filmId: Int) {
+    override fun openNewsDetailed(filmId: Int) {
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.fragmentContainer, DetailsFragment.newInstance(filmId), DetailsFragment.TAG)

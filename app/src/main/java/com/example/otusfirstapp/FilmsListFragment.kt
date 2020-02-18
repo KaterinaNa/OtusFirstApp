@@ -12,8 +12,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import java.lang.Exception
 
 class FilmsListFragment : Fragment() {
+    var listener: OnNewsClickListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +41,14 @@ class FilmsListFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        if (activity is OnNewsClickListener) {
+            listener = activity as OnNewsClickListener
+        } else {
+            throw Exception("Activity must implement OnNewsClickListener")
+        }
+
         Log.d(TAG, "onActivityCreated")
+
     }
 
 
@@ -51,10 +60,8 @@ class FilmsListFragment : Fragment() {
         }
         val detailsListener = { id: Int ->
             Log.i(TAG, "Details clicked $id")
+            listener?.openNewsDetailed(id)
             Unit
-            /*val openDetailsIntent = Intent(this, DetailActivity::class.java)
-            openDetailsIntent.putExtra("FilmId", id)
-            startActivityForResult(openDetailsIntent, REQUEST_CODE)*/
         }
 
         val layoutManager = GridLayoutManager(context, 2)
@@ -74,6 +81,10 @@ class FilmsListFragment : Fragment() {
 
     companion object {
         const val TAG = "FilmsListFragment"
+    }
+
+    interface OnNewsClickListener {
+        fun openNewsDetailed(filmId: Int)
     }
 
 }
