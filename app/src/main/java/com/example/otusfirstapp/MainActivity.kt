@@ -79,18 +79,18 @@ class MainActivity : AppCompatActivity(), FilmsListFragment.OnNewsClickListener 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        toolbar.title = "Collapsing toolbar"
-        setSupportActionBar(toolbar)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+//        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+//        toolbar.title = "Collapsing toolbar"
+//        setSupportActionBar(toolbar)
+//        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        val appBarLayout = findViewById<AppBarLayout>(R.id.app_bar_layout)
-        appBarLayout.addOnOffsetChangedListener(object : AppBarStateChangeListener() {
-            override fun onStateChanged(appBarLayout: AppBarLayout?, state: State?) {
-                Toast.makeText(appBarLayout?.context, "STATE:" + state?.name, Toast.LENGTH_SHORT)
-                    .show()
-            }
-        })
+//        val appBarLayout = findViewById<AppBarLayout>(R.id.app_bar_layout)
+//        appBarLayout.addOnOffsetChangedListener(object : AppBarStateChangeListener() {
+//            override fun onStateChanged(appBarLayout: AppBarLayout?, state: State?) {
+//                Toast.makeText(appBarLayout?.context, "STATE:" + state?.name, Toast.LENGTH_SHORT)
+//                    .show()
+//            }
+//        })
 
 
 
