@@ -53,6 +53,7 @@
             android:layout_width="198dp"
             android:layout_height="28dp"
             android:layout_marginTop="20dp"
+
             android:textSize="16dp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -61,7 +62,7 @@
 
         <ImageView
             android:id="@+id/filmImage"
-            style="@style/filmImageStyle"
+            style="@style/filmPosterStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scaleType="centerCrop"
@@ -69,11 +70,11 @@
             tools:src="@drawable/golo" />
 
 
-
-        <androidx.appcompat.widget.Toolbar
+<!--        <androidx.appcompat.widget.Toolbar-->
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+            android:visibility="gone"
             app:layout_collapseMode="pin"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
