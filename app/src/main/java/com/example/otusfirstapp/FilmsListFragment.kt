@@ -1,18 +1,16 @@
 package com.example.otusfirstapp
 
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import java.lang.Exception
 
 class FilmsListFragment : Fragment() {
     var listener: OnNewsClickListener? = null
@@ -34,12 +32,17 @@ class FilmsListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
+        toolbar.title = "Список фильмов"
 
         initRecycler(view)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+//        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+//        activity.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         if (activity is OnNewsClickListener) {
             listener = activity as OnNewsClickListener
@@ -66,7 +69,8 @@ class FilmsListFragment : Fragment() {
 
         val layoutManager = GridLayoutManager(context, 2)
         recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = PosterAdapter(LayoutInflater.from(context), items, likeListener, detailsListener)
+        recyclerView.adapter =
+            PosterAdapter(LayoutInflater.from(context), items, likeListener, detailsListener)
 
         val itemDecor = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
         itemDecor.setDrawable(context?.getDrawable(R.drawable.myline)!!)

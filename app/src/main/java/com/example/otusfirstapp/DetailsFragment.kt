@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.widget.Toolbar
 
 class DetailsFragment : Fragment() {
 
@@ -30,13 +31,16 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
+
+
         val filmId = arguments?.getInt(EXTRA_ID, 0)?:0
 
         val filmName = view.findViewById<TextView>(R.id.filmName)
         val filmImage = view.findViewById<ImageView>(R.id.filmImage)
         val filmDescr = view.findViewById<TextView>(R.id.filmDescr)
 
-        filmName.text = items[filmId].name
+        toolbar.title = items[filmId].name
         filmImage.setImageDrawable(context?.getDrawable(items[filmId].posterId))
         filmDescr.text = items[filmId].detail
 

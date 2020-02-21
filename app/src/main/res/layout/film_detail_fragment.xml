@@ -48,17 +48,6 @@
         app:expandedTitleMarginStart="48dp"
         app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-        <TextView
-            android:id="@+id/filmName"
-            android:layout_width="198dp"
-            android:layout_height="28dp"
-            android:layout_marginTop="20dp"
-
-            android:textSize="16dp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Название фильма" />
 
         <ImageView
             android:id="@+id/filmImage"
@@ -70,11 +59,10 @@
             tools:src="@drawable/golo" />
 
 
-<!--        <androidx.appcompat.widget.Toolbar-->
+       <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:visibility="gone"
             app:layout_collapseMode="pin"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
