@@ -49,22 +49,23 @@
         app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
 
-        <ImageView
-            android:id="@+id/filmImage"
-            style="@style/filmPosterStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="centerCrop"
-            app:layout_collapseMode="parallax"
-            tools:src="@drawable/golo" />
-
-
-       <androidx.appcompat.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:layout_collapseMode="pin"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+
+        <ImageView
+            android:id="@+id/filmImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:src="@drawable/lalaland"
+            app:layout_collapseMode="parallax" />
+
+
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
