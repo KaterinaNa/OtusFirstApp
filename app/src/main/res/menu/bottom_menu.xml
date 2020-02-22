@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-
-    <Item
+    <item
         android:id="@+id/bottom_navigator_home"
-        android:icon="@drawable/ic_home_24"
+        android:icon="@drawable/ic_home_24px"
         android:title="Home"/>
 
-    <Item
-        android:id="@+id/bottom_navigator_favorite"
-        android:icon="@drawable/ic_star_24"
+    <item
+        android:id="@+id/bottom_navigator_fav"
+        android:icon="@drawable/ic_star_24px"
         android:title="Favorite"/>
 
-    <Item
+    <item
         android:id="@+id/bottom_navigator_share"
-        android:icon="@drawable/ic_invite_24"
+        android:icon="@drawable/ic_share_24px"
         android:title = "Invite" />
 
 </menu>

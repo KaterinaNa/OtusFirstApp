@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class FilmsListFragment : Fragment() {
     var listener: OnNewsClickListener? = null
@@ -34,6 +35,8 @@ class FilmsListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
         toolbar.title = "Список фильмов"
+
+        val bottomNavigation = view.findViewById<BottomNavigationView>(R.id.bottom_navigation)
 
         initRecycler(view)
     }
@@ -87,8 +90,6 @@ class FilmsListFragment : Fragment() {
         const val TAG = "FilmsListFragment"
     }
 
-    interface OnNewsClickListener {
-        fun openNewsDetailed(filmId: Int)
-    }
+
 
 }

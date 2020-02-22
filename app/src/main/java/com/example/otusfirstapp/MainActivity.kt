@@ -5,18 +5,11 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.bottomnavigation.BottomNavigationView
+
 
 const val REQUEST_CODE = 42
 const val ANSWER_CODE = "Answer"
@@ -71,7 +64,7 @@ var items = arrayListOf<Film>(
 
 )
 
-class MainActivity : AppCompatActivity(), FilmsListFragment.OnNewsClickListener {
+class MainActivity : AppCompatActivity(), OnNewsClickListener {
 
     private var buttonId: Int = 0
 
@@ -79,21 +72,48 @@ class MainActivity : AppCompatActivity(), FilmsListFragment.OnNewsClickListener 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNavigation.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.bottom_navigator_home -> {
+                    onBackPressed()
+                    true
+                }
+                R.id.bottom_navigator_fav -> {
+                    supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.fragmentContainer, FavoritesFragment(), FavoritesFragment.TAG)
+                        .addToBackStack(null)
+                        .commit()
+                    true
+                }
+                R.id.bottom_navigator_share -> {
+                    onInvite()
+                    true
+                }
+                else -> false
+            }
+        }
+
 
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.fragmentContainer, FilmsListFragment(), FilmsListFragment.TAG)
             .commit()
-
-        findViewById<Button>(R.id.Favorites).setOnClickListener {
-            supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.fragmentContainer, FavoritesFragment(), FavoritesFragment.TAG)
-                .addToBackStack(null)
-                .commit()
-        }
     }
 
+    fun onInvite() {
+        val textMessage = "Поделиться в"
+        val sendIntent = Intent()
+        sendIntent.action = Intent.ACTION_SEND
+        sendIntent.putExtra(Intent.EXTRA_TEXT, textMessage)
+        sendIntent.type = "text/plain"
+        val title = resources.getString(R.string.chooser)
+        val chooser = Intent.createChooser(sendIntent, title)
+        val let = sendIntent.resolveActivity(packageManager)?.let {
+            startActivity(chooser)
+        }
+    }
 
     override fun openNewsDetailed(filmId: Int) {
 
