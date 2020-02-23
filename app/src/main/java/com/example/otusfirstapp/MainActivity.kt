@@ -95,11 +95,13 @@ class MainActivity : AppCompatActivity(), OnNewsClickListener {
             }
         }
 
+        if (savedInstanceState == null) {
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.fragmentContainer, FilmsListFragment(), FilmsListFragment.TAG)
+                .commit()
+        }
 
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.fragmentContainer, FilmsListFragment(), FilmsListFragment.TAG)
-            .commit()
     }
 
     fun onInvite() {
