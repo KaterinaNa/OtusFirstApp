@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -61,8 +62,15 @@ class FilmsListFragment : Fragment() {
     fun initRecycler(view: View) {
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
         val likeListener = { id: Int ->
+            val liked = items[id].like
             items[id].like = !items[id].like
             recyclerView.adapter?.notifyItemChanged(id)
+            if(liked==false) {
+                Toast.makeText(view.context, "Добавлено в избранное", Toast.LENGTH_SHORT).show()
+            } else{
+                Toast.makeText(view.context, "Удалено из избранного", Toast.LENGTH_SHORT).show()
+            }
+
         }
         val detailsListener = { id: Int ->
             Log.i(TAG, "Details clicked $id")
