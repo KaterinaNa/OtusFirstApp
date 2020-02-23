@@ -17,26 +17,6 @@
         app:layout_constraintTop_toTopOf="parent"
         />
 
-    <Button
-        style="@style/button"
-        android:id="@+id/addPoster"
-        android:visibility="invisible"
-        android:text="@string/addPoster"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.8"
-        />
 
-    <Button
-        style="@style/button"
-        android:id="@+id/delPoster"
-        android:visibility="invisible"
-        android:text="@string/delPoster"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.2"
-        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -40,10 +40,6 @@ class FavoritesFragment : Fragment() {
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
         toolbar.title = "Избранное"
 
-        val addPosterButton = view.findViewById<Button>(R.id.addPoster)
-        addPosterButton.setVisibility(View.VISIBLE)
-        val delPosterButton = view.findViewById<Button>(R.id.delPoster)
-        delPosterButton.setVisibility(View.VISIBLE)
 
         initRecycler(view)
     }
@@ -85,25 +81,7 @@ class FavoritesFragment : Fragment() {
         itemDecor.setDrawable(context?.getDrawable(R.drawable.myline)!!)
         recyclerView.addItemDecoration(itemDecor)
 
-        view.findViewById<View>(R.id.addPoster).setOnClickListener {
-            likedFilms.add(
-                Film(
-                    "Ла ла ленд",
-                    R.drawable.lalaland,
-                    "Это история любви старлетки, которая между прослушиваниями подает кофе состоявшимся кинозвездам, и фанатичного джазового музыканта, вынужденного подрабатывать в заштатных барах. Но пришедший к влюбленным успех начинает подтачивать их отношения.",
-                    true
-                )
-            )
-            recyclerView.adapter?.notifyItemInserted(likedFilms.size)
-        }
 
-        view.findViewById<View>(R.id.delPoster).setOnClickListener() {
-            if (likedFilms.size > 0) {
-                val position = likedFilms.size - 1
-                likedFilms.removeAt(position)
-                recyclerView.adapter?.notifyItemRemoved(position)
-            }
-        }
 
     }
 
