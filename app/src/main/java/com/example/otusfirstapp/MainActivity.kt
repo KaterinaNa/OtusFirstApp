@@ -13,6 +13,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 const val REQUEST_CODE = 42
 const val ANSWER_CODE = "Answer"
+const val API_KEY = "836cbf0813244b3c64888bc53e1975f8"
+const val URL = "https://api.themoviedb.org/3"
 
 var items = arrayListOf<Film>(
     Film(
