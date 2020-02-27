@@ -15,6 +15,9 @@ import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class FavoritesFragment : Fragment() {
 
@@ -61,6 +64,7 @@ class FavoritesFragment : Fragment() {
         var likedFilms = ArrayList<Film>(items.filter { it.like })
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
+
         val likeListener = { id: Int ->
             Log.i(TAG, "Like clicked $id")
             Unit

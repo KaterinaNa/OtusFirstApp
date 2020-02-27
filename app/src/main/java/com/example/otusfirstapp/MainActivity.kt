@@ -6,9 +6,15 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 const val REQUEST_CODE = 42
@@ -73,6 +79,23 @@ class MainActivity : AppCompatActivity(), OnNewsClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
+
+        if (API_KEY.isEmpty()) {
+            Toast.makeText(
+                applicationContext,
+                "Please obtain your API KEY from themoviedb.org first!",
+                Toast.LENGTH_LONG
+            ).show()
+            return
+        }
+
+        val apiService = RetroApp.getInstance().service
+
+        val call = apiService.getTopRatedMovies(API_KEY)
+
+
 
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNavigation.setOnNavigationItemSelectedListener {
