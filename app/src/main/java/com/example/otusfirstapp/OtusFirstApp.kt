@@ -2,10 +2,8 @@ package com.example.otusfirstapp
 
 import android.app.Application
 
-
-
-class RetroApp : Application() {
-    var service: ApiInterface
+class OtusFirstApp : Application() {
+    var service: ApiInterface? = null
 
     override fun onCreate() {
         super.onCreate()
@@ -17,14 +15,12 @@ class RetroApp : Application() {
 
     private fun initRetrofit() {
 
-        val retrofit = AdvancedApiClient.getClient()
+        val retrofit = ApiClient.getClient()
 
-        service = retrofit.create(ApiInterface::class.java)
+        service = retrofit?.create(ApiInterface::class.java)
     }
 
     companion object {
-
-        var instance: RetroApp? = null
-            private set
+        var instance: OtusFirstApp? = null
     }
 }

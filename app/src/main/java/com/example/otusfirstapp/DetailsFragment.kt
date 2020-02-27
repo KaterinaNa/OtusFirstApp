@@ -43,7 +43,7 @@ class DetailsFragment : Fragment() {
         val filmDescr = view.findViewById<TextView>(R.id.filmDescr)
 
         toolbar.title = items[filmId].name
-        filmImage.setImageDrawable(context?.getDrawable(items[filmId].posterId))
+//        filmImage.setImageDrawable(context?.getDrawable(items[filmId].posterId))
         filmDescr.text = items[filmId].detail
 
     }

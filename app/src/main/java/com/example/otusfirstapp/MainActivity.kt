@@ -9,8 +9,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import retrofit2.Call
 import retrofit2.Callback
@@ -20,9 +18,11 @@ import retrofit2.Response
 const val REQUEST_CODE = 42
 const val ANSWER_CODE = "Answer"
 const val API_KEY = "836cbf0813244b3c64888bc53e1975f8"
-const val URL = "https://api.themoviedb.org/3"
 
-var items = arrayListOf<Film>(
+lateinit var items: ArrayList<Film>
+
+
+/* = arrayListOf<Film>(
     Film(
         "Клуб любителей книг и пирогов с картофельными очистками",
         R.drawable.club_lovers,
@@ -71,7 +71,7 @@ var items = arrayListOf<Film>(
     )
 
 )
-
+*/
 class MainActivity : AppCompatActivity(), OnNewsClickListener {
 
     private var buttonId: Int = 0
@@ -91,9 +91,33 @@ class MainActivity : AppCompatActivity(), OnNewsClickListener {
             return
         }
 
-        val apiService = RetroApp.getInstance().service
+        val apiService = OtusFirstApp.instance?.service
 
-        val call = apiService.getTopRatedMovies(API_KEY)
+
+
+        if (savedInstanceState == null) {
+
+            val call = apiService?.getTopRatedMovies(API_KEY)?.enqueue(object : Callback<FilmsResponse> {
+                override fun onFailure(call: Call<FilmsResponse>, t: Throwable) {
+                    Log.e(TAG, t.toString())
+                }
+
+                override fun onResponse(
+                    call: Call<FilmsResponse>,
+                    response: Response<FilmsResponse>
+                ) {
+                    val res = response.body()?.results
+                    if (res == null) return
+
+                    items = res
+                    supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.fragmentContainer, FilmsListFragment(), FilmsListFragment.TAG)
+                        .commit()
+
+                }
+            })
+        }
 
 
 
@@ -120,12 +144,7 @@ class MainActivity : AppCompatActivity(), OnNewsClickListener {
             }
         }
 
-        if (savedInstanceState == null) {
-            supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.fragmentContainer, FilmsListFragment(), FilmsListFragment.TAG)
-                .commit()
-        }
+
 
     }
 
