@@ -19,6 +19,9 @@ class PosterViewHolder(itemView: View,
 
         val PosterPath = Film.poster()
 
+
+
+
         Glide(item: Film) {
             .PosterPath.load
             .into(R.drawable.ic_favorite_24px)
