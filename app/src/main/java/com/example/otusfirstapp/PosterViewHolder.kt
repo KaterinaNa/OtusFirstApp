@@ -17,6 +17,12 @@ class PosterViewHolder(itemView: View,
         val openDescr = itemView.findViewById<Button>(R.id.openDescr)
         val setLike = itemView.findViewById<ImageView>(R.id.setLike)
 
+        val PosterPath = Film.poster()
+
+        Glide(item: Film) {
+            .PosterPath.load
+            .into(R.drawable.ic_favorite_24px)
+        }
 
 
         fun bind(item: Film) {
@@ -27,7 +33,10 @@ class PosterViewHolder(itemView: View,
             setLike.setOnClickListener {
                 likeListener(getAdapterPosition())
             }
-//            imageView.setImageDrawable(ContextCompat.getDrawable(itemView.context, item.posterId))
+
+
+
+            imageView.setImageDrawable(ContextCompat.getDrawable(itemView.context, item.poster))
 
             if (item.like) {
                 setLike.setImageDrawable(ContextCompat.getDrawable(itemView.context, R.drawable.ic_favorite_24px))
