@@ -91,6 +91,16 @@ class FilmsListFragment : Fragment() {
         itemDecor2.setDrawable(context?.getDrawable(R.drawable.myline2)!!)
         recyclerView.addItemDecoration(itemDecor2)
 
+        recyclerView.addOnScrollListener(object: RecyclerView.OnScrollListener() {
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                (recyclerView.layoutManager as GridLayoutManager).onItemsUpdated(
+                    recyclerView,
+                    31,
+                    10
+                )
+            }
+        })
 
     }
 
