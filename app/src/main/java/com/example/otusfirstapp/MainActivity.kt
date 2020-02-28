@@ -34,17 +34,6 @@ class MainActivity : AppCompatActivity(), OnNewsClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val imageView = itemView.findViewById<ImageView>(R.id.image)
-
-        val PosterPath = Film.setToString(poster())
-
-        Glide {
-            .with(items[posterId])
-            .load(PosterPath)
-            .into(imageView)
-        }
-
-
         val apiService = OtusFirstApp.instance?.service
 
         if (savedInstanceState == null) {

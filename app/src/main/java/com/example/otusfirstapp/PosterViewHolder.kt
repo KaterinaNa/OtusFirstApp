@@ -6,7 +6,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-
+import com.bumptech.glide.Glide
 
 
 class PosterViewHolder(itemView: View,
@@ -16,17 +16,6 @@ class PosterViewHolder(itemView: View,
         val textView = itemView.findViewById<TextView>(R.id.filmName)
         val openDescr = itemView.findViewById<Button>(R.id.openDescr)
         val setLike = itemView.findViewById<ImageView>(R.id.setLike)
-
-        val PosterPath = Film.poster()
-
-
-
-
-        Glide(item: Film) {
-            .PosterPath.load
-            .into(R.drawable.ic_favorite_24px)
-        }
-
 
         fun bind(item: Film) {
             textView.text = item.name
@@ -38,8 +27,11 @@ class PosterViewHolder(itemView: View,
             }
 
 
+            Glide
+                .with(itemView)
+                .load(item.poster())
+                .into(imageView)
 
-            imageView.setImageDrawable(ContextCompat.getDrawable(itemView.context, item.poster))
 
             if (item.like) {
                 setLike.setImageDrawable(ContextCompat.getDrawable(itemView.context, R.drawable.ic_favorite_24px))

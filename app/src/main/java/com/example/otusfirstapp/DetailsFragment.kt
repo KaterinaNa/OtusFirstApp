@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class DetailsFragment : Fragment() {
@@ -43,7 +44,11 @@ class DetailsFragment : Fragment() {
         val filmDescr = view.findViewById<TextView>(R.id.filmDescr)
 
         toolbar.title = items[filmId].name
-//        filmImage.setImageDrawable(context?.getDrawable(items[filmId].posterId))
+
+        Glide
+            .with(context!!)
+            .load(items[filmId].poster())
+            .into(filmImage)
         filmDescr.text = items[filmId].detail
 
     }
