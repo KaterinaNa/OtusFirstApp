@@ -1,6 +1,5 @@
 package com.example.otusfirstapp
 
-import android.app.Activity
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
@@ -26,6 +25,7 @@ class MainActivity : AppCompatActivity(), OnNewsClickListener {
         val apiService = OtusFirstApp.instance?.service
 
         if (savedInstanceState == null) {
+            currentPage = 0
 
             apiService?.getTopRatedMovies(API_KEY, ++currentPage)?.enqueue(object : Callback<FilmsResponse> {
                 override fun onFailure(call: Call<FilmsResponse>, t: Throwable) {
@@ -50,12 +50,14 @@ class MainActivity : AppCompatActivity(), OnNewsClickListener {
 
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNavigation.setOnNavigationItemSelectedListener {
+            if (supportFragmentManager.backStackEntryCount > 0) {
+                supportFragmentManager.popBackStack()
+            }
             when (it.itemId) {
                 R.id.bottom_navigator_home -> {
                     supportFragmentManager
                         .beginTransaction()
                         .replace(R.id.fragmentContainer, FilmsListFragment(), FilmsListFragment.TAG)
-                        .addToBackStack(null)
                         .commit()
                     true
                 }
@@ -63,7 +65,6 @@ class MainActivity : AppCompatActivity(), OnNewsClickListener {
                     supportFragmentManager
                         .beginTransaction()
                         .replace(R.id.fragmentContainer, FavoritesFragment(), FavoritesFragment.TAG)
-                        .addToBackStack(null)
                         .commit()
                     true
                 }
