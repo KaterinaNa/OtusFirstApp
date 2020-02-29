@@ -13,6 +13,9 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class FilmsListFragment : Fragment() {
     var listener: OnNewsClickListener? = null
@@ -44,9 +47,6 @@ class FilmsListFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-//        (activity as AppCompatActivity).setSupportActionBar(toolbar)
-//        activity.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         if (activity is OnNewsClickListener) {
             listener = activity as OnNewsClickListener
@@ -92,13 +92,32 @@ class FilmsListFragment : Fragment() {
         recyclerView.addItemDecoration(itemDecor2)
 
         recyclerView.addOnScrollListener(object: RecyclerView.OnScrollListener() {
+            val gridLayoutManager = recyclerView.layoutManager as GridLayoutManager
 
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                (recyclerView.layoutManager as GridLayoutManager).onItemsUpdated(
-                    recyclerView,
-                    31,
-                    10
-                )
+                val lastItemIndex = items.size - 1
+                if(gridLayoutManager.findLastVisibleItemPosition() == lastItemIndex) {
+                    Log.i(TAG, "Niz scrolla")
+                    val apiService = OtusFirstApp.instance?.service
+                    apiService?.getTopRatedMovies(API_KEY)?.enqueue(object :
+                        Callback<FilmsResponse> {
+                        override fun onFailure(call: Call<FilmsResponse>, t: Throwable) {
+                            Log.e(TAG, t.toString())
+                        }
+
+                        override fun onResponse(
+                            call: Call<FilmsResponse>,
+                            response: Response<FilmsResponse>
+                        ) {
+                            val res = response.body()?.results
+                            if (res == null) return
+
+                            items.addAll(res)
+                            recyclerView.adapter?.notifyItemRangeInserted(lastItemIndex,res.size)
+                        }
+                    })
+                }
+
             }
         })
 

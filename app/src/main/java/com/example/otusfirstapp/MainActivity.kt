@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity(), OnNewsClickListener {
 
         if (savedInstanceState == null) {
 
-            val call = apiService?.getTopRatedMovies(API_KEY)?.enqueue(object : Callback<FilmsResponse> {
+            apiService?.getTopRatedMovies(API_KEY)?.enqueue(object : Callback<FilmsResponse> {
                 override fun onFailure(call: Call<FilmsResponse>, t: Throwable) {
                     Log.e(TAG, t.toString())
                 }
