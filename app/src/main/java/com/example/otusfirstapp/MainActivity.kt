@@ -123,10 +123,10 @@ class MainActivity : AppCompatActivity(), OnNewsClickListener {
                 DialogInterface.OnClickListener { dialog, which ->
                     super.onBackPressed()
                 }
-            bld.setMessage("Вы уверены, что хотите выйти?")
-            bld.setTitle("Выход?")
-            bld.setNegativeButton("Нет", no_lst)
-            bld.setPositiveButton("Выхxод", yes_lst)
+            bld.setMessage(getString(R.string.exit_ask))
+            bld.setTitle(getString(R.string.exit_ask_title))
+            bld.setNegativeButton(getString(R.string.exit_no), no_lst)
+            bld.setPositiveButton(getString(R.string.exit_yes), yes_lst)
             val dialog: AlertDialog = bld.create()
             dialog.show()
         }
