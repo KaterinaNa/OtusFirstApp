@@ -99,7 +99,7 @@ class FilmsListFragment : Fragment() {
                 if(gridLayoutManager.findLastVisibleItemPosition() == lastItemIndex) {
                     Log.i(TAG, "Niz scrolla")
                     val apiService = OtusFirstApp.instance?.service
-                    apiService?.getTopRatedMovies(API_KEY)?.enqueue(object :
+                    apiService?.getTopRatedMovies(API_KEY, 2)?.enqueue(object :
                         Callback<FilmsResponse> {
                         override fun onFailure(call: Call<FilmsResponse>, t: Throwable) {
                             Log.e(TAG, t.toString())
