@@ -22,6 +22,7 @@ const val REQUEST_CODE = 42
 const val ANSWER_CODE = "Answer"
 const val API_KEY = "836cbf0813244b3c64888bc53e1975f8"
 
+var currentPage = 0
 lateinit var items: ArrayList<Film>
 
 
@@ -38,7 +39,7 @@ class MainActivity : AppCompatActivity(), OnNewsClickListener {
 
         if (savedInstanceState == null) {
 
-            apiService?.getTopRatedMovies(API_KEY)?.enqueue(object : Callback<FilmsResponse> {
+            apiService?.getTopRatedMovies(API_KEY, ++currentPage)?.enqueue(object : Callback<FilmsResponse> {
                 override fun onFailure(call: Call<FilmsResponse>, t: Throwable) {
                     Log.e(TAG, t.toString())
                 }
