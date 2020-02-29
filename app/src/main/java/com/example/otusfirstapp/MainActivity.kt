@@ -52,7 +52,11 @@ class MainActivity : AppCompatActivity(), OnNewsClickListener {
         bottomNavigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.bottom_navigator_home -> {
-                    onBackPressed()
+                    supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.fragmentContainer, FilmsListFragment(), FilmsListFragment.TAG)
+                        .addToBackStack(null)
+                        .commit()
                     true
                 }
                 R.id.bottom_navigator_fav -> {
