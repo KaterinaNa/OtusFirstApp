@@ -1,6 +1,5 @@
 package com.example.otusfirstapp
 
-
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -34,7 +33,6 @@ class FilmsListFragment : Fragment() {
         return inflater.inflate(R.layout.films_list_fragment, container, false)
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
@@ -55,9 +53,7 @@ class FilmsListFragment : Fragment() {
         }
 
         Log.d(TAG, "onActivityCreated")
-
     }
-
 
     fun initRecycler(view: View) {
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
@@ -65,17 +61,15 @@ class FilmsListFragment : Fragment() {
             val liked = items[id].like
             items[id].like = !items[id].like
             recyclerView.adapter?.notifyItemChanged(id)
-            if(liked==false) {
+            if(liked == false) {
                 Toast.makeText(view.context, "Добавлено в избранное", Toast.LENGTH_SHORT).show()
-            } else{
+            } else {
                 Toast.makeText(view.context, "Удалено из избранного", Toast.LENGTH_SHORT).show()
             }
-
         }
         val detailsListener = { id: Int ->
             Log.i(TAG, "Details clicked $id")
             listener?.openNewsDetailed(id)
-            Unit
         }
 
         val layoutManager = GridLayoutManager(context, 2)
@@ -104,7 +98,6 @@ class FilmsListFragment : Fragment() {
                         override fun onFailure(call: Call<FilmsResponse>, t: Throwable) {
                             Log.e(TAG, t.toString())
                         }
-
                         override fun onResponse(
                             call: Call<FilmsResponse>,
                             response: Response<FilmsResponse>
@@ -117,16 +110,11 @@ class FilmsListFragment : Fragment() {
                         }
                     })
                 }
-
             }
         })
-
     }
 
     companion object {
         const val TAG = "FilmsListFragment"
     }
-
-
-
 }

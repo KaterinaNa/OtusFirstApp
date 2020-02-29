@@ -31,5 +31,4 @@ class PosterItemDecoration(context: Context, orientation: Int) :
         Log.i("rect", randomLeft.toString())
         outRect.set(randomLeft, 0, 0, 0);
     }
-
 }

@@ -8,7 +8,6 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
-
 class PosterViewHolder(itemView: View,
                        val likeListener: (Int) -> Unit?,
                        val detailslistener: (Int)-> Unit?): RecyclerView.ViewHolder(itemView){
@@ -26,21 +25,16 @@ class PosterViewHolder(itemView: View,
                 likeListener(getAdapterPosition())
             }
 
-
             Glide
                 .with(itemView)
                 .load(item.poster())
                 .into(imageView)
 
-
-            if (item.like) {
-                setLike.setImageDrawable(ContextCompat.getDrawable(itemView.context, R.drawable.ic_favorite_24px))
-            } else {
-                setLike.setImageDrawable(ContextCompat.getDrawable(itemView.context, R.drawable.ic_favorite_border_24px))
-            }
-
+            setLike.setImageDrawable(ContextCompat.getDrawable(itemView.context,
+                if (item.like)
+                    R.drawable.ic_favorite_24px
+                else
+                    R.drawable.ic_favorite_border_24px
+            ))
         }
-
-
-
 }

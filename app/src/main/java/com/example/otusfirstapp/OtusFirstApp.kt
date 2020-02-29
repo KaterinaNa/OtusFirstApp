@@ -14,7 +14,6 @@ class OtusFirstApp : Application() {
     }
 
     private fun initRetrofit() {
-
         val retrofit = ApiClient.getClient()
 
         service = retrofit?.create(ApiInterface::class.java)

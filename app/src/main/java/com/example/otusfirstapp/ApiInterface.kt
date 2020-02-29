@@ -14,6 +14,4 @@ interface ApiInterface {
 
     @GET("movie/{id}")
     fun getFilmInfo(@Path("id") id: Int, @Query("api-key") apiKey: String): Call<Film>
-
-
 }

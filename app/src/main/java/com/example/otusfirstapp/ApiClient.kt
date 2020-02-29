@@ -16,5 +16,4 @@ object ApiClient {
         }
         return retrofit
     }
-
 }
