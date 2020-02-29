@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity(), OnNewsClickListener {
     }
 
     private fun onInvite() {
-        val textMessage = "Поделиться в"
+        val textMessage = getString(R.string.share_into)
         val sendIntent = Intent()
         sendIntent.action = Intent.ACTION_SEND
         sendIntent.putExtra(Intent.EXTRA_TEXT, textMessage)

@@ -36,7 +36,7 @@ class FilmsListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
-        toolbar.title = "Список фильмов"
+        toolbar.title = getString(R.string.filmslist_title)
 
         val bottomNavigation = view.findViewById<BottomNavigationView>(R.id.bottom_navigation)
 
@@ -62,9 +62,9 @@ class FilmsListFragment : Fragment() {
             items[id].like = !items[id].like
             recyclerView.adapter?.notifyItemChanged(id)
             if(liked == false) {
-                Toast.makeText(view.context, "Добавлено в избранное", Toast.LENGTH_SHORT).show()
+                Toast.makeText(view.context, getString(R.string.added_to_favorites), Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(view.context, "Удалено из избранного", Toast.LENGTH_SHORT).show()
+                Toast.makeText(view.context, getString(R.string.deleted_from_favorites), Toast.LENGTH_SHORT).show()
             }
         }
         val detailsListener = { id: Int ->
@@ -91,7 +91,7 @@ class FilmsListFragment : Fragment() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 val lastItemIndex = items.size - 1
                 if(gridLayoutManager.findLastVisibleItemPosition() == lastItemIndex) {
-                    Log.i(TAG, "Niz scrolla")
+                    Log.i(TAG, "Bottom of recycler")
                     val apiService = OtusFirstApp.instance?.service
                     apiService?.getTopRatedMovies(API_KEY, ++currentPage)?.enqueue(object :
                         Callback<FilmsResponse> {

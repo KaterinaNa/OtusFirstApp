@@ -7,4 +7,9 @@
     <string name="favorites">Избранное</string>
     <string name="addPoster">Добавить</string>
     <string name="delPoster">Удалить</string>
+    <string name="favorites_title">Избранное</string>
+    <string name="filmslist_title">Список фильмов</string>
+    <string name="added_to_favorites">Добавлено в избранное</string>
+    <string name="deleted_from_favorites">Удалено из избранного</string>
+    <string name="share_into">Поделиться в</string>
 </resources>

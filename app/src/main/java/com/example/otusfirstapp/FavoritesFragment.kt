@@ -32,7 +32,7 @@ class FavoritesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
-        toolbar.title = "Избранное"
+        toolbar.title = getString(R.string.favorites_title)
 
         initRecycler(view)
     }
