@@ -4,7 +4,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class FilmInteractor(private val filmService: FilmService, private val filmRepository: FilmRepository) {
+class FilmInteractor(private val filmService: FilmService, private val filmRepository: FilmsResponse) {
 
     fun getRepos(username: String, callback: GetFilmCallback) {
         filmService.getUserRepos(username).enqueue(object : Callback<List<Film>> {

@@ -3,6 +3,7 @@ package com.example.otusfirstapp.Present.view.ViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.otusfirstapp.Entity.ApiClient
+import com.example.otusfirstapp.Entity.Film
 import com.example.otusfirstapp.Present.view.OtusFirstApp
 
 class FilmLostViewModel: ViewModel(){

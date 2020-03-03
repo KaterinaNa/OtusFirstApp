@@ -3,12 +3,13 @@ package com.example.otusfirstapp.Present.view
 import android.app.Application
 import com.example.otusfirstapp.Entity.ApiClient
 import com.example.otusfirstapp.Entity.ApiInterface
+import com.example.otusfirstapp.Entity.FilmInteractor
 
 class OtusFirstApp : Application() {
     var service: ApiInterface? = null
 
     lateinit var filmService: FilmService
-    lateinit var filmInteraror: FilmInterator
+    lateinit var filmInteraror: FilmInteractor
     override fun onCreate() {
         super.onCreate()
 
@@ -18,7 +19,7 @@ class OtusFirstApp : Application() {
     }
 
     private fun initInterator () {
-        filmInteraror = FilmInteraror(filmService, filmRepositiry)
+        filmInteraror = FilmInteractor(filmService, filmRepositiry)
     }
 
     private fun initRetrofit() {
