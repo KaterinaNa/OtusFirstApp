@@ -18,9 +18,4 @@ object ApiClient {
         }
         return retrofit
     }
-
-    companion object {
-        var instance: App? = null
-            private set
-    }
 }
