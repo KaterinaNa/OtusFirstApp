@@ -1,5 +1,7 @@
-package com.example.otusfirstapp
+package com.example.otusfirstapp.Entity
 
+import com.example.otusfirstapp.Entity.Film
+import com.example.otusfirstapp.Entity.FilmsResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

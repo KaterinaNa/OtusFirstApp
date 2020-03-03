@@ -3,6 +3,7 @@ package com.example.otusfirstapp;
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.otusfirstapp.Entity.Film
 
 class PosterAdapter(val inflater: LayoutInflater,
                     val items: List<Film>,

@@ -1,4 +1,4 @@
-package com.example.otusfirstapp
+package com.example.otusfirstapp.Present.view
 
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.example.otusfirstapp.*
+import com.example.otusfirstapp.Entity.FilmsResponse
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import retrofit2.Call
 import retrofit2.Callback
@@ -81,7 +83,10 @@ class FilmsListFragment : Fragment() {
         val layoutManager = GridLayoutManager(context, 2)
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter =
-            PosterAdapter(LayoutInflater.from(context), items, likeListener, detailsListener)
+            PosterAdapter(
+                LayoutInflater.from(context),
+                items, likeListener, detailsListener
+            )
 
         val itemDecor = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
         itemDecor.setDrawable(context?.getDrawable(R.drawable.myline)!!)

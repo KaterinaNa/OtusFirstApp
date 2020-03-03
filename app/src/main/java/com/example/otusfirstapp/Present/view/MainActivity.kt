@@ -1,4 +1,4 @@
-package com.example.otusfirstapp
+package com.example.otusfirstapp.Present.view
 
 import android.content.DialogInterface
 import android.content.Intent
@@ -6,6 +6,9 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.otusfirstapp.*
+import com.example.otusfirstapp.Entity.Film
+import com.example.otusfirstapp.Entity.FilmsResponse
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import retrofit2.Call
 import retrofit2.Callback
@@ -42,7 +45,11 @@ class MainActivity : AppCompatActivity(), OnNewsClickListener {
                     items = res
                     supportFragmentManager
                         .beginTransaction()
-                        .replace(R.id.fragmentContainer, FilmsListFragment(), FilmsListFragment.TAG)
+                        .replace(
+                            R.id.fragmentContainer,
+                            FilmsListFragment(),
+                            FilmsListFragment.TAG
+                        )
                         .commit()
                 }
             })
@@ -57,14 +64,22 @@ class MainActivity : AppCompatActivity(), OnNewsClickListener {
                 R.id.bottom_navigator_home -> {
                     supportFragmentManager
                         .beginTransaction()
-                        .replace(R.id.fragmentContainer, FilmsListFragment(), FilmsListFragment.TAG)
+                        .replace(
+                            R.id.fragmentContainer,
+                            FilmsListFragment(),
+                            FilmsListFragment.TAG
+                        )
                         .commit()
                     true
                 }
                 R.id.bottom_navigator_fav -> {
                     supportFragmentManager
                         .beginTransaction()
-                        .replace(R.id.fragmentContainer, FavoritesFragment(), FavoritesFragment.TAG)
+                        .replace(
+                            R.id.fragmentContainer,
+                            FavoritesFragment(),
+                            FavoritesFragment.TAG
+                        )
                         .commit()
                     true
                 }
