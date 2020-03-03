@@ -10,6 +10,7 @@ class OtusFirstApp : Application() {
 
     lateinit var filmService: FilmService
     lateinit var filmInteraror: FilmInteractor
+    var filmRepositiry = FilmRepository()
     override fun onCreate() {
         super.onCreate()
 
