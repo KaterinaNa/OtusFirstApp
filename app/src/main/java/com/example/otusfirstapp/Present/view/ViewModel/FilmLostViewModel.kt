@@ -7,7 +7,7 @@ import com.example.otusfirstapp.Entity.Film
 import com.example.otusfirstapp.Present.view.OtusFirstApp
 
 class FilmLostViewModel: ViewModel(){
-    private val reposLiveData = MutableListData<List<Film>>()
+    private val filmLiveData = MutableListData<List<Film>>()
     private val errorLiveData = MutableListData<String>()
     private val selectedFimlUrlLiveData = MutableLiveData<String>()
 
