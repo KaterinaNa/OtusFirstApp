@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import retrofit2.Call
 import retrofit2.Callback
@@ -39,6 +40,7 @@ class FilmsListFragment : Fragment() {
         val bottomNavigation = view.findViewById<BottomNavigationView>(R.id.bottom_navigation)
 
         initRecycler(view)
+        initSwipe(view)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -49,8 +51,14 @@ class FilmsListFragment : Fragment() {
         } else {
             throw Exception("Activity must implement OnNewsClickListener")
         }
-
         Log.d(TAG, "onActivityCreated")
+    }
+
+    fun initSwipe(view: View) {
+        val swipeLayout = view.findViewById<SwipeRefreshLayout>(R.id.swipe_container)
+        swipeLayout.setOnRefreshListener {
+            Log.i(TAG, "Swipe activated")
+        }
     }
 
     fun initRecycler(view: View) {
