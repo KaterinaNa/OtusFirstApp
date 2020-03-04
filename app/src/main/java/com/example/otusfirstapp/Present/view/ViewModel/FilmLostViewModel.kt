@@ -19,7 +19,7 @@ class FilmLostViewModel: ViewModel(){
     var error: LiveData<String>
         get() = errorLiveData
 
-    val select electedFimlUrlLiveData: LiveData<String>
+    val select selectedFimlUrlLiveData: LiveData<String>
             get() = electedFimlUrlLiveData
 
 
