@@ -2,14 +2,14 @@ package com.example.otusfirstapp.Present.view
 
 import android.app.Application
 import com.example.otusfirstapp.Entity.ApiClient
-import com.example.otusfirstapp.Entity.ApiInterface
+import com.example.otusfirstapp.Entity.FilmService
 import com.example.otusfirstapp.Entity.FilmInteractor
 
 class OtusFirstApp : Application() {
-    var service: ApiInterface? = null
+    var service: FilmService? = null
 
     lateinit var filmService: FilmService
-    lateinit var filmInteraror: FilmInteractor
+    lateinit var filmInteractor: FilmInteractor
     var filmRepositiry = FilmRepository()
     override fun onCreate() {
         super.onCreate()
@@ -20,13 +20,13 @@ class OtusFirstApp : Application() {
     }
 
     private fun initInterator () {
-        filmInteraror = FilmInteractor(filmService, filmRepositiry)
+        filmInteractor = FilmInteractor(filmService, filmRepositiry)
     }
 
     private fun initRetrofit() {
         val retrofit = ApiClient.getClient()
 
-        service = retrofit?.create(ApiInterface::class.java)
+        service = retrofit?.create(FilmService::class.java)
     }
 
     companion object {

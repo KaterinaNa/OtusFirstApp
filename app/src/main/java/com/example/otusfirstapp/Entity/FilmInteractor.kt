@@ -5,7 +5,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.http.Query
 
-class FilmInteractor(private val filmService: ApiInterface, private val filmRepository: FilmRepository) {
+class FilmInteractor(private val filmService: FilmService, private val filmRepository: FilmRepository) {
 
     fun getRepos(id: Int, apiKey: String, callback: GetFilmCallback) {
         filmService.getFilmInfo(id, apiKey).enqueue(object : Callback<List<Film>> {
