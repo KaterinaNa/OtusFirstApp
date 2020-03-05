@@ -4,6 +4,7 @@ import android.app.Application
 import com.example.otusfirstapp.Entity.ApiClient
 import com.example.otusfirstapp.Entity.FilmService
 import com.example.otusfirstapp.Entity.FilmInteractor
+import com.example.otusfirstapp.Entity.FilmRepository
 
 class OtusFirstApp : Application() {
     var service: FilmService? = null
@@ -17,6 +18,7 @@ class OtusFirstApp : Application() {
         instance = this
 
         initRetrofit()
+        initInterator()
     }
 
     private fun initInterator () {
