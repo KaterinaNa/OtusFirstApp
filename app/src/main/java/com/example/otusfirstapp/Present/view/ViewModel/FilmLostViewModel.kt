@@ -4,11 +4,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.otusfirstapp.Entity.Film
+import com.example.otusfirstapp.Entity.FilmInteractor
+import com.example.otusfirstapp.Entity.FilmsResponse
 import com.example.otusfirstapp.Present.view.OtusFirstApp
+import retrofit2.Call
+import retrofit2.Response
 
 class FilmLostViewModel: ViewModel(){
-    private val filmLiveData = MutableListData<List<Film>>()
-    private val errorLiveData = MutableListData<String>()
+    private val filmLiveData = MutableLiveData<List<Film>>()
+    private val errorLiveData = MutableLiveData<String>()
     private val selectedFimlUrlLiveData = MutableLiveData<String>()
 
     private val filmInteractor = OtusFirstApp.instance!!.filmInteractor
@@ -16,15 +20,18 @@ class FilmLostViewModel: ViewModel(){
     val film: LiveData<List<Film>>
         get() = filmLiveData
 
-    var error: LiveData<String>
+    val error: LiveData<String>
         get() = errorLiveData
 
-    val select selectedFimlUrl: LiveData<String>
-            get() = selectedFimlUrlLiveData
+    val selectedFimlUrl: LiveData<String>
+        get() = selectedFimlUrlLiveData
 
 
-    fun onGetDataClick() {
-        filmInteractor.getRepos(id, apiKey {
+    fun OnClick (call: Call<FilmsResponse>,
+                          response: Response<FilmsResponse>
+    ) {
+        val res = response.body()?.results
+        filmInteractor.getRepos(id, apiKey, FilmInteractor.GetFilmCallback {
             override fun onSuccesed(film: List<Film>)
             filmLiveData.postValue(response)
         }

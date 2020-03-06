@@ -8,10 +8,10 @@ import retrofit2.http.Query
 class FilmInteractor(private val filmService: FilmService, private val filmRepository: FilmRepository) {
 
     fun getRepos(id: Int, apiKey: String, callback: GetFilmCallback) {
-        filmService.getFilmInfo(id, apiKey).enqueue(object : Callback<List<Film>> {
-            override fun onResponse(call: Call<List<Film>>, response: Response<List<Film>>) {
+        filmService.getFilmInfo(id, apiKey).enqueue(object : Callback<Film> {
+            override fun onResponse(call: Call<Film>, response: Response<Film>) {
                 if (response.isSuccessful) {
-                    filmRepository.addToCache(response.body()!!)
+                    filmRepository.addToCache(listOf(response.body()!!))
 
                     callback.onSuccess(filmRepository.cachedOrFakeRepos)
                 } else {
@@ -19,7 +19,7 @@ class FilmInteractor(private val filmService: FilmService, private val filmRepos
                 }
             }
 
-            override fun onFailure(call: Call<List<Film>>, t: Throwable) {
+            override fun onFailure(call: Call<Film>, t: Throwable) {
                 callback.onError("Network error probably...")
             }
         })
