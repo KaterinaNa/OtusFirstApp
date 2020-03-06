@@ -19,8 +19,20 @@ class FilmLostViewModel: ViewModel(){
     var error: LiveData<String>
         get() = errorLiveData
 
-    val select selectedFimlUrlLiveData: LiveData<String>
-            get() = electedFimlUrlLiveData
+    val select selectedFimlUrl: LiveData<String>
+            get() = selectedFimlUrlLiveData
+
+
+    fun onGetDataClick() {
+        filmInteractor.getRepos(id, apiKey {
+            override fun onSuccesed(film: List<Film>)
+            filmLiveData.postValue(response)
+        }
+        override fun onError(error: String) {
+            errorLiveData.postValue(error)
+        }
+        )}
+    }
 
 
     }

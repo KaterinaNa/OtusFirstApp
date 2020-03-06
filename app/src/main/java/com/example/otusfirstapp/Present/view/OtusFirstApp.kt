@@ -5,13 +5,17 @@ import com.example.otusfirstapp.Entity.ApiClient
 import com.example.otusfirstapp.Entity.FilmService
 import com.example.otusfirstapp.Entity.FilmInteractor
 import com.example.otusfirstapp.Entity.FilmRepository
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class OtusFirstApp : Application() {
     var service: FilmService? = null
 
     lateinit var filmService: FilmService
     lateinit var filmInteractor: FilmInteractor
-    var filmRepositiry = FilmRepository()
+    var filmRepository = FilmRepository()
+
+
     override fun onCreate() {
         super.onCreate()
 
@@ -22,13 +26,20 @@ class OtusFirstApp : Application() {
     }
 
     private fun initInterator () {
-        filmInteractor = FilmInteractor(filmService, filmRepositiry)
+        filmInteractor = FilmInteractor(filmService, filmRepository)
     }
 
     private fun initRetrofit() {
-        val retrofit = ApiClient.getClient()
+
+        var retrofit: Retrofit? = null
 
         service = retrofit?.create(FilmService::class.java)
+
+        filmService) = Retrofit.Builder()
+                    .baseUrl("https://api.themoviedb.org/3/")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build()
+
     }
 
     companion object {
