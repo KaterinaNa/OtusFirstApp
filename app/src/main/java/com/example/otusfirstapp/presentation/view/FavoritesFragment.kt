@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.otusfirstapp.data.entity.Film
-import com.example.otusfirstapp.PosterAdapter
 import com.example.otusfirstapp.R
 
 class FavoritesFragment : Fragment() {
@@ -71,12 +70,13 @@ class FavoritesFragment : Fragment() {
 
         val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = PosterAdapter(
-            LayoutInflater.from(context),
-            likedFilms,
-            likeListener,
-            detailsListener
-        )
+        recyclerView.adapter =
+            PosterAdapter(
+                LayoutInflater.from(context),
+                likedFilms,
+                likeListener,
+                detailsListener
+            )
 
         val itemDecor = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
         itemDecor.setDrawable(context?.getDrawable(R.drawable.myline)!!)

@@ -1,4 +1,4 @@
-package com.example.otusfirstapp
+package com.example.otusfirstapp.presentation.view
 
 import android.content.Context
 import android.graphics.Canvas

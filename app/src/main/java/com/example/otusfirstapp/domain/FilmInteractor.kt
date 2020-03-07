@@ -10,20 +10,20 @@ import retrofit2.Response
 
 class FilmInteractor(private val filmService: FilmService, private val filmRepository: FilmRepository) {
 
-    fun getFilms(apiKey: String, page: Int, callback: GetFilmCallback) {
+    fun getTopFilms(apiKey: String, page: Int, callback: GetTopFilmsCallback) {
 
         val apiCallback = GetTopRatedCallback(callback, filmRepository)
 
         filmService.getTopRatedMovies(apiKey, page).enqueue(apiCallback)
     }
 
-    interface GetFilmCallback {
+    interface GetTopFilmsCallback {
         fun onSuccess(films: ArrayList<Film>)
         fun onError(error: String)
     }
 }
 
-class GetTopRatedCallback(val callback: FilmInteractor.GetFilmCallback, val filmRepository: FilmRepository) : Callback<FilmsResponse> {
+class GetTopRatedCallback(val callback: FilmInteractor.GetTopFilmsCallback, val filmRepository: FilmRepository) : Callback<FilmsResponse> {
     override fun onResponse(call: Call<FilmsResponse>, response: Response<FilmsResponse>) {
         if (response.isSuccessful) {
             val films = response.body()?.results

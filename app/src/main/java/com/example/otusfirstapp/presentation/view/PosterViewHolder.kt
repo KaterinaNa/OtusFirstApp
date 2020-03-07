@@ -1,4 +1,4 @@
-package com.example.otusfirstapp
+package com.example.otusfirstapp.presentation.view
 
 import android.view.View
 import android.widget.Button
@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.otusfirstapp.R
 import com.example.otusfirstapp.data.entity.Film
 
 class PosterViewHolder(itemView: View,

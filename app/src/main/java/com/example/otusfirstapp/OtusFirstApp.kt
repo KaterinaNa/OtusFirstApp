@@ -43,7 +43,7 @@ class OtusFirstApp : Application() {
     }
 
     companion object {
-        var instance: OtusFirstApp? = null
+        lateinit var instance: OtusFirstApp
         private set
     }
 }
