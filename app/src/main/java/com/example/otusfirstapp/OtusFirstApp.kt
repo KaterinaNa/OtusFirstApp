@@ -11,7 +11,6 @@ class OtusFirstApp : Application() {
 
     lateinit var filmService: FilmService
     lateinit var filmInteractor: FilmInteractor
-    var filmRepository = FilmRepository()
 
 
     override fun onCreate() {
@@ -24,6 +23,8 @@ class OtusFirstApp : Application() {
     }
 
     private fun initInterator () {
+        val filmRepository = FilmRepository()
+
         filmInteractor = FilmInteractor(
             filmService,
             filmRepository
