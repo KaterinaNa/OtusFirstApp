@@ -12,31 +12,35 @@ class FilmInteractor(private val filmService: FilmService, private val filmRepos
 
     fun getFilms(apiKey: String, page: Int, callback: GetFilmCallback) {
 
-        filmService.getTopRatedMovies(apiKey, page).enqueue(object : Callback<FilmsResponse> {
-            override fun onResponse(call: Call<FilmsResponse>, response: Response<FilmsResponse>) {
-                if (response.isSuccessful) {
-                    val films = response.body()?.results
-                    if (films == null) {
-                        callback.onError("API returned null results")
-                        return
-                    }
+        val apiCallback = GetTopRatedCallback(callback, filmRepository)
 
-                    filmRepository.addToCache(films)
-
-                    callback.onSuccess(filmRepository.cachedOrFakeFilms)
-                } else {
-                    callback.onError(response.code().toString() + "")
-                }
-            }
-
-            override fun onFailure(call: Call<FilmsResponse>, t: Throwable) {
-                callback.onError("Network error probably...")
-            }
-        })
+        filmService.getTopRatedMovies(apiKey, page).enqueue(apiCallback)
     }
 
     interface GetFilmCallback {
         fun onSuccess(films: ArrayList<Film>)
         fun onError(error: String)
+    }
+}
+
+class GetTopRatedCallback(val callback: FilmInteractor.GetFilmCallback, val filmRepository: FilmRepository) : Callback<FilmsResponse> {
+    override fun onResponse(call: Call<FilmsResponse>, response: Response<FilmsResponse>) {
+        if (response.isSuccessful) {
+            val films = response.body()?.results
+            if (films == null) {
+                callback.onError("API returned null results")
+                return
+            }
+
+            filmRepository.addToCache(films)
+
+            callback.onSuccess(filmRepository.cachedOrFakeFilms)
+        } else {
+            callback.onError(response.code().toString() + "")
+        }
+    }
+
+    override fun onFailure(call: Call<FilmsResponse>, t: Throwable) {
+        callback.onError("Network error probably...")
     }
 }
