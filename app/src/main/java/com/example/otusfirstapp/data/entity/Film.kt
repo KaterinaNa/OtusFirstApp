@@ -1,4 +1,4 @@
-package com.example.otusfirstapp.Entity
+package com.example.otusfirstapp.data.entity
 
 import com.google.gson.annotations.SerializedName
 

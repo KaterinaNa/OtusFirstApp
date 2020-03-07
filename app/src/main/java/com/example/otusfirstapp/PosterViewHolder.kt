@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.otusfirstapp.Entity.Film
+import com.example.otusfirstapp.data.entity.Film
 
 class PosterViewHolder(itemView: View,
                        val likeListener: (Int) -> Unit?,
