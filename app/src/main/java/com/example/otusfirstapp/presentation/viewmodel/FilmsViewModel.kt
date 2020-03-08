@@ -12,6 +12,7 @@ class FilmsViewModel : ViewModel() {
     private val filmsLiveData = MutableLiveData<ArrayList<Film>>()
     private val errorLiveData = MutableLiveData<String>()
     private val selectedFilmLiveData = MutableLiveData<Film>()
+    private val favoriteFilmLiveData = MutableLiveData<Film>
     private var currentPage = 0
 
     private val filmInteractor = OtusFirstApp.instance.filmInteractor
@@ -24,6 +25,9 @@ class FilmsViewModel : ViewModel() {
 
     val selectedFilm: LiveData<Film>
         get() = selectedFilmLiveData
+
+    val favoriteFilmLiveData: LiveData<Film>
+        get() favoriteFilmLiveData
 
 
     fun getTopFilms() {
@@ -38,6 +42,11 @@ class FilmsViewModel : ViewModel() {
                 }
             })
     }
+
+    fun favoriteFilmLiveData() {
+
+    }
+
 
     fun openDetails(filmId: Int) {
         val film = filmInteractor.getFilmById(filmId)
