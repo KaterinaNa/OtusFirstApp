@@ -21,6 +21,10 @@ class FilmInteractor(private val filmService: FilmService, private val filmRepos
         return filmRepository.getFilmById(id)
     }
 
+    fun getFavoriteFilms(): ArrayList<Film> {
+        return filmRepository.getFavoriteFilms()
+    }
+
     interface GetTopFilmsCallback {
         fun onSuccess(films: ArrayList<Film>)
         fun onError(error: String)

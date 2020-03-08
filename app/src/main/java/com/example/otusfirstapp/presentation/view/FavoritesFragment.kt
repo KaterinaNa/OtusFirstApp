@@ -62,11 +62,11 @@ class FavoritesFragment : Fragment() {
     private fun initViewModel(view: View) {
         viewModel = ViewModelProvider(activity!!).get(FilmsViewModel::class.java)
 
-        viewModel!!.films.observe(
+        viewModel!!.favoriteFilms.observe(
             viewLifecycleOwner,
             Observer<ArrayList<Film>> { films ->
                 adapter!!.setItems(films)
-                Log.i(FilmsListFragment.TAG, "films update")
+                Log.i(TAG, "films update")
             })
     }
 
@@ -78,11 +78,8 @@ class FavoritesFragment : Fragment() {
     }
 
     fun initRecycler(view: View) {
-        var realIndex: ArrayList<Int> = arrayListOf()
-        var likedFilms = ArrayList<Film>(film.filterIndexed { idx: Int, it: Film ->
-            if(it.like) realIndex.add(idx)
-            it.like
-        })
+
+
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
 
         val likeListener = { favId: Int ->
@@ -92,19 +89,21 @@ class FavoritesFragment : Fragment() {
             recyclerView.adapter?.notifyItemChanged(favId)*/
         }
         val detailsListener = { favId: Int ->
-            val id = realIndex[favId]
+            //val id = realIndex[favId]
+            val id = favId
             Log.i(TAG, "Details clicked $id")
             listener?.openFilmDetailed()
         }
 
         val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         recyclerView.layoutManager = layoutManager
-        recyclerView.adapter =
+        adapter =
             PosterAdapter(
                 LayoutInflater.from(context),
                 likeListener,
                 detailsListener
             )
+        recyclerView!!.adapter = adapter
 
         val itemDecor = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
         itemDecor.setDrawable(context?.getDrawable(R.drawable.myline)!!)
