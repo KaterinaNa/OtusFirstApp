@@ -8,9 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.otusfirstapp.R
+import com.example.otusfirstapp.data.entity.Film
+import com.example.otusfirstapp.presentation.viewmodel.FilmsViewModel
 
 class DetailsFragment : Fragment() {
 
@@ -34,13 +39,22 @@ class DetailsFragment : Fragment() {
         val filmDescr = view.findViewById<TextView>(R.id.filmDescr)
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
 
-/*        val filmId = arguments?.getInt(EXTRA_ID, 0)?:0
-        toolbar.title = items[filmId].name
-        filmDescr.text = items[filmId].detail
-        Glide
-            .with(context!!)
-            .load(items[filmId].poster())
-            .into(filmImage)*/
+
+        val viewModel = ViewModelProvider(activity!!).get(FilmsViewModel::class.java)
+
+        fun render(film: Film) {
+            toolbar.title = film.name
+            filmDescr.text = film.detail
+            Glide
+                .with(context!!)
+                .load(film.poster())
+                .into(filmImage)
+        }
+
+        viewModel.selectedFilm.observe(
+            viewLifecycleOwner,
+            Observer<Film> { render(it) }
+        )
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

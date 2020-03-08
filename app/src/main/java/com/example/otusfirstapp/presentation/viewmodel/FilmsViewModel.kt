@@ -11,7 +11,8 @@ import com.example.otusfirstapp.presentation.view.API_KEY
 class FilmsViewModel : ViewModel() {
     private val filmsLiveData = MutableLiveData<ArrayList<Film>>()
     private val errorLiveData = MutableLiveData<String>()
-    private val selectedFimlIdLiveData = MutableLiveData<Int>()
+    private val selectedFilmLiveData = MutableLiveData<Film>()
+    private var currentPage = 0
 
     private val filmInteractor = OtusFirstApp.instance.filmInteractor
 
@@ -21,8 +22,8 @@ class FilmsViewModel : ViewModel() {
     val error: LiveData<String>
         get() = errorLiveData
 
-    val selectedFimlId: LiveData<Int>
-        get() = selectedFimlIdLiveData
+    val selectedFilm: LiveData<Film>
+        get() = selectedFilmLiveData
 
 
     fun getTopFilms() {
@@ -39,7 +40,8 @@ class FilmsViewModel : ViewModel() {
     }
 
     fun openDetails(filmId: Int) {
-        selectedFimlIdLiveData.postValue(filmId)
+        val film = filmInteractor.getFilmById(filmId)
+        selectedFilmLiveData.postValue(film)
     }
 
 

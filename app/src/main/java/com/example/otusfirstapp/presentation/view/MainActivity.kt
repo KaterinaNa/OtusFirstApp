@@ -3,16 +3,10 @@ package com.example.otusfirstapp.presentation.view
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.example.otusfirstapp.*
-import com.example.otusfirstapp.data.entity.Film
-import com.example.otusfirstapp.data.entity.FilmsResponse
+import com.example.otusfirstapp.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 const val API_KEY = "836cbf0813244b3c64888bc53e1975f8"
 
@@ -84,14 +78,12 @@ class MainActivity : AppCompatActivity(),
         }
     }
 
-    override fun openFilmDetailed(filmId: Int) {
+    override fun openFilmDetailed() {
         supportFragmentManager
             .beginTransaction()
             .replace(
                 R.id.fragmentContainer,
-                DetailsFragment.newInstance(
-                    filmId
-                ),
+                DetailsFragment(),
                 DetailsFragment.TAG
             )
             .addToBackStack(null)

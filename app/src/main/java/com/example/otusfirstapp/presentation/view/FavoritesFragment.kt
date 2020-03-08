@@ -65,7 +65,7 @@ class FavoritesFragment : Fragment() {
         val detailsListener = { favId: Int ->
             val id = realIndex[favId]
             Log.i(TAG, "Details clicked $id")
-            listener?.openFilmDetailed(id)
+            listener?.openFilmDetailed()
         }
 
         val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)

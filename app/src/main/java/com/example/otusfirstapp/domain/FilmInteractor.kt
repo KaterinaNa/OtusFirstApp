@@ -17,6 +17,10 @@ class FilmInteractor(private val filmService: FilmService, private val filmRepos
         filmService.getTopRatedMovies(apiKey, page).enqueue(apiCallback)
     }
 
+    fun getFilmById(id: Int): Film {
+        return filmRepository.getFilmById(id)
+    }
+
     interface GetTopFilmsCallback {
         fun onSuccess(films: ArrayList<Film>)
         fun onError(error: String)
@@ -31,7 +35,6 @@ class GetTopRatedCallback(val callback: FilmInteractor.GetTopFilmsCallback, val 
                 callback.onError("API returned null results")
                 return
             }
-
             filmRepository.addToCache(films)
 
             callback.onSuccess(filmRepository.cachedOrFakeFilms)

@@ -94,7 +94,8 @@ class FilmsListFragment : Fragment() {
         }
         val detailsListener = { id: Int ->
             Log.i(TAG, "Details clicked $id")
-            listener?.openFilmDetailed(id)
+            viewModel!!.openDetails(id)
+            listener?.openFilmDetailed()
         }
 
         val layoutManager = GridLayoutManager(context, 2)

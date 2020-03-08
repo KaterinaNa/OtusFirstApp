@@ -47,4 +47,8 @@ class FilmRepository {
         Log.i("Repository", "Add to cache")
         cachedFilms.addAll(films)
     }
+
+    fun getFilmById(id: Int): Film {
+        return cachedOrFakeFilms[id]
+    }
 }
