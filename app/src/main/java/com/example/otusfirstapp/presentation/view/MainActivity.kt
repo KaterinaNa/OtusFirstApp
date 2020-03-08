@@ -16,9 +16,6 @@ import retrofit2.Response
 
 const val API_KEY = "836cbf0813244b3c64888bc53e1975f8"
 
-var currentPage = 0
-lateinit var items: ArrayList<Film>
-
 class MainActivity : AppCompatActivity(),
     OnFilmClickListener {
 
@@ -26,34 +23,15 @@ class MainActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val apiService = OtusFirstApp.instance?.service
-
         if (savedInstanceState == null) {
-            currentPage = 0
-
-            apiService?.getTopRatedMovies(API_KEY, ++currentPage)?.enqueue(object : Callback<FilmsResponse> {
-                override fun onFailure(call: Call<FilmsResponse>, t: Throwable) {
-                    Log.e(TAG, t.toString())
-                }
-
-                override fun onResponse(
-                    call: Call<FilmsResponse>,
-                    response: Response<FilmsResponse>
-                ) {
-                    val res = response.body()?.results
-                    if (res == null) return
-
-                    items = res
-                    supportFragmentManager
-                        .beginTransaction()
-                        .replace(
-                            R.id.fragmentContainer,
-                            FilmsListFragment(),
-                            FilmsListFragment.TAG
-                        )
-                        .commit()
-                }
-            })
+            supportFragmentManager
+                .beginTransaction()
+                .replace(
+                    R.id.fragmentContainer,
+                    FilmsListFragment(),
+                    FilmsListFragment.TAG
+                )
+                .commit()
         }
 
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)

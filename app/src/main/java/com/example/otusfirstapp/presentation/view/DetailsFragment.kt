@@ -34,13 +34,13 @@ class DetailsFragment : Fragment() {
         val filmDescr = view.findViewById<TextView>(R.id.filmDescr)
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
 
-        val filmId = arguments?.getInt(EXTRA_ID, 0)?:0
+/*        val filmId = arguments?.getInt(EXTRA_ID, 0)?:0
         toolbar.title = items[filmId].name
         filmDescr.text = items[filmId].detail
         Glide
             .with(context!!)
             .load(items[filmId].poster())
-            .into(filmImage)
+            .into(filmImage)*/
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

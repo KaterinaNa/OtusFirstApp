@@ -1,5 +1,6 @@
 package com.example.otusfirstapp.data
 
+import android.util.Log
 import com.example.otusfirstapp.data.entity.Film
 
 class FilmRepository {
@@ -43,6 +44,7 @@ class FilmRepository {
     }
 
     fun addToCache(films: ArrayList<Film>) {
-        this.cachedFilms.addAll(films)
+        Log.i("Repository", "Add to cache")
+        cachedFilms.addAll(films)
     }
 }

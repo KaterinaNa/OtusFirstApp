@@ -50,17 +50,17 @@ class FavoritesFragment : Fragment() {
 
     fun initRecycler(view: View) {
         var realIndex: ArrayList<Int> = arrayListOf()
-        var likedFilms = ArrayList<Film>(items.filterIndexed { idx: Int, it: Film ->
+/*        var likedFilms = ArrayList<Film>(items.filterIndexed { idx: Int, it: Film ->
             if(it.like) realIndex.add(idx)
             it.like
-        })
+        })*/
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
 
         val likeListener = { favId: Int ->
-            val id = realIndex[favId]
+/*            val id = realIndex[favId]
             Log.i(TAG, "Like clicked $id")
             items[id].like = !items[id].like
-            recyclerView.adapter?.notifyItemChanged(favId)
+            recyclerView.adapter?.notifyItemChanged(favId)*/
         }
         val detailsListener = { favId: Int ->
             val id = realIndex[favId]
@@ -73,7 +73,6 @@ class FavoritesFragment : Fragment() {
         recyclerView.adapter =
             PosterAdapter(
                 LayoutInflater.from(context),
-                likedFilms,
                 likeListener,
                 detailsListener
             )

@@ -6,11 +6,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.otusfirstapp.R
 import com.example.otusfirstapp.data.entity.Film
 
-class PosterAdapter(val inflater: LayoutInflater,
-                    val items: List<Film>,
-                    val likeListener: (Int) -> Unit?,
-                    val detalislistener: (Int) ->Unit?) :
+class PosterAdapter(
+    val inflater: LayoutInflater,
+    val likeListener: (Int) -> Unit?,
+    val detalislistener: (Int) -> Unit?
+) :
     RecyclerView.Adapter<PosterViewHolder>() {
+    private var items = ArrayList<Film>()
+
+    fun setItems(films: ArrayList<Film>) {
+        items.clear()
+        items.addAll(films)
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PosterViewHolder {
         return PosterViewHolder(

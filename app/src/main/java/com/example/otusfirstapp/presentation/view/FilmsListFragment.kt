@@ -8,19 +8,21 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.otusfirstapp.*
-import com.example.otusfirstapp.data.entity.FilmsResponse
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.otusfirstapp.data.entity.Film
+import com.example.otusfirstapp.presentation.viewmodel.FilmsViewModel
 
 class FilmsListFragment : Fragment() {
-    var listener: OnFilmClickListener? = null
+    private var listener: OnFilmClickListener? = null
+    private var viewModel: FilmsViewModel? = null
+    private var recycler: RecyclerView? = null
+    private var adapter: PosterAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,10 +41,11 @@ class FilmsListFragment : Fragment() {
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
         toolbar.title = getString(R.string.filmslist_title)
 
-        val bottomNavigation = view.findViewById<BottomNavigationView>(R.id.bottom_navigation)
-
         initRecycler(view)
         initSwipe(view)
+        initViewModel(view)
+
+        viewModel!!.getTopFilms()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -56,24 +59,38 @@ class FilmsListFragment : Fragment() {
         Log.d(TAG, "onActivityCreated")
     }
 
-    fun initSwipe(view: View) {
+    private fun initViewModel(view: View) {
+        viewModel = ViewModelProvider(activity!!).get(FilmsViewModel::class.java)
+
+        viewModel!!.films.observe(
+            viewLifecycleOwner,
+            Observer<ArrayList<Film>> { films ->
+                adapter!!.setItems(films)
+                Log.i(TAG, "films update")
+            })
+        viewModel!!.error.observe(
+            viewLifecycleOwner,
+            Observer<String> { error -> Toast.makeText(context, error, Toast.LENGTH_SHORT).show() })
+    }
+
+    private fun initSwipe(view: View) {
         val swipeLayout = view.findViewById<SwipeRefreshLayout>(R.id.swipe_container)
         swipeLayout.setOnRefreshListener {
             Log.i(TAG, "Swipe activated")
         }
     }
 
-    fun initRecycler(view: View) {
-        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
-        val likeListener = { id: Int ->
-            val liked = items[id].like
-            items[id].like = !items[id].like
-            recyclerView.adapter?.notifyItemChanged(id)
-            if(liked == false) {
+    private fun initRecycler(view: View) {
+        recycler = view.findViewById<RecyclerView>(R.id.recyclerView)
+        val likeListener = { id: Int ->/*
+            val item = items[id]
+            item.like = !item.like
+            recycler!!.adapter?.notifyItemChanged(id)
+            if(item.like) {
                 Toast.makeText(view.context, getString(R.string.added_to_favorites), Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(view.context, getString(R.string.deleted_from_favorites), Toast.LENGTH_SHORT).show()
-            }
+            }*/
         }
         val detailsListener = { id: Int ->
             Log.i(TAG, "Details clicked $id")
@@ -81,26 +98,28 @@ class FilmsListFragment : Fragment() {
         }
 
         val layoutManager = GridLayoutManager(context, 2)
-        recyclerView.layoutManager = layoutManager
-        recyclerView.adapter =
+        recycler!!.layoutManager = layoutManager
+
+        adapter =
             PosterAdapter(
                 LayoutInflater.from(context),
-                items, likeListener, detailsListener
+                likeListener, detailsListener
             )
+        recycler!!.adapter = adapter
 
         val itemDecor = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
         itemDecor.setDrawable(context?.getDrawable(R.drawable.myline)!!)
-        recyclerView.addItemDecoration(itemDecor)
+        recycler!!.addItemDecoration(itemDecor)
 
         val itemDecor2 = DividerItemDecoration(context, DividerItemDecoration.HORIZONTAL)
         itemDecor2.setDrawable(context?.getDrawable(R.drawable.myline2)!!)
-        recyclerView.addItemDecoration(itemDecor2)
+        recycler!!.addItemDecoration(itemDecor2)
 
-        recyclerView.addOnScrollListener(object: RecyclerView.OnScrollListener() {
-            val gridLayoutManager = recyclerView.layoutManager as GridLayoutManager
+        recycler!!.addOnScrollListener(object: RecyclerView.OnScrollListener() {
+            val gridLayoutManager = recycler!!.layoutManager as GridLayoutManager
 
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                val lastItemIndex = items.size - 1
+/*                val lastItemIndex = items.size - 1
                 if(gridLayoutManager.findLastVisibleItemPosition() == lastItemIndex) {
                     Log.i(TAG, "Bottom of recycler")
                     val apiService = OtusFirstApp.instance?.service
@@ -120,7 +139,7 @@ class FilmsListFragment : Fragment() {
                             recyclerView.adapter?.notifyItemRangeInserted(lastItemIndex,res.size)
                         }
                     })
-                }
+                }*/
             }
         })
     }
