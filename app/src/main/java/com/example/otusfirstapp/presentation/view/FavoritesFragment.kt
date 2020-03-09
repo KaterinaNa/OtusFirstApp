@@ -45,7 +45,7 @@ class FavoritesFragment : Fragment() {
         initRecycler(view)
         initViewModel(view)
 
-        viewModel!!.getTopFilms()
+        viewModel!!.getFavoriteFilms()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -79,19 +79,15 @@ class FavoritesFragment : Fragment() {
 
     fun initRecycler(view: View) {
 
-
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
 
-        val likeListener = { favId: Int ->
-/*            val id = realIndex[favId]
-            Log.i(TAG, "Like clicked $id")
-            items[id].like = !items[id].like
-            recyclerView.adapter?.notifyItemChanged(favId)*/
+        val likeListener = { id : Int ->
+            viewModel!!.likeFilmById(id)
+            adapter?.notifyItemChanged(id)
         }
-        val detailsListener = { favId: Int ->
-            //val id = realIndex[favId]
-            val id = favId
+        val detailsListener = { id: Int ->
             Log.i(TAG, "Details clicked $id")
+            viewModel!!.openDetails(id)
             listener?.openFilmDetailed()
         }
 
