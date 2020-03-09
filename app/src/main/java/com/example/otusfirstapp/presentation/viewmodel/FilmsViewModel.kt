@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.example.otusfirstapp.OtusFirstApp
 import com.example.otusfirstapp.data.entity.Film
 import com.example.otusfirstapp.domain.FilmInteractor
+import com.example.otusfirstapp.domain.GetTopFilmsCallback
 import com.example.otusfirstapp.presentation.view.API_KEY
 
 class FilmsViewModel : ViewModel() {
@@ -16,7 +17,7 @@ class FilmsViewModel : ViewModel() {
 
     private var currentPage = 0
 
-    private val filmInteractor = OtusFirstApp.instance.filmInteractor
+    private val filmInteractor: FilmInteractor = OtusFirstApp.instance.filmInteractor
 
     val films: LiveData<ArrayList<Film>>
         get() = filmsLiveData
@@ -33,7 +34,7 @@ class FilmsViewModel : ViewModel() {
 
     fun getTopFilms() {
         filmInteractor.getTopFilms(API_KEY, 1,
-            object : FilmInteractor.GetTopFilmsCallback {
+            object : GetTopFilmsCallback {
                 override fun onSuccess(films: ArrayList<Film>) {
                     filmsLiveData.postValue(films)
                 }

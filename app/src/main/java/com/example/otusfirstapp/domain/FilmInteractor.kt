@@ -17,25 +17,36 @@ class FilmInteractor(private val filmService: FilmService, private val filmRepos
         filmService.getTopRatedMovies(apiKey, page).enqueue(apiCallback)
     }
 
+    fun getFilms(): ArrayList<Film> {
+        return filmRepository.cachedOrFakeFilms
+    }
+
     fun getFilmById(id: Int): Film {
-        return filmRepository.getFilmById(id)
+        return filmRepository.cachedOrFakeFilms[id]
     }
 
     fun getFavoriteFilms(): ArrayList<Film> {
-        return filmRepository.getFavoriteFilms()
+        val realIndex: ArrayList<Int> = arrayListOf()
+        val likedFilms = filmRepository.cachedOrFakeFilms.filterIndexed { idx: Int, it: Film ->
+            if(it.like) realIndex.add(idx)
+            it.like
+        }
+        return ArrayList(likedFilms)
     }
 
     fun likeFilmById(id: Int): Boolean {
-        return filmRepository.likeFilmById(id)
-    }
-
-    interface GetTopFilmsCallback {
-        fun onSuccess(films: ArrayList<Film>)
-        fun onError(error: String)
+        val film = filmRepository.cachedOrFakeFilms[id]
+        return film.like()
     }
 }
 
-class GetTopRatedCallback(val callback: FilmInteractor.GetTopFilmsCallback, val filmRepository: FilmRepository) : Callback<FilmsResponse> {
+
+interface GetTopFilmsCallback {
+    fun onSuccess(films: ArrayList<Film>)
+    fun onError(error: String)
+}
+
+class GetTopRatedCallback(val callback: GetTopFilmsCallback, val filmRepository: FilmRepository) : Callback<FilmsResponse> {
     override fun onResponse(call: Call<FilmsResponse>, response: Response<FilmsResponse>) {
         if (response.isSuccessful) {
             val films = response.body()?.results

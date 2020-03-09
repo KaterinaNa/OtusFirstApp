@@ -66,7 +66,6 @@ class FavoritesFragment : Fragment() {
             viewLifecycleOwner,
             Observer<ArrayList<Film>> { films ->
                 adapter!!.setItems(films)
-                Log.i(TAG, "films update")
             })
     }
 

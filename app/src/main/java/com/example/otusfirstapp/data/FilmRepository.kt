@@ -47,23 +47,4 @@ class FilmRepository {
         Log.i("Repository", "Add to cache")
         cachedFilms.addAll(films)
     }
-
-    fun getFavoriteFilms(): ArrayList<Film> {
-        val realIndex: ArrayList<Int> = arrayListOf()
-        val likedFilms = cachedOrFakeFilms.filterIndexed { idx: Int, it: Film ->
-            if(it.like) realIndex.add(idx)
-            it.like
-        }
-        return ArrayList(likedFilms)
-    }
-
-    fun getFilmById(id: Int): Film {
-        return cachedOrFakeFilms[id]
-    }
-
-    fun likeFilmById(id: Int): Boolean {
-        val item = cachedOrFakeFilms[id]
-        item.like = !item.like
-        return item.like
-    }
 }
