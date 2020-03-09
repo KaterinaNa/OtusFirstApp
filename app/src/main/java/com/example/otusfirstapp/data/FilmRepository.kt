@@ -60,4 +60,10 @@ class FilmRepository {
     fun getFilmById(id: Int): Film {
         return cachedOrFakeFilms[id]
     }
+
+    fun likeFilmById(id: Int): Boolean {
+        val item = cachedOrFakeFilms[id]
+        item.like = !item.like
+        return item.like
+    }
 }
