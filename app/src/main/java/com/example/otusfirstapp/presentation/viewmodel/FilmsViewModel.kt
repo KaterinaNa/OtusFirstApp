@@ -46,18 +46,18 @@ class FilmsViewModel : ViewModel() {
     }
 
     fun getFavoriteFilms() {
-        val films = filmInteractor.getFavoriteFilms()
-        favoriteFilmsLiveData.postValue(films)
+        val films = filmInteractor.getFilms()
+        val likedFilms = films.filter { it.like } as ArrayList<Film>
+        favoriteFilmsLiveData.postValue(likedFilms)
     }
 
 
-    fun openDetails(filmId: Int) {
-        val film = filmInteractor.getFilmById(filmId)
+    fun openDetails(film: Film) {
         selectedFilmLiveData.postValue(film)
     }
 
-    fun likeFilmById(id: Int) {
-        val like = filmInteractor.likeFilmById(id)
+    fun likeFilm(film: Film) : Boolean {
+        return film.like()
     }
 
 

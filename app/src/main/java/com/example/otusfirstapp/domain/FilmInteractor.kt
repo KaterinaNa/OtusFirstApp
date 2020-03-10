@@ -24,20 +24,6 @@ class FilmInteractor(private val filmService: FilmService, private val filmRepos
     fun getFilmById(id: Int): Film {
         return filmRepository.cachedOrFakeFilms[id]
     }
-
-    fun getFavoriteFilms(): ArrayList<Film> {
-        val realIndex: ArrayList<Int> = arrayListOf()
-        val likedFilms = filmRepository.cachedOrFakeFilms.filterIndexed { idx: Int, it: Film ->
-            if(it.like) realIndex.add(idx)
-            it.like
-        }
-        return ArrayList(likedFilms)
-    }
-
-    fun likeFilmById(id: Int): Boolean {
-        val film = filmRepository.cachedOrFakeFilms[id]
-        return film.like()
-    }
 }
 
 

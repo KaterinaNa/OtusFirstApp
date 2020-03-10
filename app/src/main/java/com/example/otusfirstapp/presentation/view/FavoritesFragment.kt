@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -80,13 +79,13 @@ class FavoritesFragment : Fragment() {
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
 
-        val likeListener = { id : Int ->
-            viewModel!!.likeFilmById(id)
-            adapter?.notifyItemChanged(id)
+        val likeListener = { film : Film ->
+            viewModel!!.likeFilm(film)
+            adapter?.notifyItemChanged(film)
         }
-        val detailsListener = { id: Int ->
-            Log.i(TAG, "Details clicked $id")
-            viewModel!!.openDetails(id)
+        val detailsListener = { film: Film ->
+            Log.i(TAG, "Details clicked $film")
+            viewModel!!.openDetails(film)
             listener?.openFilmDetailed()
         }
 

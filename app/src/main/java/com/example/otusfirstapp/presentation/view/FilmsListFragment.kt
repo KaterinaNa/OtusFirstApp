@@ -82,18 +82,18 @@ class FilmsListFragment : Fragment() {
 
     private fun initRecycler(view: View) {
         recycler = view.findViewById<RecyclerView>(R.id.recyclerView)
-        val likeListener = { id: Int ->
-            viewModel!!.likeFilmById(id)
-            adapter?.notifyItemChanged(id)
+        val likeListener = { film: Film ->
+            viewModel!!.likeFilm(film)
+            adapter?.notifyItemChanged(film)
             /*if(item.like) {
                 Toast.makeText(view.context, getString(R.string.added_to_favorites), Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(view.context, getString(R.string.deleted_from_favorites), Toast.LENGTH_SHORT).show()
             }*/
         }
-        val detailsListener = { id: Int ->
-            Log.i(TAG, "Details clicked $id")
-            viewModel!!.openDetails(id)
+        val detailsListener = { film: Film ->
+            Log.i(TAG, "Details clicked $film")
+            viewModel!!.openDetails(film)
             listener?.openFilmDetailed()
         }
 

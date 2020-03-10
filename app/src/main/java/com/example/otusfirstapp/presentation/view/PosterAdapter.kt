@@ -8,8 +8,8 @@ import com.example.otusfirstapp.data.entity.Film
 
 class PosterAdapter(
     val inflater: LayoutInflater,
-    val likeListener: (Int) -> Unit?,
-    val detalislistener: (Int) -> Unit?
+    val likeListener: (Film) -> Unit?,
+    val detalislistener: (Film) -> Unit?
 ) :
     RecyclerView.Adapter<PosterViewHolder>() {
     private var items = ArrayList<Film>()
@@ -34,5 +34,10 @@ class PosterAdapter(
 
     override fun onBindViewHolder(holder: PosterViewHolder, position: Int) {
         holder.bind(items[position])
+    }
+
+    fun notifyItemChanged(film : Film) {
+        val index = items.indexOf(film)
+        notifyItemChanged(index)
     }
 }
