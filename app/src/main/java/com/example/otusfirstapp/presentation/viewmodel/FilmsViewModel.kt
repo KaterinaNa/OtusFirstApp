@@ -15,7 +15,7 @@ class FilmsViewModel : ViewModel() {
     private val selectedFilmLiveData = MutableLiveData<Film>()
     private val favoriteFilmsLiveData = MutableLiveData<ArrayList<Film>>()
 
-    private var currentPage = 0
+    private var currentPage = 1
 
     private val filmInteractor: FilmInteractor = OtusFirstApp.instance.filmInteractor
 
@@ -32,8 +32,8 @@ class FilmsViewModel : ViewModel() {
         get() = favoriteFilmsLiveData
 
 
-    fun getTopFilms() {
-        filmInteractor.getTopFilms(API_KEY, 1,
+    fun getTopFilms(page: Int) {
+        filmInteractor.getTopFilms(API_KEY, page,
             object : GetTopFilmsCallback {
                 override fun onSuccess(films: ArrayList<Film>) {
                     filmsLiveData.postValue(films)
@@ -43,6 +43,10 @@ class FilmsViewModel : ViewModel() {
                     errorLiveData.postValue(error)
                 }
             })
+    }
+
+    fun getTopFilmsNextPage() {
+        return getTopFilms(++currentPage)
     }
 
     fun getFavoriteFilms() {

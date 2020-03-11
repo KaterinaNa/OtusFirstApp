@@ -42,7 +42,7 @@ class GetTopRatedCallback(val callback: GetTopFilmsCallback, val filmRepository:
             }
             filmRepository.addToCache(films)
 
-            callback.onSuccess(filmRepository.cachedOrFakeFilms)
+            callback.onSuccess(films)
         } else {
             callback.onError(response.code().toString() + "")
         }

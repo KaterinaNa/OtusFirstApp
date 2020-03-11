@@ -20,6 +20,12 @@ class PosterAdapter(
         notifyDataSetChanged()
     }
 
+    fun addItems(films: ArrayList<Film>) {
+        val itemCountBeforeAdd = itemCount
+        items.addAll(films)
+        notifyItemRangeInserted(itemCountBeforeAdd, films.size)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PosterViewHolder {
         return PosterViewHolder(
             inflater.inflate(

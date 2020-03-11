@@ -45,7 +45,9 @@ class FilmsListFragment : Fragment() {
         initSwipe(view)
         initViewModel(view)
 
-        viewModel!!.getTopFilms()
+        if(adapter!!.itemCount == 0) {
+            viewModel!!.getTopFilms(1)
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -65,7 +67,7 @@ class FilmsListFragment : Fragment() {
         viewModel!!.films.observe(
             viewLifecycleOwner,
             Observer<ArrayList<Film>> { films ->
-                adapter!!.setItems(films)
+                adapter!!.addItems(films)
                 Log.i(TAG, "films update")
             })
         viewModel!!.error.observe(
@@ -119,27 +121,12 @@ class FilmsListFragment : Fragment() {
             val gridLayoutManager = recycler!!.layoutManager as GridLayoutManager
 
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-/*                val lastItemIndex = items.size - 1
+                val lastItemIndex = adapter!!.itemCount - 1
+
                 if(gridLayoutManager.findLastVisibleItemPosition() == lastItemIndex) {
                     Log.i(TAG, "Bottom of recycler")
-                    val apiService = OtusFirstApp.instance?.service
-                    apiService?.getTopRatedMovies(API_KEY, ++currentPage)?.enqueue(object :
-                        Callback<FilmsResponse> {
-                        override fun onFailure(call: Call<FilmsResponse>, t: Throwable) {
-                            Log.e(TAG, t.toString())
-                        }
-                        override fun onResponse(
-                            call: Call<FilmsResponse>,
-                            response: Response<FilmsResponse>
-                        ) {
-                            val res = response.body()?.results
-                            if (res == null) return
-
-                            items.addAll(res)
-                            recyclerView.adapter?.notifyItemRangeInserted(lastItemIndex,res.size)
-                        }
-                    })
-                }*/
+                    viewModel!!.getTopFilmsNextPage()
+                }
             }
         })
     }
