@@ -4,6 +4,7 @@ import android.app.Application
 import com.example.otusfirstapp.data.FilmService
 import com.example.otusfirstapp.domain.FilmInteractor
 import com.example.otusfirstapp.data.FilmRepository
+import com.example.otusfirstapp.domain.FilmsUpdater
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -11,6 +12,7 @@ class OtusFirstApp : Application() {
 
     lateinit var filmService: FilmService
     lateinit var filmInteractor: FilmInteractor
+    lateinit var FilmsUpdater: FilmsUpdater
 
 
     override fun onCreate() {
