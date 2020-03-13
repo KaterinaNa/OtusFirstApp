@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.otusfirstapp.OtusFirstApp
 import com.example.otusfirstapp.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -16,6 +17,8 @@ class MainActivity : AppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        lifecycle.addObserver(OtusFirstApp.instance.filmsUpdater)
 
         if (savedInstanceState == null) {
             supportFragmentManager

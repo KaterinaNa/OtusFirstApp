@@ -12,7 +12,7 @@ class OtusFirstApp : Application() {
 
     lateinit var filmService: FilmService
     lateinit var filmInteractor: FilmInteractor
-    lateinit var FilmsUpdater: FilmsUpdater
+    lateinit var filmsUpdater: FilmsUpdater
 
 
     override fun onCreate() {
@@ -41,6 +41,7 @@ class OtusFirstApp : Application() {
             .build()
 
         filmService = retrofit.create(FilmService::class.java)
+        filmsUpdater = FilmsUpdater(filmService)
 
     }
 

@@ -1,5 +1,6 @@
 package com.example.otusfirstapp.presentation.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,6 +9,7 @@ import com.example.otusfirstapp.data.entity.Film
 import com.example.otusfirstapp.domain.FilmInteractor
 import com.example.otusfirstapp.domain.GetTopFilmsCallback
 import com.example.otusfirstapp.presentation.view.API_KEY
+import com.example.otusfirstapp.presentation.view.FilmsListFragment
 
 class FilmsViewModel : ViewModel() {
     private val filmsLiveData = MutableLiveData<ArrayList<Film>>()
@@ -47,6 +49,7 @@ class FilmsViewModel : ViewModel() {
 
     fun getTopFilmsNextPage() {
         return getTopFilms(++currentPage)
+        Log.i(FilmsListFragment.TAG, "++currentpage")
     }
 
     fun getFavoriteFilms() {

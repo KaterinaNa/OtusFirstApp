@@ -47,6 +47,7 @@ class FilmsListFragment : Fragment() {
 
         if(adapter!!.itemCount == 0) {
             viewModel!!.getTopFilms(1)
+            Log.i(TAG, "page  = 1")
         }
     }
 
