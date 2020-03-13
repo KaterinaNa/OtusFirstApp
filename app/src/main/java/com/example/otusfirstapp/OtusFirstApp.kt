@@ -5,8 +5,10 @@ import com.example.otusfirstapp.data.FilmService
 import com.example.otusfirstapp.domain.FilmInteractor
 import com.example.otusfirstapp.data.FilmRepository
 import com.example.otusfirstapp.domain.FilmsUpdater
+import com.example.otusfirstapp.data.entity.Db
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.Executors
 
 class OtusFirstApp : Application() {
 
@@ -22,6 +24,11 @@ class OtusFirstApp : Application() {
 
         initRetrofit()
         initInterator()
+
+        Executors.newSingleThreadScheduledExecutor().execute(
+            Runnable {
+                Db.getInstance(this)?.getFilmDao()?.getAll()
+            }
     }
 
     private fun initInterator () {
