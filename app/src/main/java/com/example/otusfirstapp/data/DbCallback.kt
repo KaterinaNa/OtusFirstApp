@@ -1,4 +1,4 @@
-package com.example.otusfirstapp.data.entity
+package com.example.otusfirstapp.data
 
 import android.content.Context
 import android.util.Log
@@ -8,13 +8,11 @@ import java.util.concurrent.Executors
 
 class DbCallback(private val ctx: Context) : RoomDatabase.Callback() {
     override fun onCreate(db: SupportSQLiteDatabase) {
-        Log.d(TAG, "DbCallback onCreate")
-        Executors.newSingleThreadScheduledExecutor().execute(Runnable {
-            val film = ListData.films[0]
-            Db.getInstance(ctx)?.getFilmDao()?.insert(film)
-            Log.d(TAG, "DbCallback executed")
-
-        })
+        Log.i(TAG, "DbCallback onCreate")
+        Executors.newSingleThreadScheduledExecutor().execute {
+            Db.getInstance(ctx)?.getFilmDAO()?.getAll()
+            Log.i(TAG, "DbCallback executed")
+        }
     }
 
     override fun onOpen(db: SupportSQLiteDatabase) {

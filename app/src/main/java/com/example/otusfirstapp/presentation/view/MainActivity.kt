@@ -66,6 +66,7 @@ class MainActivity : AppCompatActivity(),
                 else -> false
             }
         }
+
     }
 
     private fun onInvite() {
@@ -91,14 +92,6 @@ class MainActivity : AppCompatActivity(),
             )
             .addToBackStack(null)
             .commit()
-    }
-
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        super.onRestoreInstanceState(savedInstanceState)
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
     }
 
     override fun onBackPressed() {
