@@ -7,11 +7,11 @@ object Db {
 
     private var instance: AppDb? = null
 
-    fun getInstance(context: Context): AppDb? {
+    fun getInstance(context: Context? = null): AppDb? {
         if (instance == null) {
             synchronized(AppDb::class) {
                 instance = Room.databaseBuilder(
-                    context,
+                    context!!,
                     AppDb::class.java,
                     "db-name.db"
                 )
