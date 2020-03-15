@@ -4,7 +4,10 @@ import android.util.Log
 import com.example.otusfirstapp.data.entity.Film
 
 class FilmRepository {
-    private val cachedFilms = ArrayList<Film>()
+    private val cachedFilms: ArrayList<Film>
+        get() {
+            return Db.getInstance()?.getFilmDAO()?.getAll() as ArrayList<Film>
+        }
     private val fakeFilms = ArrayList<Film>()
 
 
@@ -46,7 +49,7 @@ class FilmRepository {
 
         fun addToCache(films: ArrayList<Film>) {
             Log.i("Repository", "Add to cache")
-            cachedFilms.addAll(films)
+            Db.getInstance()?.getFilmDAO()?.insertFilms(films as ArrayList<Film?>)
         }
 
 }
