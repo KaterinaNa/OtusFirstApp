@@ -24,6 +24,7 @@ class OtusFirstApp : Application() {
         initRetrofit()
         initInterator()
         initDb()
+        initFavDb()
     }
 
     private fun initInterator () {
@@ -49,6 +50,10 @@ class OtusFirstApp : Application() {
 
     private fun initDb() {
         Db.getInstance(this)?.getFilmDAO()?.getAll()
+    }
+
+    private fun initFavDb() {
+        Db.getInstance(this)?.getFavoriteFilmDAO()?.getAll()
     }
 
     companion object {
