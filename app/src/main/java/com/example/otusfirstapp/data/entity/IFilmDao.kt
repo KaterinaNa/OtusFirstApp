@@ -3,7 +3,7 @@ package com.example.otusfirstapp.data.entity
 import androidx.room.*
 
 @Dao
-interface IFilmDAO {
+interface IFilmDao {
 
     @Insert
     fun insertSingleFilm(Film: Film?): Long

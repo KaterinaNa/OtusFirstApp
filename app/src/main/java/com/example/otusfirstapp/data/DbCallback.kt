@@ -10,13 +10,17 @@ class DbCallback(private val ctx: Context) : RoomDatabase.Callback() {
     override fun onCreate(db: SupportSQLiteDatabase) {
         Log.i(TAG, "DbCallback onCreate")
         Executors.newSingleThreadScheduledExecutor().execute {
-            Db.getInstance(ctx)?.getFilmDAO()?.getAll()
+            Db.getInstance(ctx)?.getFilmDao()?.getAll()
             Log.i(TAG, "DbCallback executed")
         }
     }
 
     override fun onOpen(db: SupportSQLiteDatabase) {
         // do something every time database is open
+    }
+
+    companion object {
+        const val TAG = "DbCallback"
     }
 
 }

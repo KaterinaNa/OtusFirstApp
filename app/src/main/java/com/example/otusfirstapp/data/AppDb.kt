@@ -2,13 +2,10 @@ package com.example.otusfirstapp.data
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.example.otusfirstapp.data.entity.Film
-import com.example.otusfirstapp.data.entity.FilmDAO
+import com.example.otusfirstapp.data.entity.*
 
-const val TAG = "AppDb"
-
-@Database(entities = arrayOf(Film::class), version = 1)
+@Database(entities = [Film::class, LikedFilm::class], version = 3)
 abstract class AppDb : RoomDatabase() {
-    abstract fun getFilmDAO(): FilmDAO
-
+    abstract fun getFilmDao(): FilmDao
+    abstract fun getLikedFilmDao(): LikedFilmDao
 }
