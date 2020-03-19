@@ -49,11 +49,11 @@ class OtusFirstApp : Application() {
     }
 
     private fun initDb() {
-        Db.getInstance(this)?.getFilmDAO()?.getAll()
+        Db.getInstance(this)?.getFilmDao()?.getAll()
     }
 
     private fun initFavDb() {
-        Db.getInstance(this)?.getFavoriteFilmDAO()?.getAll()
+        Db.getInstance(this)?.getFavoriteFilmDao()?.getAll()
     }
 
     companion object {
