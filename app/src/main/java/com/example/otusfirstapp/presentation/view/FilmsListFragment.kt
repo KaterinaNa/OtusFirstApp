@@ -68,7 +68,7 @@ class FilmsListFragment : Fragment() {
         viewModel!!.films.observe(
             viewLifecycleOwner,
             Observer<ArrayList<Film>> { films ->
-                adapter!!.addItems(films)
+                adapter!!.setItems(films)
                 Log.i(TAG, "films update")
             })
         viewModel!!.error.observe(

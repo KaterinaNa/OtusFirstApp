@@ -7,9 +7,12 @@ import com.google.gson.annotations.SerializedName
 
 @Entity
 data class Film (
-    @SerializedName("id")
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     val id: Int,
+
+    @SerializedName("id")
+    @ColumnInfo(name = "original_id")
+    val originalId: Int,
 
     @SerializedName("title")
     @ColumnInfo(name = "title")
@@ -24,18 +27,13 @@ data class Film (
     val posterPath: String,
 
     @ColumnInfo(name = "like")
-    var like: Boolean
+    val like : Boolean
 ) {
     fun poster(): String {
         return "https://image.tmdb.org/t/p/w500$posterPath"
     }
 
-    fun like(state: Boolean? = null): Boolean {
-        like = state ?: !like
-        return like
-    }
-
     override fun toString(): String {
-        return "Film{id=$id, title='$name', overview=$detail', poster_path='$posterPath', like='$like'}"
+        return "Film{id=, title='$name', overview=$detail', poster_path='$posterPath', like='$like'}"
     }
 }

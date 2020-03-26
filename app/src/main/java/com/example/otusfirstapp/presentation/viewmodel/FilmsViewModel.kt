@@ -19,6 +19,10 @@ class FilmsViewModel : ViewModel() {
 
     private var currentPage = 1
 
+    init {
+        Log.i(TAG, "ViewModel created $currentPage")
+    }
+
     private val filmInteractor: FilmInteractor = OtusFirstApp.instance.filmInteractor
 
     val films: LiveData<ArrayList<Film>>
@@ -48,8 +52,8 @@ class FilmsViewModel : ViewModel() {
     }
 
     fun getTopFilmsNextPage() {
+        Log.i(TAG, "getTopFilmsNextPage $currentPage")
         return getTopFilms(++currentPage)
-        Log.i(FilmsListFragment.TAG, "++currentpage")
     }
 
     fun getFavoriteFilms() {
@@ -64,9 +68,11 @@ class FilmsViewModel : ViewModel() {
     }
 
     fun likeFilm(film: Film) : Boolean {
-        return film.like()
+        return true //film.like()
     }
 
-
+    companion object {
+        const val TAG = "FilmsViewModel"
+    }
 }
 
