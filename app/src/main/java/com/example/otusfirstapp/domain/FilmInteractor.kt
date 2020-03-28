@@ -1,5 +1,6 @@
 package com.example.otusfirstapp.domain
 
+import android.util.Log
 import com.example.otusfirstapp.data.FilmRepository
 import com.example.otusfirstapp.data.FilmService
 import com.example.otusfirstapp.data.entity.Film
@@ -36,6 +37,7 @@ class GetTopRatedCallback(val callback: GetTopFilmsCallback, val filmRepository:
     override fun onResponse(call: Call<FilmsResponse>, response: Response<FilmsResponse>) {
         if (response.isSuccessful) {
             val films = response.body()?.results
+            Log.i("Interactor", response.body()?.totalResults.toString())
             if (films == null) {
                 callback.onError("API returned null results")
                 return

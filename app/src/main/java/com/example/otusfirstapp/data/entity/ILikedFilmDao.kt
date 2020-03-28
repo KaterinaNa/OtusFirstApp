@@ -32,7 +32,7 @@ interface ILikedFilmDao {
     @Query("SELECT * FROM LikedFilm")
     fun getAll(): List<LikedFilm?>?
 
-    @Query("SELECT * FROM LikedFilm WHERE likeId = :id")
+    @Query("SELECT * FROM LikedFilm WHERE id = :id")
     fun getById(id: Long): LikedFilm?
 
 

@@ -8,26 +8,29 @@ import com.google.gson.annotations.SerializedName
 @Entity
 data class Film (
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
+    @Transient
     val id: Int,
 
-    @SerializedName("id")
     @ColumnInfo(name = "original_id")
-    val originalId: Int,
+    @SerializedName("id")
+    var originalId: Int,
 
-    @SerializedName("title")
     @ColumnInfo(name = "title")
-    val name: String,
+    @SerializedName("title")
+    var name: String,
 
-    @SerializedName("overview")
     @ColumnInfo(name = "overview")
-    val detail: String,
+    @SerializedName("overview")
+    var detail: String,
 
-    @SerializedName("poster_path")
     @ColumnInfo(name = "poster_path")
-    val posterPath: String,
+    @SerializedName("poster_path")
+    var posterPath: String,
 
     @ColumnInfo(name = "like")
-    val like : Boolean
+    @Transient
+    var like : Boolean
 ) {
     fun poster(): String {
         return "https://image.tmdb.org/t/p/w500$posterPath"

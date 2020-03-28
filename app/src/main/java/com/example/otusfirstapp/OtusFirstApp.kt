@@ -7,6 +7,8 @@ import com.example.otusfirstapp.domain.FilmInteractor
 import com.example.otusfirstapp.data.FilmRepository
 import com.example.otusfirstapp.domain.FilmsUpdater
 import com.google.gson.GsonBuilder
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -25,7 +27,6 @@ class OtusFirstApp : Application() {
         initRetrofit()
         initInterator()
         initDb()
-        initFavDb()
     }
 
     private fun initInterator () {
@@ -39,13 +40,19 @@ class OtusFirstApp : Application() {
 
     private fun initRetrofit() {
         val gson = GsonBuilder()
-            .excludeFieldsWithoutExposeAnnotation()
             .create()
 
+        val logging = HttpLoggingInterceptor()
+        logging.level = (HttpLoggingInterceptor.Level.BODY)
+
+        val client = OkHttpClient.Builder()
+            .addInterceptor(logging)
+            .build()
 
         val retrofit = Retrofit.Builder()
             .baseUrl("https://api.themoviedb.org/3/")
             .addConverterFactory(GsonConverterFactory.create(gson))
+            .client(client)
             .build()
 
         filmService = retrofit.create(FilmService::class.java)
@@ -55,10 +62,6 @@ class OtusFirstApp : Application() {
 
     private fun initDb() {
         Db.getInstance(this)?.getFilmDao()?.getAll()
-    }
-
-    private fun initFavDb() {
-        //Db.getInstance(this)?.getFavoriteFilmDao()?.getAll()
     }
 
     companion object {

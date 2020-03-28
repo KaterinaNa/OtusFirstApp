@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity
 data class LikedFilm (
     @PrimaryKey(autoGenerate = true)
-    val likeId: Int,
+    val id: Int,
 
     @ColumnInfo(name = "film_id")
     val filmId: Int,
@@ -22,6 +22,6 @@ data class LikedFilm (
     }
 
     override fun toString(): String {
-        return "FavoriteFilm{id=$likeId, filmId='$filmId', like='$like'}"
+        return "FavoriteFilm{id=$id, filmId='$filmId', like='$like'}"
     }
 }
