@@ -2,13 +2,16 @@ package com.example.otusfirstapp.data.entity
 
 import com.google.gson.annotations.SerializedName
 
-class FilmsResponse {
+class FilmsResponse (
     @SerializedName("page")
-    val page = 0
+    val page: Int,
+
     @SerializedName("results")
-    val results: ArrayList<Film>? = null
+    val results: ArrayList<Film>,
+
     @SerializedName("total_results")
-    val totalResults = 0
+    val totalResults: Int,
+
     @SerializedName("total_pages")
-    val totalPages = 0
-}
+    val totalPages: Int
+)
