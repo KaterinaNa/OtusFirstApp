@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.otusfirstapp.OtusFirstApp
+import com.example.otusfirstapp.data.Db
 import com.example.otusfirstapp.data.entity.Film
 import com.example.otusfirstapp.domain.FilmInteractor
 import com.example.otusfirstapp.domain.GetTopFilmsCallback
@@ -68,7 +69,9 @@ class FilmsViewModel : ViewModel() {
     }
 
     fun likeFilm(film: Film) : Boolean {
-        return true //film.like()
+        film.like()
+        Db.getInstance()?.getFilmDao()?.update(film)
+        return film.like
     }
 
     companion object {
