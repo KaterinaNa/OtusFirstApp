@@ -36,6 +36,11 @@ data class Film (
         return "https://image.tmdb.org/t/p/w500$posterPath"
     }
 
+    fun like(state: Boolean? = null): Boolean {
+        like = state ?: !like
+        return like
+    }
+
     override fun toString(): String {
         return "Film{id=, title='$name', overview=$detail', poster_path='$posterPath', like='$like'}"
     }
