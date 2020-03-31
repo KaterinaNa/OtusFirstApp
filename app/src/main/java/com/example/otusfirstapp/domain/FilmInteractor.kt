@@ -8,6 +8,8 @@ import com.example.otusfirstapp.data.entity.FilmsResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
+import kotlin.collections.ArrayList
 
 class FilmInteractor(private val filmService: FilmService, private val filmRepository: FilmRepository) {
 
@@ -43,6 +45,7 @@ class GetTopRatedCallback(val callback: GetTopFilmsCallback, val filmRepository:
                 return
             }
             filmRepository.addToCache(films)
+            val dateResponce = Date()
 
             callback.onSuccess(filmRepository.cachedOrFakeFilms)
         } else {
