@@ -1,5 +1,7 @@
 package com.example.otusfirstapp.domain
 
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
 import android.os.Handler
 import android.util.Log
 
@@ -13,12 +15,30 @@ import com.example.otusfirstapp.presentation.view.API_KEY
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
 
 class FilmsUpdater (private val service: FilmService) : LifecycleObserver {
     private val handler = Handler()
 
+    private lateinit var pref: SharedPreferences
+
+    private val APP_PREFERENCES = "mysettings"
+    private val APP_PREFERENCES_COUNTER = "timePeriod"
+    val dateNow = Date()
+
+
+
+    private fun getSharedPreferences(appPreferences: String, modePrivate: Int): SharedPreferences {
+        if (dateResponse.getTime()-dateNow.getTime()<=PERIOD){
+            pref = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE)
+        }
+    }
+
+
+
     private val taskRunnable = object : Runnable {
         override fun run() {
+
             Log.i(TAG, "taskRunnable")
             val task = OurTask(service, {
                 handler.postDelayed(this, DELAY.toLong())
@@ -61,6 +81,7 @@ class FilmsUpdater (private val service: FilmService) : LifecycleObserver {
     companion object {
         private val TAG = "FilmsUpdater"
         private val DELAY = 5000
+        private val PERIOD = 1200000
     }
 
 }
