@@ -1,6 +1,8 @@
 package com.example.otusfirstapp
 
 import android.app.Application
+import android.content.Context
+import android.content.SharedPreferences
 import com.example.otusfirstapp.data.Db
 import com.example.otusfirstapp.data.FilmService
 import com.example.otusfirstapp.domain.FilmInteractor
@@ -17,7 +19,10 @@ class OtusFirstApp : Application() {
     lateinit var filmService: FilmService
     lateinit var filmInteractor: FilmInteractor
     lateinit var filmsUpdater: FilmsUpdater
+    lateinit var sharedPref: SharedPreferences
 
+    private val APP_PREFERENCES = "mysettings"
+    val LAST_RESPONSE_KEY = "lastResponse"
 
     override fun onCreate() {
         super.onCreate()
@@ -27,6 +32,8 @@ class OtusFirstApp : Application() {
         initRetrofit()
         initInterator()
         initDb()
+        sharedPref = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
+        filmsUpdater = FilmsUpdater(filmInteractor)
     }
 
     private fun initInterator () {
@@ -56,9 +63,9 @@ class OtusFirstApp : Application() {
             .build()
 
         filmService = retrofit.create(FilmService::class.java)
-        filmsUpdater = FilmsUpdater(filmService)
 
     }
+
 
     private fun initDb() {
         Db.getInstance(this)?.getFilmDao()?.getAll()
@@ -66,6 +73,5 @@ class OtusFirstApp : Application() {
 
     companion object {
         lateinit var instance: OtusFirstApp
-        private set
     }
 }
