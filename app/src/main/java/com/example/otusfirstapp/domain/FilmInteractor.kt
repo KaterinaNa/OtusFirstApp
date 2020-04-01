@@ -1,6 +1,7 @@
 package com.example.otusfirstapp.domain
 
 import android.util.Log
+import com.example.otusfirstapp.OtusFirstApp
 import com.example.otusfirstapp.data.FilmRepository
 import com.example.otusfirstapp.data.FilmService
 import com.example.otusfirstapp.data.entity.Film
@@ -45,7 +46,11 @@ class GetTopRatedCallback(val callback: GetTopFilmsCallback, val filmRepository:
                 return
             }
             filmRepository.addToCache(films)
-            val dateResponce = Date()
+
+            val dateResponse = Date()
+            val editor = OtusFirstApp.instance.sharedPref.edit()
+            editor.putLong(OtusFirstApp.instance.LAST_RESPONSE_KEY, dateResponse.time)
+            editor.apply()
 
             callback.onSuccess(filmRepository.cachedOrFakeFilms)
         } else {

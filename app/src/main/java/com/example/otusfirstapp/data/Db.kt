@@ -25,7 +25,7 @@ object Db {
             }
         }
         return instance
-    }
+}
 
     fun destroyInstance() {
         instance?.close()
