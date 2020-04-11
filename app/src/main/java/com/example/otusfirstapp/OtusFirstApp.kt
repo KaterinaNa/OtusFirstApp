@@ -22,7 +22,6 @@ class OtusFirstApp : Application() {
     lateinit var sharedPref: SharedPreferences
 
     private val APP_PREFERENCES = "mysettings"
-    val LAST_RESPONSE_KEY = "lastResponse"
 
     override fun onCreate() {
         super.onCreate()

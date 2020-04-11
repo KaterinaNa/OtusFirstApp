@@ -41,15 +41,15 @@ class FilmsViewModel : ViewModel() {
 
     fun getTopFilms(page: Int) {
         filmInteractor.getTopFilms(API_KEY, page,
-            object : GetTopFilmsCallback {
-                override fun onSuccess(films: ArrayList<Film>) {
-                    filmsLiveData.postValue(films)
-                }
+        object : GetTopFilmsCallback {
+            override fun onSuccess(films: ArrayList<Film>) {
+                filmsLiveData.postValue(films)
+            }
 
-                override fun onError(error: String) {
-                    errorLiveData.postValue(error)
-                }
-            })
+            override fun onError(error: String) {
+                errorLiveData.postValue(error)
+            }
+        })
     }
 
     fun getTopFilmsNextPage() {
@@ -72,6 +72,10 @@ class FilmsViewModel : ViewModel() {
         film.like()
         Db.getInstance()?.getFilmDao()?.update(film)
         return film.like
+    }
+
+    fun updateError () {
+
     }
 
     companion object {

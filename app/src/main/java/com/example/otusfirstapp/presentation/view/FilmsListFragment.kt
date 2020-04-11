@@ -17,6 +17,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.otusfirstapp.*
 import com.example.otusfirstapp.data.entity.Film
 import com.example.otusfirstapp.presentation.viewmodel.FilmsViewModel
+import com.google.android.material.snackbar.Snackbar
 
 class FilmsListFragment : Fragment() {
     private var listener: OnFilmClickListener? = null
@@ -26,6 +27,7 @@ class FilmsListFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+//        lifecycle.addObserver(OtusFirstApp.instance.filmsUpdater)
     }
 
     override fun onCreateView(
@@ -62,6 +64,17 @@ class FilmsListFragment : Fragment() {
         Log.d(TAG, "onActivityCreated")
     }
 
+    fun snackBarError() {
+        val snackbar = Snackbar.make(view!!, "Network error", Snackbar.LENGTH_LONG)
+        snackbar.setAction("Retry") {
+            Log.i(TAG, "snackbar retry tapped")
+            viewModel!!.getTopFilms(1)
+        }
+        snackbar.show()
+
+    }
+
+
     private fun initViewModel(view: View) {
         viewModel = ViewModelProvider(activity!!).get(FilmsViewModel::class.java)
 
@@ -69,11 +82,11 @@ class FilmsListFragment : Fragment() {
             viewLifecycleOwner,
             Observer<ArrayList<Film>> { films ->
                 adapter!!.setItems(films)
-                Log.i(TAG, "films update")
+                Log.i(TAG, "films update ${films.size}")
             })
         viewModel!!.error.observe(
             viewLifecycleOwner,
-            Observer<String> { error -> Toast.makeText(context, error, Toast.LENGTH_SHORT).show() })
+            Observer<String> { error -> snackBarError() })
     }
 
     private fun initSwipe(view: View) {
@@ -88,7 +101,7 @@ class FilmsListFragment : Fragment() {
         val likeListener = { film: Film ->
             viewModel!!.likeFilm(film)
             adapter?.notifyItemChanged(film)
-            /*if(item.like) {
+           /* if(item.like) {
                 Toast.makeText(view.context, getString(R.string.added_to_favorites), Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(view.context, getString(R.string.deleted_from_favorites), Toast.LENGTH_SHORT).show()
@@ -126,7 +139,7 @@ class FilmsListFragment : Fragment() {
 
                 if(gridLayoutManager.findLastVisibleItemPosition() == lastItemIndex) {
                     Log.i(TAG, "Bottom of recycler")
-                    viewModel!!.getTopFilmsNextPage()
+                    //viewModel!!.getTopFilmsNextPage()
                 }
             }
         })
