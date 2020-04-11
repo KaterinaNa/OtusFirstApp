@@ -6,8 +6,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-
-
+import com.bumptech.glide.Glide
 
 class PosterViewHolder(itemView: View,
                        val likeListener: (Int) -> Unit?,
@@ -17,8 +16,6 @@ class PosterViewHolder(itemView: View,
         val openDescr = itemView.findViewById<Button>(R.id.openDescr)
         val setLike = itemView.findViewById<ImageView>(R.id.setLike)
 
-
-
         fun bind(item: Film) {
             textView.text = item.name
             openDescr.setOnClickListener {
@@ -27,16 +24,17 @@ class PosterViewHolder(itemView: View,
             setLike.setOnClickListener {
                 likeListener(getAdapterPosition())
             }
-            imageView.setImageDrawable(ContextCompat.getDrawable(itemView.context, item.posterId))
 
-            if (item.like) {
-                setLike.setImageDrawable(ContextCompat.getDrawable(itemView.context, R.drawable.ic_favorite_24px))
-            } else {
-                setLike.setImageDrawable(ContextCompat.getDrawable(itemView.context, R.drawable.ic_favorite_border_24px))
-            }
+            Glide
+                .with(itemView)
+                .load(item.poster())
+                .into(imageView)
 
+            setLike.setImageDrawable(ContextCompat.getDrawable(itemView.context,
+                if (item.like)
+                    R.drawable.ic_favorite_24px
+                else
+                    R.drawable.ic_favorite_border_24px
+            ))
         }
-
-
-
 }

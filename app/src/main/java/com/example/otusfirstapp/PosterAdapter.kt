@@ -19,5 +19,4 @@ class PosterAdapter(val inflater: LayoutInflater,
     override fun onBindViewHolder(holder: PosterViewHolder, position: Int) {
         holder.bind(items[position])
     }
-
 }

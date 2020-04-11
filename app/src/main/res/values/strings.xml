@@ -7,7 +7,13 @@
     <string name="favorites">Favorites</string>
     <string name="addPoster">Add</string>
     <string name="delPoster">Delete</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="favorites_title">Favorites</string>
+    <string name="filmslist_title">Films list</string>
+    <string name="added_to_favorites">Added to favorite</string>
+    <string name="deleted_from_favorites">Deleted from favorites</string>
+    <string name="share_into">Share</string>
+    <string name="exit_ask">Are you sure you want to exit?</string>
+    <string name="exit_ask_title">Exit?</string>
+    <string name="exit_no">No</string>
+    <string name="exit_yes">Exit</string>
 </resources>
