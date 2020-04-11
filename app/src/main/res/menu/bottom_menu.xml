@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/bottom_navigator_home"
+        android:icon="@drawable/ic_home_24px"
+        android:title="Home"/>
+
+    <item
+        android:id="@+id/bottom_navigator_fav"
+        android:icon="@drawable/ic_star_24px"
+        android:title="Favorite"/>
+
+    <item
+        android:id="@+id/bottom_navigator_share"
+        android:icon="@drawable/ic_share_24px"
+        android:title = "Invite" />
+
+</menu>
