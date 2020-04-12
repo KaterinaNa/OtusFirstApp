@@ -53,8 +53,16 @@ class FilmRepository {
         }
 */
         fun addToCache(films: ArrayList<Film>) {
-            Log.i("Repository", "Add to cache")
-            Db.getInstance()?.getFilmDao()?.insertFilms(films as ArrayList<Film?>)
+            Log.i(TAG, "Add to cache")
+            Db.getInstance()?.getFilmDao()?.insertFilms(films)
         }
 
+        fun clearCache() {
+            Log.i(TAG, "Clear cache")
+            Db.getInstance()?.getFilmDao()?.deleteFilms(cachedFilms)
+        }
+
+    companion object {
+        const val TAG = "FilmRepository"
+    }
 }

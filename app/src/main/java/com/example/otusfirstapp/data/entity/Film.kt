@@ -10,27 +10,27 @@ data class Film (
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     @Transient
-    val id: Int,
+    val id: Int = 0,
 
     @ColumnInfo(name = "original_id")
     @SerializedName("id")
-    var originalId: Int,
+    var originalId: Int = 0,
 
     @ColumnInfo(name = "title")
     @SerializedName("title")
-    var name: String,
+    var name: String = "",
 
     @ColumnInfo(name = "overview")
     @SerializedName("overview")
-    var detail: String,
+    var detail: String = "",
 
     @ColumnInfo(name = "poster_path")
     @SerializedName("poster_path")
-    var posterPath: String,
+    var posterPath: String = "",
 
     @ColumnInfo(name = "like")
     @Transient
-    var like : Boolean
+    var like : Boolean = false
 ) {
     fun poster(): String {
         return "https://image.tmdb.org/t/p/w500$posterPath"

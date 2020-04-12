@@ -21,7 +21,7 @@ class FilmInteractor(private val filmService: FilmService, private val filmRepos
         )
         val timePeriod = dateResponse-dateNow
         Log.i(TAG, timePeriod.toString())
-        if (timePeriod >= PERIOD) {
+        if (true || timePeriod >= PERIOD) {
             filmService.getTopRatedMovies(apiKey, page).enqueue(object : Callback<FilmsResponse> {
                 override fun onResponse(call: Call<FilmsResponse>, response: Response<FilmsResponse>) {
                     if (response.isSuccessful) {
@@ -33,9 +33,8 @@ class FilmInteractor(private val filmService: FilmService, private val filmRepos
                         }
                         filmRepository.addToCache(films)
 
-                        val dateResponse = Date()
                         val editor = OtusFirstApp.instance.sharedPref.edit()
-                        editor.putLong(LAST_RESPONSE_KEY, dateResponse.time)
+                        editor.putLong(LAST_RESPONSE_KEY, Date().time)
                         editor.apply()
 
                         callback.onSuccess(getFilms())
@@ -55,6 +54,10 @@ class FilmInteractor(private val filmService: FilmService, private val filmRepos
 
     fun getFilms(): ArrayList<Film> {
         return filmRepository.cachedOrFakeFilms
+    }
+
+    fun clearFilms() {
+        filmRepository.clearCache()
     }
 
     fun getFilmById(id: Int): Film {

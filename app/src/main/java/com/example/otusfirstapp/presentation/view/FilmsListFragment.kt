@@ -24,6 +24,7 @@ class FilmsListFragment : Fragment() {
     private var viewModel: FilmsViewModel? = null
     private var recycler: RecyclerView? = null
     private var adapter: PosterAdapter? = null
+    private var swipeLayout: SwipeRefreshLayout? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +49,7 @@ class FilmsListFragment : Fragment() {
         initViewModel(view)
 
         if(adapter!!.itemCount == 0) {
-            viewModel!!.getTopFilms(1)
+            viewModel!!.startGetTopFilms()
             Log.i(TAG, "page  = 1")
         }
     }
@@ -64,11 +65,11 @@ class FilmsListFragment : Fragment() {
         Log.d(TAG, "onActivityCreated")
     }
 
-    fun snackBarError() {
-        val snackbar = Snackbar.make(view!!, "Network error", Snackbar.LENGTH_LONG)
+    fun snackBarError(error: String) {
+        val snackbar = Snackbar.make(view!!, "Network error: $error", Snackbar.LENGTH_LONG)
         snackbar.setAction("Retry") {
             Log.i(TAG, "snackbar retry tapped")
-            viewModel!!.getTopFilms(1)
+            viewModel!!.retryTopFilms()
         }
         snackbar.show()
 
@@ -83,16 +84,18 @@ class FilmsListFragment : Fragment() {
             Observer<ArrayList<Film>> { films ->
                 adapter!!.setItems(films)
                 Log.i(TAG, "films update ${films.size}")
+                if (films.size > 0) swipeLayout?.isRefreshing = false
             })
         viewModel!!.error.observe(
             viewLifecycleOwner,
-            Observer<String> { error -> snackBarError() })
+            Observer<String> { error -> snackBarError(error) })
     }
 
     private fun initSwipe(view: View) {
-        val swipeLayout = view.findViewById<SwipeRefreshLayout>(R.id.swipe_container)
-        swipeLayout.setOnRefreshListener {
+        swipeLayout = view.findViewById<SwipeRefreshLayout>(R.id.swipe_container)
+        swipeLayout?.setOnRefreshListener {
             Log.i(TAG, "Swipe activated")
+            viewModel!!.startGetTopFilms()
         }
     }
 
@@ -139,7 +142,7 @@ class FilmsListFragment : Fragment() {
 
                 if(gridLayoutManager.findLastVisibleItemPosition() == lastItemIndex) {
                     Log.i(TAG, "Bottom of recycler")
-                    //viewModel!!.getTopFilmsNextPage()
+                    viewModel!!.getTopFilmsNextPage()
                 }
             }
         })

@@ -12,7 +12,7 @@ interface IFilmDao {
     fun insertFilms(vararg Films: Film?)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertFilms(Films: ArrayList<Film?>?): List<Long?>?
+    fun insertFilms(Films: ArrayList<Film>?): List<Long?>?
 
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
@@ -22,13 +22,13 @@ interface IFilmDao {
     fun update(Film: Film?)
 
     @Update
-    fun updateFilms(Films: ArrayList<Film?>?): Int
+    fun updateFilms(Films: ArrayList<Film>?): Int
 
     @Delete
     fun deleteFilm(Film: Film?)
 
     @Delete
-    fun deleteFilms(Films: ArrayList<Film?>?): Int
+    fun deleteFilms(Films: ArrayList<Film>?): Int
 
     @Query("SELECT * FROM Film")
     fun getAll(): List<Film?>?
