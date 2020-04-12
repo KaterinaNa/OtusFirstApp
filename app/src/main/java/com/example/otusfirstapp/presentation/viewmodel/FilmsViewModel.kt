@@ -39,7 +39,7 @@ class FilmsViewModel : ViewModel() {
         get() = favoriteFilmsLiveData
 
 
-    fun getTopFilms(page: Int) {
+    private fun getTopFilms(page: Int) {
         filmInteractor.getTopFilms(API_KEY, page,
         object : GetTopFilmsCallback {
             override fun onSuccess(films: ArrayList<Film>) {
@@ -52,9 +52,23 @@ class FilmsViewModel : ViewModel() {
         })
     }
 
+    fun startGetTopFilms() {
+        currentPage = 1
+        Log.i(TAG, "startGetTopFilms $currentPage")
+        filmInteractor.clearFilms()
+        filmsLiveData.postValue(arrayListOf())
+        return getTopFilms(currentPage)
+
+    }
+
     fun getTopFilmsNextPage() {
         Log.i(TAG, "getTopFilmsNextPage $currentPage")
         return getTopFilms(++currentPage)
+    }
+
+    fun retryTopFilms() {
+        Log.i(TAG, "retryTopFilms $currentPage")
+        return getTopFilms(currentPage)
     }
 
     fun getFavoriteFilms() {
