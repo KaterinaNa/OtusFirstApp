@@ -52,7 +52,7 @@ class OtusFirstApp : Application() {
         logging.level = (HttpLoggingInterceptor.Level.BODY)
 
         val client = OkHttpClient.Builder()
-            .addInterceptor(logging)
+//            .addInterceptor(logging)
             .build()
 
         val retrofit = Retrofit.Builder()

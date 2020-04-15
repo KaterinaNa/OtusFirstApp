@@ -16,7 +16,7 @@ class FilmRepository {
             cachedFilms
         else
             fakeFilms
-/*
+
         init {
             fakeFilms.add(
                 Film(
@@ -51,9 +51,14 @@ class FilmRepository {
 
 
         }
-*/
+
         fun addToCache(films: ArrayList<Film>) {
             Log.i(TAG, "Add to cache")
+            films.map {
+                if (it.posterPath === null) {
+                    Log.i(TAG, "${it.id} ${it.posterPath}")
+                }
+            }
             Db.getInstance()?.getFilmDao()?.insertFilms(films)
         }
 

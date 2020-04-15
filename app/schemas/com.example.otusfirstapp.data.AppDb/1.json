@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "0bb55a0a25de9b4098ec51f4342c9ad3",
+    "identityHash": "4a3b005a5b7ae2f9038139470aaac151",
     "entities": [
       {
         "tableName": "Film",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `original_id` INTEGER NOT NULL, `title` TEXT NOT NULL, `overview` TEXT NOT NULL, `poster_path` TEXT NOT NULL, `like` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `original_id` INTEGER NOT NULL, `title` TEXT NOT NULL, `overview` TEXT NOT NULL, `poster_path` TEXT NOT NULL DEFAULT '', `like` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -36,7 +36,8 @@
             "fieldPath": "posterPath",
             "columnName": "poster_path",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": true,
+            "defaultValue": "''"
           },
           {
             "fieldPath": "like",
@@ -90,7 +91,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0bb55a0a25de9b4098ec51f4342c9ad3')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4a3b005a5b7ae2f9038139470aaac151')"
     ]
   }
 }
