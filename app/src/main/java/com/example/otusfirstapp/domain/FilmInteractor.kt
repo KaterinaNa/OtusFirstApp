@@ -19,9 +19,9 @@ class FilmInteractor(private val filmService: FilmService, private val filmRepos
         val dateResponse = OtusFirstApp.instance.sharedPref.getLong(
             LAST_RESPONSE_KEY, dateNow + PERIOD
         )
-        val timePeriod = dateResponse-dateNow
-        Log.i(TAG, timePeriod.toString())
-        if (true || timePeriod >= PERIOD) {
+//        val timePeriod = dateResponse-dateNow
+//        Log.i(TAG, timePeriod.toString())
+//        if (true || timePeriod >= PERIOD) {
             filmService.getTopRatedMovies(apiKey, page).enqueue(object : Callback<FilmsResponse> {
                 override fun onResponse(call: Call<FilmsResponse>, response: Response<FilmsResponse>) {
                     if (response.isSuccessful) {
@@ -33,9 +33,9 @@ class FilmInteractor(private val filmService: FilmService, private val filmRepos
                         }
                         filmRepository.addToCache(films)
 
-                        val editor = OtusFirstApp.instance.sharedPref.edit()
-                        editor.putLong(LAST_RESPONSE_KEY, Date().time)
-                        editor.apply()
+//                        val editor = OtusFirstApp.instance.sharedPref.edit()
+//                        editor.putLong(LAST_RESPONSE_KEY, Date().time)
+//                        editor.apply()
 
                         callback.onSuccess(getFilms())
                     } else {
@@ -47,9 +47,9 @@ class FilmInteractor(private val filmService: FilmService, private val filmRepos
                     callback.onError("Network error probably...")
                 }
             })
-        } else {
-            callback.onSuccess(getFilms())
-        }
+//        } else {
+//            callback.onSuccess(getFilms())
+//        }
     }
 
     fun getFilms(): ArrayList<Film> {

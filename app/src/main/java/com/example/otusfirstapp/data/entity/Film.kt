@@ -24,7 +24,7 @@ data class Film (
     @SerializedName("overview")
     var detail: String = "",
 
-    @ColumnInfo(name = "poster_path")
+    @ColumnInfo(name = "poster_path", defaultValue = "")
     @SerializedName("poster_path")
     var posterPath: String = "",
 
