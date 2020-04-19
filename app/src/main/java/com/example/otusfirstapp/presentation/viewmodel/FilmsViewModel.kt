@@ -54,11 +54,14 @@ class FilmsViewModel : ViewModel() {
 
     fun startGetTopFilms() {
         currentPage = 1
-        Log.i(TAG, "startGetTopFilms $currentPage")
-        filmInteractor.clearFilms()
-        filmsLiveData.postValue(arrayListOf())
+        Log.i(TAG, "startOverGetTopFilms $currentPage")
         return getTopFilms(currentPage)
 
+    }
+
+    fun resetCache() {
+        filmInteractor.clearFilms()
+        filmsLiveData.postValue(arrayListOf())
     }
 
     fun getTopFilmsNextPage() {
