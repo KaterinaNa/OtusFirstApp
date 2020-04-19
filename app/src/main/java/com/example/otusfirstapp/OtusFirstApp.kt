@@ -3,6 +3,7 @@ package com.example.otusfirstapp
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
+import com.example.otusfirstapp.data.AppDb
 import com.example.otusfirstapp.data.Db
 import com.example.otusfirstapp.data.FilmService
 import com.example.otusfirstapp.domain.FilmInteractor
@@ -20,6 +21,7 @@ class OtusFirstApp : Application() {
     lateinit var filmInteractor: FilmInteractor
     lateinit var filmsUpdater: FilmsUpdater
     lateinit var sharedPref: SharedPreferences
+    lateinit var db: AppDb
 
     private val APP_PREFERENCES = "mysettings"
 
@@ -67,7 +69,7 @@ class OtusFirstApp : Application() {
 
 
     private fun initDb() {
-        Db.getInstance(this)?.getFilmDao()?.getAll()
+        db = Db.getInstance(this)!!
     }
 
     companion object {
