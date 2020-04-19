@@ -26,7 +26,6 @@ class FilmInteractor(private val filmService: FilmService, private val filmRepos
                 override fun onResponse(call: Call<FilmsResponse>, response: Response<FilmsResponse>) {
                     if (response.isSuccessful) {
                         val films = response.body()?.results
-                        Log.i(TAG, response.body()?.totalResults.toString())
                         if (films == null) {
                             callback.onError("API returned null results")
                             return
