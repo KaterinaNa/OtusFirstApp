@@ -30,6 +30,11 @@ class FilmInteractor(private val filmService: FilmService, private val filmRepos
                             callback.onError("API returned null results")
                             return
                         }
+
+                        films.forEachIndexed { index, filmRaw ->
+                            filmRaw.sortOrder = (page - 1) * PAGE_SIZE + index
+                        }
+
                         filmRepository.addToCache(films)
 
                         val editor = App.instance.sharedPref.edit()
@@ -75,6 +80,7 @@ class FilmInteractor(private val filmService: FilmService, private val filmRepos
 
     companion object {
         private const val TAG = "FilmInteractor"
+        private const val PAGE_SIZE = 20
         private const val LAST_RESPONSE_KEY = "lastResponse"
         private const val PERIOD = 20*60*1000
     }
