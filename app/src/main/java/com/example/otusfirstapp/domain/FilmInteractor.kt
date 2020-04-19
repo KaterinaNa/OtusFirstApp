@@ -17,7 +17,7 @@ class FilmInteractor(private val filmService: FilmService, private val filmRepos
     fun getTopFilms(apiKey: String, page: Int, callback: GetTopFilmsCallback) {
         val dateNow = Date().time
         val dateResponse = App.instance.sharedPref.getLong(
-            LAST_RESPONSE_KEY, dateNow + PERIOD
+            "${LAST_RESPONSE_KEY}_${page}", dateNow + PERIOD
         )
         val timePeriod = dateResponse-dateNow
         Log.i(TAG, timePeriod.toString())
@@ -55,7 +55,17 @@ class FilmInteractor(private val filmService: FilmService, private val filmRepos
         return filmRepository.cachedOrFakeFilms
     }
 
+    private fun resetAllCacheTimers() {
+        val editor = App.instance.sharedPref.edit()
+        val keys = App.instance.sharedPref.all
+            .map { it.key }
+            .filter { it.indexOf(LAST_RESPONSE_KEY) == 0 }
+        keys.forEach { editor.remove(it) }
+        editor.apply()
+    }
+
     fun clearFilms() {
+        resetAllCacheTimers()
         filmRepository.clearCache()
     }
 
