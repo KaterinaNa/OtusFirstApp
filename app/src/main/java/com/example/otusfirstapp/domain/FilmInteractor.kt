@@ -1,7 +1,7 @@
 package com.example.otusfirstapp.domain
 
 import android.util.Log
-import com.example.otusfirstapp.OtusFirstApp
+import com.example.otusfirstapp.App
 import com.example.otusfirstapp.data.FilmRepository
 import com.example.otusfirstapp.data.FilmService
 import com.example.otusfirstapp.data.entity.Film
@@ -16,7 +16,7 @@ class FilmInteractor(private val filmService: FilmService, private val filmRepos
 
     fun getTopFilms(apiKey: String, page: Int, callback: GetTopFilmsCallback) {
         val dateNow = Date().time
-        val dateResponse = OtusFirstApp.instance.sharedPref.getLong(
+        val dateResponse = App.instance.sharedPref.getLong(
             LAST_RESPONSE_KEY, dateNow + PERIOD
         )
 //        val timePeriod = dateResponse-dateNow
