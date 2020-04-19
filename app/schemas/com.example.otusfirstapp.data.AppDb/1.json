@@ -2,21 +2,15 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "4a3b005a5b7ae2f9038139470aaac151",
+    "identityHash": "e0e02ddbc3a7a8f6a152c52680f48a16",
     "entities": [
       {
-        "tableName": "Film",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `original_id` INTEGER NOT NULL, `title` TEXT NOT NULL, `overview` TEXT NOT NULL, `poster_path` TEXT NOT NULL DEFAULT '', `like` INTEGER NOT NULL)",
+        "tableName": "FilmRaw",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `title` TEXT NOT NULL, `overview` TEXT NOT NULL DEFAULT '', `poster_path` TEXT NOT NULL DEFAULT '', `sort_order` INTEGER NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
             "columnName": "id",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "originalId",
-            "columnName": "original_id",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -30,7 +24,8 @@
             "fieldPath": "detail",
             "columnName": "overview",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": true,
+            "defaultValue": "''"
           },
           {
             "fieldPath": "posterPath",
@@ -40,8 +35,8 @@
             "defaultValue": "''"
           },
           {
-            "fieldPath": "like",
-            "columnName": "like",
+            "fieldPath": "sortOrder",
+            "columnName": "sort_order",
             "affinity": "INTEGER",
             "notNull": true
           }
@@ -50,21 +45,15 @@
           "columnNames": [
             "id"
           ],
-          "autoGenerate": true
+          "autoGenerate": false
         },
         "indices": [],
         "foreignKeys": []
       },
       {
-        "tableName": "LikedFilm",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `film_id` INTEGER NOT NULL, `like` INTEGER NOT NULL)",
+        "tableName": "Fav",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`film_id` INTEGER NOT NULL, `fav` INTEGER NOT NULL, PRIMARY KEY(`film_id`))",
         "fields": [
-          {
-            "fieldPath": "id",
-            "columnName": "id",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
           {
             "fieldPath": "filmId",
             "columnName": "film_id",
@@ -72,17 +61,17 @@
             "notNull": true
           },
           {
-            "fieldPath": "like",
-            "columnName": "like",
+            "fieldPath": "fav",
+            "columnName": "fav",
             "affinity": "INTEGER",
             "notNull": true
           }
         ],
         "primaryKey": {
           "columnNames": [
-            "id"
+            "film_id"
           ],
-          "autoGenerate": true
+          "autoGenerate": false
         },
         "indices": [],
         "foreignKeys": []
@@ -91,7 +80,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4a3b005a5b7ae2f9038139470aaac151')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e0e02ddbc3a7a8f6a152c52680f48a16')"
     ]
   }
 }

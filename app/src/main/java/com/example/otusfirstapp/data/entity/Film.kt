@@ -1,19 +1,11 @@
 package com.example.otusfirstapp.data.entity
 
 import androidx.room.ColumnInfo
-import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.google.gson.annotations.SerializedName
 
 
 data class Film (
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
-    @Transient
     val id: Int = 0,
-
-    @ColumnInfo(name = "original_id")
-    var originalId: Int = 0,
 
     @ColumnInfo(name = "title")
     var name: String = "",
@@ -24,8 +16,10 @@ data class Film (
     @ColumnInfo(name = "poster_path", defaultValue = "")
     var posterPath: String = "",
 
+    @ColumnInfo(name = "sort_order")
+    var sortOrder: Int = 0,
+
     @ColumnInfo(name = "fav")
-    @Transient
     var fav : Boolean = false
 ) {
     fun poster(): String {

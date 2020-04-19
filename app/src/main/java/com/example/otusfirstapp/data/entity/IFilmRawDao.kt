@@ -25,4 +25,7 @@ interface IFilmRawDao {
 
     @Query("SELECT FilmRaw.*, Fav.fav FROM FilmRaw LEFT JOIN Fav ON (FilmRaw.id = Fav.film_id) ORDER BY FilmRaw.sort_order")
     fun getAll(): List<Film?>?
+
+    @Query("DELETE FROM FilmRaw")
+    fun deleteAll(): Int
 }

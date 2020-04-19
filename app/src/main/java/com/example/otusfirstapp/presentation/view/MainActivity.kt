@@ -5,10 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.example.otusfirstapp.OtusFirstApp
 import com.example.otusfirstapp.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.snackbar.Snackbar
 
 const val API_KEY = "836cbf0813244b3c64888bc53e1975f8"
 

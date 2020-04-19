@@ -4,13 +4,13 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.otusfirstapp.OtusFirstApp
+import com.example.otusfirstapp.App
 import com.example.otusfirstapp.data.Db
+import com.example.otusfirstapp.data.entity.Fav
 import com.example.otusfirstapp.data.entity.Film
 import com.example.otusfirstapp.domain.FilmInteractor
 import com.example.otusfirstapp.domain.GetTopFilmsCallback
 import com.example.otusfirstapp.presentation.view.API_KEY
-import com.example.otusfirstapp.presentation.view.FilmsListFragment
 
 class FilmsViewModel : ViewModel() {
     private val filmsLiveData = MutableLiveData<ArrayList<Film>>()
@@ -24,7 +24,7 @@ class FilmsViewModel : ViewModel() {
         Log.i(TAG, "ViewModel created $currentPage")
     }
 
-    private val filmInteractor: FilmInteractor = OtusFirstApp.instance.filmInteractor
+    private val filmInteractor: FilmInteractor = App.instance.filmInteractor
 
     val films: LiveData<ArrayList<Film>>
         get() = filmsLiveData
@@ -73,7 +73,7 @@ class FilmsViewModel : ViewModel() {
 
     fun getFavoriteFilms() {
         val films = filmInteractor.getFilms()
-        val likedFilms = films.filter { it.like } as ArrayList<Film>
+        val likedFilms = films.filter { it.fav } as ArrayList<Film>
         favoriteFilmsLiveData.postValue(likedFilms)
     }
 
@@ -83,9 +83,10 @@ class FilmsViewModel : ViewModel() {
     }
 
     fun likeFilm(film: Film) : Boolean {
-        film.like()
-        Db.getInstance()?.getFilmDao()?.update(film)
-        return film.like
+        film.fav()
+        val fav = Fav(film.id, film.fav)
+        Db.getInstance()?.getFavDao()?.insert(fav)
+        return film.fav
     }
 
     fun updateError () {

@@ -10,7 +10,7 @@ class DbCallback(private val ctx: Context) : RoomDatabase.Callback() {
     override fun onCreate(db: SupportSQLiteDatabase) {
         Log.i(TAG, "DbCallback onCreate")
         Executors.newSingleThreadScheduledExecutor().execute {
-            Db.getInstance(ctx)?.getFilmDao()?.getAll()
+            Db.getInstance(ctx)?.getFilmRawDao()?.getAll()
             Log.i(TAG, "DbCallback executed")
         }
     }

@@ -15,7 +15,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class OtusFirstApp : Application() {
+class App : Application() {
 
     lateinit var filmService: FilmService
     lateinit var filmInteractor: FilmInteractor
@@ -34,7 +34,7 @@ class OtusFirstApp : Application() {
         initInterator()
         initDb()
         sharedPref = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
-        filmsUpdater = FilmsUpdater(filmInteractor)
+        // filmsUpdater = FilmsUpdater(filmInteractor)
     }
 
     private fun initInterator () {
@@ -73,6 +73,6 @@ class OtusFirstApp : Application() {
     }
 
     companion object {
-        lateinit var instance: OtusFirstApp
+        lateinit var instance: App
     }
 }

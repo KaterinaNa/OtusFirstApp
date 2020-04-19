@@ -33,7 +33,7 @@ class PosterViewHolder(itemView: View,
                 .into(imageView)
 
             setLike.setImageDrawable(ContextCompat.getDrawable(itemView.context,
-                if (item.like)
+                if (item.fav)
                     R.drawable.ic_favorite_24px
                 else
                     R.drawable.ic_favorite_border_24px
