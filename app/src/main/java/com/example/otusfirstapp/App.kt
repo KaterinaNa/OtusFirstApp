@@ -8,7 +8,6 @@ import com.example.otusfirstapp.data.Db
 import com.example.otusfirstapp.data.FilmService
 import com.example.otusfirstapp.domain.FilmInteractor
 import com.example.otusfirstapp.data.FilmRepository
-import com.example.otusfirstapp.domain.FilmsUpdater
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -19,7 +18,6 @@ class App : Application() {
 
     lateinit var filmService: FilmService
     lateinit var filmInteractor: FilmInteractor
-    lateinit var filmsUpdater: FilmsUpdater
     lateinit var sharedPref: SharedPreferences
     lateinit var db: AppDb
 
@@ -29,12 +27,10 @@ class App : Application() {
         super.onCreate()
 
         instance = this
-
         initRetrofit()
         initInterator()
         initDb()
         sharedPref = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
-        // filmsUpdater = FilmsUpdater(filmInteractor)
     }
 
     private fun initInterator () {
