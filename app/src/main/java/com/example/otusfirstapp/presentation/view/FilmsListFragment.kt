@@ -74,7 +74,6 @@ class FilmsListFragment : Fragment() {
 
     }
 
-
     private fun initViewModel(view: View) {
         viewModel = ViewModelProvider(activity!!).get(FilmsViewModel::class.java)
 
@@ -87,7 +86,12 @@ class FilmsListFragment : Fragment() {
             })
         viewModel!!.error.observe(
             viewLifecycleOwner,
-            Observer<String> { error -> snackBarError(error) })
+            Observer {
+                it.getContentIfNotHandled().let {
+                    if (it != null) snackBarError(it)
+                }
+            }
+        )
     }
 
     private fun initSwipe(view: View) {
