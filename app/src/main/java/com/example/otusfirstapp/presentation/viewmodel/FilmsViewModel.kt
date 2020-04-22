@@ -6,15 +6,18 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.otusfirstapp.App
 import com.example.otusfirstapp.data.Db
+import com.example.otusfirstapp.data.entity.Event
 import com.example.otusfirstapp.data.entity.Fav
 import com.example.otusfirstapp.data.entity.Film
 import com.example.otusfirstapp.domain.FilmInteractor
 import com.example.otusfirstapp.domain.GetTopFilmsCallback
 import com.example.otusfirstapp.presentation.view.API_KEY
+import java.util.*
+import kotlin.collections.ArrayList
 
 class FilmsViewModel : ViewModel() {
     private val filmsLiveData = MutableLiveData<ArrayList<Film>>()
-    private val errorLiveData = MutableLiveData<String>()
+    private val errorLiveData = MutableLiveData<Event<String>>()
     private val selectedFilmLiveData = MutableLiveData<Film>()
     private val favoriteFilmsLiveData = MutableLiveData<ArrayList<Film>>()
 
@@ -29,7 +32,7 @@ class FilmsViewModel : ViewModel() {
     val films: LiveData<ArrayList<Film>>
         get() = filmsLiveData
 
-    val error: LiveData<String>
+    val error: LiveData<Event<String>>
         get() = errorLiveData
 
     val selectedFilm: LiveData<Film>
@@ -37,7 +40,6 @@ class FilmsViewModel : ViewModel() {
 
     val favoriteFilms: LiveData<ArrayList<Film>>
         get() = favoriteFilmsLiveData
-
 
     private fun getTopFilms(page: Int) {
         filmInteractor.getTopFilms(API_KEY, page,
@@ -47,7 +49,7 @@ class FilmsViewModel : ViewModel() {
             }
 
             override fun onError(error: String) {
-                errorLiveData.postValue(error)
+                errorLiveData.postValue(Event("${error} ${Date()}"))
             }
         })
     }
