@@ -15,6 +15,7 @@ import kotlin.collections.ArrayList
 class FilmInteractor(private val filmService: FilmService, private val filmRepository: FilmRepository) {
 
     fun getTopFilms(apiKey: String, page: Int, callback: GetTopFilmsCallback) {
+        callback.onSuccess(getFilms())
         val dateNow = Date().time
         val dateResponse = App.instance.sharedPref.getLong(
             "${LAST_RESPONSE_KEY}_${page}", dateNow + PERIOD
@@ -51,8 +52,6 @@ class FilmInteractor(private val filmService: FilmService, private val filmRepos
                     callback.onError("Network error probably...")
                 }
             })
-        } else {
-            callback.onSuccess(getFilms())
         }
     }
 

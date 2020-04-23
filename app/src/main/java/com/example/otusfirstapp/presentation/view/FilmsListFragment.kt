@@ -27,7 +27,6 @@ class FilmsListFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        lifecycle.addObserver(OtusFirstApp.instance.filmsUpdater)
     }
 
     override fun onCreateView(
@@ -44,7 +43,7 @@ class FilmsListFragment : Fragment() {
         toolbar.title = getString(R.string.filmslist_title)
 
         initRecycler(view)
-        initSwipe(view)
+         initSwipe(view)
         initViewModel(view)
 
         if(adapter!!.itemCount == 0) {
@@ -89,6 +88,7 @@ class FilmsListFragment : Fragment() {
             Observer {
                 it.getContentIfNotHandled().let {
                     if (it != null) snackBarError(it)
+                    swipeLayout?.isRefreshing = false
                 }
             }
         )
@@ -108,11 +108,6 @@ class FilmsListFragment : Fragment() {
         val likeListener = { film: Film ->
             viewModel!!.likeFilm(film)
             adapter?.notifyItemChanged(film)
-           /* if(item.like) {
-                Toast.makeText(view.context, getString(R.string.added_to_favorites), Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(view.context, getString(R.string.deleted_from_favorites), Toast.LENGTH_SHORT).show()
-            }*/
         }
         val detailsListener = { film: Film ->
             Log.i(TAG, "Details clicked $film")

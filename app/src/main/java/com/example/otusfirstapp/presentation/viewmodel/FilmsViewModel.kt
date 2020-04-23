@@ -49,7 +49,7 @@ class FilmsViewModel : ViewModel() {
             }
 
             override fun onError(error: String) {
-                errorLiveData.postValue(Event("${error} ${Date()}"))
+                errorLiveData.postValue(Event("${error} "))
             }
         })
     }
