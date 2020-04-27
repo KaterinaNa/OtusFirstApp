@@ -16,6 +16,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.otusfirstapp.data.entity.Film
 import com.example.otusfirstapp.R
 import com.example.otusfirstapp.presentation.viewmodel.FilmsViewModel
+import kotlin.collections.ArrayList
 
 class FavoritesFragment : Fragment() {
     private var listener: OnFilmClickListener? = null
