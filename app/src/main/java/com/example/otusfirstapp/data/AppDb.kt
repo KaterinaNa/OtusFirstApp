@@ -8,6 +8,5 @@ import com.example.otusfirstapp.data.entity.*
 abstract class AppDb : RoomDatabase() {
     abstract fun getFilmRawDao(): FilmRawDao
     abstract fun getFavDao(): FavDao
-    abstract fun getFilmLaterDao(): FilmLaterDao
     abstract fun getLaterDao(): LaterDao
 }

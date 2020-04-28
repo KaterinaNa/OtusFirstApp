@@ -10,11 +10,10 @@ data class Later (
     @ColumnInfo(name = "film_id")
     val filmId: Int,
 
-
     @ColumnInfo(name = "show_time")
-    var show_time: Long = 0
+    var showTime: Long = 0
 ) {
     override fun toString(): String {
-        return "Later{filmId='$filmId', later='$later'}"
+        return "Later{filmId='$filmId', later='$showTime'}"
     }
 }

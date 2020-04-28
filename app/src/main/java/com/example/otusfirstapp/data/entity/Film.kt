@@ -1,6 +1,7 @@
 package com.example.otusfirstapp.data.entity
 
 import androidx.room.ColumnInfo
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 
 
@@ -22,10 +23,10 @@ data class Film (
     @ColumnInfo(name = "fav")
     var fav : Boolean = false,
 
-    @ColumnInfo(name = "later")
-    var later : Long = 0
-    )
-    {
+    @ColumnInfo(name = "show_time")
+    var showTime : Long = 0
+) {
+
     fun poster(): String {
         return "https://image.tmdb.org/t/p/w500$posterPath"
     }
@@ -36,6 +37,6 @@ data class Film (
     }
 
     override fun toString(): String {
-        return "Film{id=, title='$name', overview=$detail', poster_path='$posterPath', like='$fav', later='$later'}"
+        return "Film{id=, title='$name', overview=$detail', poster_path='$posterPath', like='$fav', later='$showTime'}"
     }
 }

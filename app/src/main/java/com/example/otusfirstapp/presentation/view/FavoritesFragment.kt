@@ -90,13 +90,16 @@ class FavoritesFragment : Fragment() {
             listener?.openFilmDetailed()
         }
 
+        val laterListener = { _: Film -> Unit }
+
         val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         recyclerView.layoutManager = layoutManager
         adapter =
             PosterAdapter(
                 LayoutInflater.from(context),
                 likeListener,
-                detailsListener
+                detailsListener,
+                laterListener
             )
         recyclerView!!.adapter = adapter
 

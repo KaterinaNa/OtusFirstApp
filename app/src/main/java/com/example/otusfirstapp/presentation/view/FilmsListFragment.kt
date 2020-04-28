@@ -1,5 +1,6 @@
 package com.example.otusfirstapp.presentation.view
 
+import android.app.TimePickerDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,6 +18,8 @@ import com.example.otusfirstapp.*
 import com.example.otusfirstapp.data.entity.Film
 import com.example.otusfirstapp.presentation.viewmodel.FilmsViewModel
 import com.google.android.material.snackbar.Snackbar
+import java.util.*
+import kotlin.collections.ArrayList
 
 class FilmsListFragment : Fragment() {
     private var listener: OnFilmClickListener? = null
@@ -43,7 +46,7 @@ class FilmsListFragment : Fragment() {
         toolbar.title = getString(R.string.filmslist_title)
 
         initRecycler(view)
-         initSwipe(view)
+        initSwipe(view)
         initViewModel(view)
 
         if(adapter!!.itemCount == 0) {
@@ -109,6 +112,22 @@ class FilmsListFragment : Fragment() {
             viewModel!!.likeFilm(film)
             adapter?.notifyItemChanged(film)
         }
+        val laterListener = { film: Film ->
+            val saveShowTime = TimePickerDialog.OnTimeSetListener { listeningView, hourOfDay, minute ->
+                viewModel!!.laterFilm(film, Date().time + 30000)
+            }
+
+            val newCalendar = Calendar.getInstance()
+            val startTime = TimePickerDialog(
+                context,
+                saveShowTime,
+                newCalendar[Calendar.HOUR_OF_DAY],
+                newCalendar[Calendar.MINUTE],
+                true
+            )
+            startTime.show()
+        }
+
         val detailsListener = { film: Film ->
             Log.i(TAG, "Details clicked $film")
             viewModel!!.openDetails(film)
@@ -121,7 +140,9 @@ class FilmsListFragment : Fragment() {
         adapter =
             PosterAdapter(
                 LayoutInflater.from(context),
-                likeListener, detailsListener
+                likeListener,
+                detailsListener,
+                laterListener
             )
         recycler!!.adapter = adapter
 

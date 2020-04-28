@@ -12,8 +12,8 @@ import com.example.otusfirstapp.data.entity.Film
 
 class PosterViewHolder(itemView: View,
                        val likeListener: (Film) -> Unit?,
-                       val laterlistener: (Film) -> Unit?,
-                       val detailslistener: (Film)-> Unit?): RecyclerView.ViewHolder(itemView){
+                       val detailsListener: (Film)-> Unit?,
+                       val laterListener: (Film) -> Unit?): RecyclerView.ViewHolder(itemView){
         val imageView = itemView.findViewById<ImageView>(R.id.imageView)
         val textView = itemView.findViewById<TextView>(R.id.filmName)
         val openDescr = itemView.findViewById<Button>(R.id.openDescr)
@@ -23,7 +23,7 @@ class PosterViewHolder(itemView: View,
         fun bind(item: Film) {
             textView.text = item.name
             openDescr.setOnClickListener {
-                detailslistener(item)
+                detailsListener(item)
             }
             setLike.setOnClickListener {
                 likeListener(item)
@@ -44,7 +44,7 @@ class PosterViewHolder(itemView: View,
                     R.drawable.ic_favorite_border_24px
             ))
             setLater.setImageDrawable(ContextCompat.getDrawable(itemView.context,
-                if (item.later)
+                if (item.showTime > 0)
                     R.drawable.ic_alarm_on_24px
                 else
                     R.drawable.ic_alarm_24px

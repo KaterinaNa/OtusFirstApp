@@ -9,6 +9,7 @@ import com.example.otusfirstapp.data.Db
 import com.example.otusfirstapp.data.entity.Event
 import com.example.otusfirstapp.data.entity.Fav
 import com.example.otusfirstapp.data.entity.Film
+import com.example.otusfirstapp.data.entity.Later
 import com.example.otusfirstapp.domain.FilmInteractor
 import com.example.otusfirstapp.domain.GetTopFilmsCallback
 import com.example.otusfirstapp.presentation.view.API_KEY
@@ -92,6 +93,13 @@ class FilmsViewModel : ViewModel() {
         val fav = Fav(film.id, film.fav)
         Db.getInstance()?.getFavDao()?.insert(fav)
         return film.fav
+    }
+
+    fun laterFilm(film: Film, time: Long) : Long {
+        film.showTime = time
+        val later = Later(film.id, film.showTime)
+        Db.getInstance()?.getLaterDao()?.insert(later)
+        return film.showTime
     }
 
     fun updateError () {

@@ -23,7 +23,12 @@ interface IFilmRawDao {
     @Delete
     fun deleteFilms(films: ArrayList<FilmRaw>?): Int
 
-    @Query("SELECT FilmRaw.*, Fav.fav FROM FilmRaw LEFT JOIN Fav ON (FilmRaw.id = Fav.film_id) ORDER BY FilmRaw.sort_order")
+    @Query("""
+        SELECT FilmRaw.*, Fav.fav, Later.show_time
+        FROM FilmRaw
+            LEFT JOIN Fav ON (FilmRaw.id = Fav.film_id)
+            LEFT JOIN Later ON (FilmRaw.id = Later.film_id)
+        ORDER BY FilmRaw.sort_order""")
     fun getAll(): List<Film?>?
 
     @Query("DELETE FROM FilmRaw")
