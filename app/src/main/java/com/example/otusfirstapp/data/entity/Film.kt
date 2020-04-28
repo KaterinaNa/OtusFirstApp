@@ -20,8 +20,12 @@ data class Film (
     var sortOrder: Int = 0,
 
     @ColumnInfo(name = "fav")
-    var fav : Boolean = false
-) {
+    var fav : Boolean = false,
+
+    @ColumnInfo(name = "later")
+    var later : Long = 0
+    )
+    {
     fun poster(): String {
         return "https://image.tmdb.org/t/p/w500$posterPath"
     }
@@ -32,6 +36,6 @@ data class Film (
     }
 
     override fun toString(): String {
-        return "Film{id=, title='$name', overview=$detail', poster_path='$posterPath', like='$fav'}"
+        return "Film{id=, title='$name', overview=$detail', poster_path='$posterPath', like='$fav', later='$later'}"
     }
 }
