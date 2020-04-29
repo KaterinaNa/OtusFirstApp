@@ -114,8 +114,7 @@ class FilmsListFragment : Fragment() {
             adapter?.notifyItemChanged(film)
         }
         val laterListener = { film: Film ->
-            val timeZone = TimeZone.getTimeZone("UTC+7")
-            val newCalendar = Calendar.getInstance(timeZone)
+            val newCalendar = Calendar.getInstance()
 
             if(film.showTime > 0) {
                 newCalendar.timeInMillis = film.showTime
