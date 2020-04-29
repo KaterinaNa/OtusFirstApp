@@ -1,5 +1,6 @@
 package com.example.otusfirstapp.presentation.view
 
+import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
 import android.util.Log
@@ -113,19 +114,41 @@ class FilmsListFragment : Fragment() {
             adapter?.notifyItemChanged(film)
         }
         val laterListener = { film: Film ->
-            val saveShowTime = TimePickerDialog.OnTimeSetListener { listeningView, hourOfDay, minute ->
-                viewModel!!.laterFilm(film, Date().time + 30000)
+            val timeZone = TimeZone.getTimeZone("UTC+7")
+            val newCalendar = Calendar.getInstance(timeZone)
+
+            if(film.showTime > 0) {
+                newCalendar.timeInMillis = film.showTime
             }
 
-            val newCalendar = Calendar.getInstance()
-            val startTime = TimePickerDialog(
-                context,
-                saveShowTime,
-                newCalendar[Calendar.HOUR_OF_DAY],
-                newCalendar[Calendar.MINUTE],
-                true
+            val saveShowData = DatePickerDialog.OnDateSetListener { dateView,
+                                                                    year,
+                                                                    monthOfYear,
+                                                                    dayOfMonth ->
+
+                val saveShowTime = TimePickerDialog.OnTimeSetListener { timeView,
+                                                                        hourOfDay,
+                                                                        minute ->
+                    newCalendar.set(year, monthOfYear, dayOfMonth, hourOfDay, minute)
+                    viewModel!!.laterFilm(film, newCalendar.time.time)
+                }
+                val startTime = TimePickerDialog(
+                    context,
+                    saveShowTime,
+                    newCalendar[Calendar.HOUR_OF_DAY],
+                    newCalendar[Calendar.MINUTE],
+                    true
+                )
+                startTime.show()
+            }
+            val startData = DatePickerDialog(
+                context!!,
+                saveShowData,
+                newCalendar[Calendar.YEAR],
+                newCalendar[Calendar.MONTH],
+                newCalendar[Calendar.DAY_OF_MONTH]
             )
-            startTime.show()
+            startData.show()
         }
 
         val detailsListener = { film: Film ->
