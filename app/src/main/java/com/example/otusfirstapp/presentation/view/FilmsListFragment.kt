@@ -1,7 +1,11 @@
 package com.example.otusfirstapp.presentation.view
 
+import android.app.AlarmManager
 import android.app.DatePickerDialog
+import android.app.PendingIntent
 import android.app.TimePickerDialog
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -130,6 +134,17 @@ class FilmsListFragment : Fragment() {
                                                                         minute ->
                     newCalendar.set(year, monthOfYear, dayOfMonth, hourOfDay, minute)
                     viewModel!!.laterFilm(film, newCalendar.time.time)
+
+                    val intent = Intent(context, MainActivity::class.java)
+                    intent.putExtra("filmId", film.id)
+                    val requestCode = 43
+                    val pendIntent = PendingIntent.getActivity(
+                        context, requestCode, intent, PendingIntent.FLAG_CANCEL_CURRENT
+                    )
+                    val alarmManager = activity?.applicationContext?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+                    alarmManager.set(AlarmManager.RTC, newCalendar.time.time, pendIntent)
+
+
                 }
                 val startTime = TimePickerDialog(
                     context,

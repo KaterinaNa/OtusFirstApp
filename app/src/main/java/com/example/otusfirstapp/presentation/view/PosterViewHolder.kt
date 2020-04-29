@@ -45,9 +45,9 @@ class PosterViewHolder(itemView: View,
             ))
             setLater.setImageDrawable(ContextCompat.getDrawable(itemView.context,
                 if (item.showTime > 0)
-                    R.drawable.ic_alarm_on_24px
+                    R.drawable.ic_notifications_24px
                 else
-                    R.drawable.ic_alarm_24px
+                    R.drawable.ic_notifications_none_24px
             ))
         }
 }
