@@ -100,8 +100,8 @@ class FilmsViewModel : ViewModel() {
         return film.fav
     }
 
-    fun deleteLaterFilm(filmId: Int){
-        val later = Later(filmId, 0)
+    fun deleteLaterFilm(film: Film){
+        val later = Later(film.id, 0)
         Db.getInstance()?.getLaterDao()?.deleteLater(later)
     }
 

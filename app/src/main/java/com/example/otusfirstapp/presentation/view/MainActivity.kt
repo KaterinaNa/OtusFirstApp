@@ -8,6 +8,7 @@ import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.otusfirstapp.R
+import com.example.otusfirstapp.data.entity.Film
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 const val API_KEY = "836cbf0813244b3c64888bc53e1975f8"
@@ -71,14 +72,14 @@ class MainActivity : AppCompatActivity(),
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         Log.i(TAG, "onActivityResult $requestCode")
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 42) {
+/*        if (requestCode == 42) {
             if (resultCode == Activity.RESULT_OK) {
                 data?.let {
-                    val filmId = it.getIntExtra("filmId", 0)
+                    val film = intent.getParcelableExtra<Film>("film")
                     openFilmDetailed()
                 }
             }
-        }
+        }*/
     }
 
     private fun onInvite() {

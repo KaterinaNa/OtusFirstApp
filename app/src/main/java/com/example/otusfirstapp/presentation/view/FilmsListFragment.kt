@@ -19,12 +19,12 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.example.otusfirstapp.*
+import com.example.otusfirstapp.App
+import com.example.otusfirstapp.R
 import com.example.otusfirstapp.data.entity.Film
 import com.example.otusfirstapp.presentation.viewmodel.FilmsViewModel
 import com.google.android.material.snackbar.Snackbar
 import java.util.*
-import kotlin.collections.ArrayList
 
 class FilmsListFragment : Fragment() {
     private var listener: OnFilmClickListener? = null
@@ -71,11 +71,12 @@ class FilmsListFragment : Fragment() {
         }
 
         activity?.let {
-            val filmId = it.intent.getIntExtra("film", 0)
-            Log.i(TAG, "filmId $filmId")
-            if (filmId > 0) {
-                viewModel!!.openDetailsById(filmId)
-                viewModel!!.deleteLaterFilm(filmId)
+            it.intent.setExtrasClassLoader(Film::class.java.classLoader)
+            val film = it.intent.getParcelableExtra<Film>("film")
+            Log.i(TAG, "film $film")
+            if (film != null) {
+                viewModel!!.openDetails(film)
+                viewModel!!.deleteLaterFilm(film)
                 listener?.openFilmDetailed()
                 adapter?.notifyItemChanged(film)
             }
@@ -148,7 +149,10 @@ class FilmsListFragment : Fragment() {
                     viewModel!!.laterFilm(film, newCalendar.time.time)
 
                     val intent = Intent(context, NotificationActivity::class.java)
-                    intent.putExtra("filmId", film.id)
+                    intent.setExtrasClassLoader(Film::class.java.classLoader)
+                    val bundle = Bundle()
+                    bundle.putParcelable("film", film)
+                    intent.putExtra("bundle", bundle)
                     val requestCode = 42
                     val pendingIntent = PendingIntent.getActivity(
                         context, requestCode, intent, PendingIntent.FLAG_CANCEL_CURRENT
