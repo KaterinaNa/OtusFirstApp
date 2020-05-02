@@ -62,6 +62,10 @@ class FilmRepository {
         App.instance.db.getFilmRawDao().deleteAll()
     }
 
+    fun getFilmById(id: Int): Film? {
+        return App.instance.db.getFilmRawDao().getById(id)
+    }
+
     companion object {
         const val TAG = "FilmRepository"
     }

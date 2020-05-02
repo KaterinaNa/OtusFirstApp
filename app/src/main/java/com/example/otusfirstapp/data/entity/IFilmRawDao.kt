@@ -31,6 +31,14 @@ interface IFilmRawDao {
         ORDER BY FilmRaw.sort_order""")
     fun getAll(): List<Film?>?
 
+    @Query("""
+        SELECT FilmRaw.*, Fav.fav, Later.show_time
+        FROM FilmRaw
+            LEFT JOIN Fav ON (FilmRaw.id = Fav.film_id)
+            LEFT JOIN Later ON (FilmRaw.id = Later.film_id)
+        WHERE FilmRaw.id = :id""")
+    fun getById(id: Int): Film?
+
     @Query("DELETE FROM FilmRaw")
     fun deleteAll(): Int
 }

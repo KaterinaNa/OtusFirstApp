@@ -88,12 +88,23 @@ class FilmsViewModel : ViewModel() {
         selectedFilmLiveData.postValue(film)
     }
 
+    fun openDetailsById(filmId: Int) {
+        val film = filmInteractor.getFilmById(filmId)
+        selectedFilmLiveData.postValue(film)
+    }
+
     fun likeFilm(film: Film) : Boolean {
         film.fav()
         val fav = Fav(film.id, film.fav)
         Db.getInstance()?.getFavDao()?.insert(fav)
         return film.fav
     }
+
+    fun deleteLaterFilm(filmId: Int){
+        val later = Later(filmId, 0)
+        Db.getInstance()?.getLaterDao()?.deleteLater(later)
+    }
+
 
     fun laterFilm(film: Film, time: Long) : Long {
         film.showTime = time

@@ -63,10 +63,22 @@ class FilmsListFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+
         if (activity is OnFilmClickListener) {
             listener = activity as OnFilmClickListener
         } else {
             throw Exception("Activity must implement OnNewsClickListener")
+        }
+
+        activity?.let {
+            val filmId = it.intent.getIntExtra("film", 0)
+            Log.i(TAG, "filmId $filmId")
+            if (filmId > 0) {
+                viewModel!!.openDetailsById(filmId)
+                viewModel!!.deleteLaterFilm(filmId)
+                listener?.openFilmDetailed()
+                adapter?.notifyItemChanged(film)
+            }
         }
         Log.d(TAG, "onActivityCreated")
     }
@@ -135,16 +147,16 @@ class FilmsListFragment : Fragment() {
                     newCalendar.set(year, monthOfYear, dayOfMonth, hourOfDay, minute)
                     viewModel!!.laterFilm(film, newCalendar.time.time)
 
-                    val intent = Intent(context, MainActivity::class.java)
+                    val intent = Intent(context, NotificationActivity::class.java)
                     intent.putExtra("filmId", film.id)
-                    val requestCode = 43
-                    val pendIntent = PendingIntent.getActivity(
+                    val requestCode = 42
+                    val pendingIntent = PendingIntent.getActivity(
                         context, requestCode, intent, PendingIntent.FLAG_CANCEL_CURRENT
                     )
-                    val alarmManager = activity?.applicationContext?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-                    alarmManager.set(AlarmManager.RTC, newCalendar.time.time, pendIntent)
+                    val alarmManager = App.instance.applicationContext.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+                    alarmManager.set(AlarmManager.RTC, newCalendar.time.time, pendingIntent)
 
-
+                    adapter?.notifyItemChanged(film)
                 }
                 val startTime = TimePickerDialog(
                     context,

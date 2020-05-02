@@ -1,10 +1,10 @@
 package com.example.otusfirstapp.data.entity
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
-import androidx.room.Ignore
-import androidx.room.PrimaryKey
+import kotlinx.android.parcel.Parcelize
 
-
+@Parcelize
 data class Film (
     val id: Int = 0,
 
@@ -25,7 +25,7 @@ data class Film (
 
     @ColumnInfo(name = "show_time")
     var showTime : Long = 0
-) {
+): Parcelable {
 
     fun poster(): String {
         return "https://image.tmdb.org/t/p/w500$posterPath"
