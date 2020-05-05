@@ -48,7 +48,7 @@ class FilmsListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
-        toolbar.title = getString(R.string.filmslist_title)
+        toolbar.title = getString(R.string.later_title)
 
         initRecycler(view)
         initSwipe(view)

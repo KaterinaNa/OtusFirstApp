@@ -21,6 +21,7 @@ class FilmsViewModel : ViewModel() {
     private val errorLiveData = MutableLiveData<Event<String>>()
     private val selectedFilmLiveData = MutableLiveData<Film>()
     private val favoriteFilmsLiveData = MutableLiveData<ArrayList<Film>>()
+    private val laterFilmsLiveData = MutableLiveData<ArrayList<Film>>()
 
     private var currentPage = 1
 
@@ -41,6 +42,9 @@ class FilmsViewModel : ViewModel() {
 
     val favoriteFilms: LiveData<ArrayList<Film>>
         get() = favoriteFilmsLiveData
+
+    val laterFilms: LiveData<ArrayList<Film>>
+        get() = laterFilmsLiveData
 
     private fun getTopFilms(page: Int) {
         filmInteractor.getTopFilms(API_KEY, page,
@@ -111,6 +115,12 @@ class FilmsViewModel : ViewModel() {
         val later = Later(film.id, film.showTime)
         Db.getInstance()?.getLaterDao()?.insert(later)
         return film.showTime
+    }
+
+    fun getLaterFilms() {
+        val films = filmInteractor.getFilms()
+        val laterFilms = films.filter { it.showTime != null} as ArrayList<Film>
+        laterFilmsLiveData.postValue(laterFilms)
     }
 
     fun updateError () {
