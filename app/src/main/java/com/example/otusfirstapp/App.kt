@@ -12,7 +12,8 @@ import com.example.otusfirstapp.data.Db
 import com.example.otusfirstapp.data.FilmService
 import com.example.otusfirstapp.domain.FilmInteractor
 import com.example.otusfirstapp.data.FilmRepository
-import com.example.otusfirstapp.presentation.view.NotificationActivity
+import com.example.otusfirstapp.presentation.view.LaterIntentService
+
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -35,7 +36,7 @@ class App : Application() {
         initRetrofit()
         initInterator()
         initDb()
-        createNitificationChannel()
+        createNotificationChannel()
         sharedPref = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
     }
 
@@ -69,12 +70,12 @@ class App : Application() {
 
     }
 
-    fun createNitificationChannel() {
+    fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val notificationManager = NotificationManagerCompat.from(this)
             val name = "Вы хотели посмотреть"
             val importance = NotificationManager.IMPORTANCE_DEFAULT
-            val channel = NotificationChannel(NotificationActivity.CHANNEL_ID, name, importance)
+            val channel = NotificationChannel(LaterIntentService.CHANNEL_ID, name, importance)
             notificationManager.createNotificationChannel(channel)
         }
     }

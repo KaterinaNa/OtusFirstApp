@@ -79,6 +79,7 @@ class FilmsListFragment : Fragment() {
                 viewModel!!.deleteLaterFilm(film)
                 listener?.openFilmDetailed()
                 adapter?.notifyItemChanged(film)
+                it.intent.replaceExtras(Bundle())
             }
         }
         Log.d(TAG, "onActivityCreated")
@@ -148,13 +149,13 @@ class FilmsListFragment : Fragment() {
                     newCalendar.set(year, monthOfYear, dayOfMonth, hourOfDay, minute)
                     viewModel!!.laterFilm(film, newCalendar.time.time)
 
-                    val intent = Intent(context, NotificationActivity::class.java)
+                    val intent = Intent(context, LaterIntentService::class.java)
                     intent.setExtrasClassLoader(Film::class.java.classLoader)
                     val bundle = Bundle()
                     bundle.putParcelable("film", film)
                     intent.putExtra("bundle", bundle)
                     val requestCode = 42
-                    val pendingIntent = PendingIntent.getActivity(
+                    val pendingIntent = PendingIntent.getService(
                         context, requestCode, intent, PendingIntent.FLAG_CANCEL_CURRENT
                     )
                     val alarmManager = App.instance.applicationContext.getSystemService(Context.ALARM_SERVICE) as AlarmManager
@@ -170,6 +171,7 @@ class FilmsListFragment : Fragment() {
                     true
                 )
                 startTime.show()
+
             }
             val startData = DatePickerDialog(
                 context!!,
@@ -179,6 +181,7 @@ class FilmsListFragment : Fragment() {
                 newCalendar[Calendar.DAY_OF_MONTH]
             )
             startData.show()
+            adapter?.notifyItemChanged(film)
         }
 
         val detailsListener = { film: Film ->
