@@ -59,6 +59,17 @@ class MainActivity : AppCompatActivity(),
                         .commit()
                     true
                 }
+                R.id.bottom_navigator_later -> {
+                    supportFragmentManager
+                        .beginTransaction()
+                        .replace(
+                            R.id.fragmentContainer,
+                            LaterFilmFragment(),
+                            LaterFilmFragment.TAG
+                        )
+                        .commit()
+                    true
+                }
                 R.id.bottom_navigator_share -> {
                     onInvite()
                     true

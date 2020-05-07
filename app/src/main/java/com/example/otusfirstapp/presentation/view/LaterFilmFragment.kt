@@ -1,5 +1,11 @@
 package com.example.otusfirstapp.presentation.view
 
+import android.app.AlarmManager
+import android.app.DatePickerDialog
+import android.app.PendingIntent
+import android.app.TimePickerDialog
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,9 +19,12 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.example.otusfirstapp.App
 import com.example.otusfirstapp.R
 import com.example.otusfirstapp.data.entity.Film
 import com.example.otusfirstapp.presentation.viewmodel.FilmsViewModel
+import java.util.*
+import kotlin.collections.ArrayList
 
 class LaterFilmFragment : Fragment() {
     private var listener: OnFilmClickListener? = null
@@ -39,12 +48,12 @@ class LaterFilmFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
-        toolbar.title = getString(R.string.favorites_title)
+        toolbar.title = getString(R.string.later_title)
 
         initRecycler(view)
         initViewModel(view)
 
-        viewModel!!.getFavoriteFilms()
+        viewModel!!.getLaterFilms()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -89,8 +98,56 @@ class LaterFilmFragment : Fragment() {
             listener?.openFilmDetailed()
         }
 
-        val laterListener = { film: Film, time : Long -> Unit
-            viewModel!!.laterFilm(film)
+        val laterListener = { film: Film ->
+            val newCalendar = Calendar.getInstance()
+
+            if(film.showTime > 0) {
+                newCalendar.timeInMillis = film.showTime
+            }
+
+            val saveShowData = DatePickerDialog.OnDateSetListener { dateView,
+                                                                    year,
+                                                                    monthOfYear,
+                                                                    dayOfMonth ->
+
+                val saveShowTime = TimePickerDialog.OnTimeSetListener { timeView,
+                                                                        hourOfDay,
+                                                                        minute ->
+                    newCalendar.set(year, monthOfYear, dayOfMonth, hourOfDay, minute)
+                    viewModel!!.laterFilm(film, newCalendar.time.time)
+
+                    val intent = Intent(context, LaterIntentService::class.java)
+                    intent.setExtrasClassLoader(Film::class.java.classLoader)
+                    val bundle = Bundle()
+                    bundle.putParcelable("film", film)
+                    intent.putExtra("bundle", bundle)
+                    val requestCode = 42
+                    val pendingIntent = PendingIntent.getService(
+                        context, requestCode, intent, PendingIntent.FLAG_CANCEL_CURRENT
+                    )
+                    val alarmManager = App.instance.applicationContext.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+                    alarmManager.set(AlarmManager.RTC, newCalendar.time.time, pendingIntent)
+
+                    adapter?.notifyItemChanged(film)
+                }
+                val startTime = TimePickerDialog(
+                    context,
+                    saveShowTime,
+                    newCalendar[Calendar.HOUR_OF_DAY],
+                    newCalendar[Calendar.MINUTE],
+                    true
+                )
+                startTime.show()
+
+            }
+            val startData = DatePickerDialog(
+                context!!,
+                saveShowData,
+                newCalendar[Calendar.YEAR],
+                newCalendar[Calendar.MONTH],
+                newCalendar[Calendar.DAY_OF_MONTH]
+            )
+            startData.show()
             adapter?.notifyItemChanged(film)
         }
 

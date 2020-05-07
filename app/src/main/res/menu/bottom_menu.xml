@@ -10,6 +10,10 @@
         android:id="@+id/bottom_navigator_fav"
         android:icon="@drawable/ic_star_24px"
         android:title="Favorite"/>
+    <item
+        android:id="@+id/bottom_navigator_later"
+        android:icon="@drawable/ic_notifications_24px"
+        android:title="Later"/>
 
     <item
         android:id="@+id/bottom_navigator_share"

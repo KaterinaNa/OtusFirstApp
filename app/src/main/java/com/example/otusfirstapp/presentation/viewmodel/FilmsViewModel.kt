@@ -119,7 +119,7 @@ class FilmsViewModel : ViewModel() {
 
     fun getLaterFilms() {
         val films = filmInteractor.getFilms()
-        val laterFilms = films.filter { it.showTime != null} as ArrayList<Film>
+        val laterFilms = films.filter { it.showTime > 0} as ArrayList<Film>
         laterFilmsLiveData.postValue(laterFilms)
     }
 
