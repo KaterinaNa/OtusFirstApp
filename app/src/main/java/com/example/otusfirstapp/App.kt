@@ -6,19 +6,22 @@ import android.app.NotificationManager
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Build
+import android.util.Log
 import androidx.core.app.NotificationManagerCompat
 import com.example.otusfirstapp.data.AppDb
 import com.example.otusfirstapp.data.Db
+import com.example.otusfirstapp.data.FilmRepository
+import com.example.otusfirstapp.data.FilmRepository.Companion.TAG
 import com.example.otusfirstapp.data.FilmService
 import com.example.otusfirstapp.domain.FilmInteractor
-import com.example.otusfirstapp.data.FilmRepository
 import com.example.otusfirstapp.presentation.view.LaterIntentService
-
+import com.google.firebase.iid.FirebaseInstanceId
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+
 
 class App : Application() {
 
@@ -39,6 +42,7 @@ class App : Application() {
         createNotificationChannel()
         sharedPref = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
     }
+
 
     private fun initInterator () {
         val filmRepository = FilmRepository()
@@ -86,5 +90,6 @@ class App : Application() {
 
     companion object {
         lateinit var instance: App
+        const val TAG = "Token"
     }
 }

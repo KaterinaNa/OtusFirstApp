@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "736638473193",
+    "firebase_url": "https://otusfirstapp.firebaseio.com",
+    "project_id": "otusfirstapp",
+    "storage_bucket": "otusfirstapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:736638473193:android:9fd4a0e525083bf65f7178",
+        "android_client_info": {
+          "package_name": "com.example.otusfirstapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "736638473193-0jdr3dpjh3vc5je67i9ngrfq2mco1ma1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfSsl-yzghyBF15bqGcfMD3ECml_hPVfM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "736638473193-0jdr3dpjh3vc5je67i9ngrfq2mco1ma1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

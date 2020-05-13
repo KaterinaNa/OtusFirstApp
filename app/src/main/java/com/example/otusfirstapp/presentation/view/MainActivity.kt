@@ -5,11 +5,14 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.otusfirstapp.R
 import com.example.otusfirstapp.data.entity.Film
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.iid.FirebaseInstanceId
 
 const val API_KEY = "836cbf0813244b3c64888bc53e1975f8"
 
@@ -77,6 +80,20 @@ class MainActivity : AppCompatActivity(),
                 else -> false
             }
         }
+
+        FirebaseInstanceId.getInstance().instanceId
+            .addOnCompleteListener(OnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    Log.w(TAG, "getInstanceId failed", task.exception)
+                    return@OnCompleteListener
+                }
+
+                // Get new Instance ID token
+                val token = task.result?.token
+
+                Log.d(TAG, "token: $token")
+                Toast.makeText(baseContext, token, Toast.LENGTH_LONG).show()
+            })
 
     }
 
