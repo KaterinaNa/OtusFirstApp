@@ -1,4 +1,4 @@
-package com.example.otusfirstapp
+package com.example.otusfirstapp.data.entity
 
 import com.google.gson.annotations.SerializedName
 
@@ -19,5 +19,14 @@ data class Film (
 ) {
     fun poster(): String {
         return "https://image.tmdb.org/t/p/w500$posterPath"
+    }
+
+    fun like(state: Boolean? = null): Boolean {
+        like = if (state == null) {
+            !like
+        } else {
+            state
+        }
+        return like
     }
 }

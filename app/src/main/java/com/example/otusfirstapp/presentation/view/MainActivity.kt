@@ -1,51 +1,34 @@
-package com.example.otusfirstapp
+package com.example.otusfirstapp.presentation.view
 
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.otusfirstapp.OtusFirstApp
+import com.example.otusfirstapp.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 const val API_KEY = "836cbf0813244b3c64888bc53e1975f8"
 
-var currentPage = 0
-lateinit var items: ArrayList<Film>
-
-class MainActivity : AppCompatActivity(), OnNewsClickListener {
+class MainActivity : AppCompatActivity(),
+    OnFilmClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val apiService = OtusFirstApp.instance?.service
+        lifecycle.addObserver(OtusFirstApp.instance.filmsUpdater)
 
         if (savedInstanceState == null) {
-            currentPage = 0
-
-            apiService?.getTopRatedMovies(API_KEY, ++currentPage)?.enqueue(object : Callback<FilmsResponse> {
-                override fun onFailure(call: Call<FilmsResponse>, t: Throwable) {
-                    Log.e(TAG, t.toString())
-                }
-
-                override fun onResponse(
-                    call: Call<FilmsResponse>,
-                    response: Response<FilmsResponse>
-                ) {
-                    val res = response.body()?.results
-                    if (res == null) return
-
-                    items = res
-                    supportFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.fragmentContainer, FilmsListFragment(), FilmsListFragment.TAG)
-                        .commit()
-                }
-            })
+            supportFragmentManager
+                .beginTransaction()
+                .replace(
+                    R.id.fragmentContainer,
+                    FilmsListFragment(),
+                    FilmsListFragment.TAG
+                )
+                .commit()
         }
 
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
@@ -57,14 +40,22 @@ class MainActivity : AppCompatActivity(), OnNewsClickListener {
                 R.id.bottom_navigator_home -> {
                     supportFragmentManager
                         .beginTransaction()
-                        .replace(R.id.fragmentContainer, FilmsListFragment(), FilmsListFragment.TAG)
+                        .replace(
+                            R.id.fragmentContainer,
+                            FilmsListFragment(),
+                            FilmsListFragment.TAG
+                        )
                         .commit()
                     true
                 }
                 R.id.bottom_navigator_fav -> {
                     supportFragmentManager
                         .beginTransaction()
-                        .replace(R.id.fragmentContainer, FavoritesFragment(), FavoritesFragment.TAG)
+                        .replace(
+                            R.id.fragmentContainer,
+                            FavoritesFragment(),
+                            FavoritesFragment.TAG
+                        )
                         .commit()
                     true
                 }
@@ -90,12 +81,12 @@ class MainActivity : AppCompatActivity(), OnNewsClickListener {
         }
     }
 
-    override fun openNewsDetailed(filmId: Int) {
+    override fun openFilmDetailed() {
         supportFragmentManager
             .beginTransaction()
             .replace(
                 R.id.fragmentContainer,
-                DetailsFragment.newInstance(filmId),
+                DetailsFragment(),
                 DetailsFragment.TAG
             )
             .addToBackStack(null)
