@@ -73,8 +73,8 @@ class FilmInteractor(private val filmService: FilmService, private val filmRepos
         filmRepository.clearCache()
     }
 
-    fun getFilmById(id: Int): Film {
-        return filmRepository.cachedOrFakeFilms[id]
+    fun getFilmById(id: Int): Film? {
+        return filmRepository.getFilmById(id)
     }
 
     companion object {

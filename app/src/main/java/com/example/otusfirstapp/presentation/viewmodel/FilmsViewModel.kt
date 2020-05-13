@@ -9,6 +9,7 @@ import com.example.otusfirstapp.data.Db
 import com.example.otusfirstapp.data.entity.Event
 import com.example.otusfirstapp.data.entity.Fav
 import com.example.otusfirstapp.data.entity.Film
+import com.example.otusfirstapp.data.entity.Later
 import com.example.otusfirstapp.domain.FilmInteractor
 import com.example.otusfirstapp.domain.GetTopFilmsCallback
 import com.example.otusfirstapp.presentation.view.API_KEY
@@ -20,6 +21,7 @@ class FilmsViewModel : ViewModel() {
     private val errorLiveData = MutableLiveData<Event<String>>()
     private val selectedFilmLiveData = MutableLiveData<Film>()
     private val favoriteFilmsLiveData = MutableLiveData<ArrayList<Film>>()
+    private val laterFilmsLiveData = MutableLiveData<ArrayList<Film>>()
 
     private var currentPage = 1
 
@@ -40,6 +42,9 @@ class FilmsViewModel : ViewModel() {
 
     val favoriteFilms: LiveData<ArrayList<Film>>
         get() = favoriteFilmsLiveData
+
+    val laterFilms: LiveData<ArrayList<Film>>
+        get() = laterFilmsLiveData
 
     private fun getTopFilms(page: Int) {
         filmInteractor.getTopFilms(API_KEY, page,
@@ -87,11 +92,35 @@ class FilmsViewModel : ViewModel() {
         selectedFilmLiveData.postValue(film)
     }
 
+    fun openDetailsById(filmId: Int) {
+        val film = filmInteractor.getFilmById(filmId)
+        selectedFilmLiveData.postValue(film)
+    }
+
     fun likeFilm(film: Film) : Boolean {
         film.fav()
         val fav = Fav(film.id, film.fav)
         Db.getInstance()?.getFavDao()?.insert(fav)
         return film.fav
+    }
+
+    fun deleteLaterFilm(film: Film){
+        val later = Later(film.id, 0)
+        Db.getInstance()?.getLaterDao()?.deleteLater(later)
+    }
+
+
+    fun laterFilm(film: Film, time: Long) : Long {
+        film.showTime = time
+        val later = Later(film.id, film.showTime)
+        Db.getInstance()?.getLaterDao()?.insert(later)
+        return film.showTime
+    }
+
+    fun getLaterFilms() {
+        val films = filmInteractor.getFilms()
+        val laterFilms = films.filter { it.showTime > 0} as ArrayList<Film>
+        laterFilmsLiveData.postValue(laterFilms)
     }
 
     fun updateError () {
