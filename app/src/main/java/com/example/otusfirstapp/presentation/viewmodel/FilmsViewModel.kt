@@ -4,27 +4,35 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.otusfirstapp.OtusFirstApp
+import com.example.otusfirstapp.App
+import com.example.otusfirstapp.data.Db
+import com.example.otusfirstapp.data.entity.Event
+import com.example.otusfirstapp.data.entity.Fav
 import com.example.otusfirstapp.data.entity.Film
 import com.example.otusfirstapp.domain.FilmInteractor
 import com.example.otusfirstapp.domain.GetTopFilmsCallback
 import com.example.otusfirstapp.presentation.view.API_KEY
-import com.example.otusfirstapp.presentation.view.FilmsListFragment
+import java.util.*
+import kotlin.collections.ArrayList
 
 class FilmsViewModel : ViewModel() {
     private val filmsLiveData = MutableLiveData<ArrayList<Film>>()
-    private val errorLiveData = MutableLiveData<String>()
+    private val errorLiveData = MutableLiveData<Event<String>>()
     private val selectedFilmLiveData = MutableLiveData<Film>()
     private val favoriteFilmsLiveData = MutableLiveData<ArrayList<Film>>()
 
     private var currentPage = 1
 
-    private val filmInteractor: FilmInteractor = OtusFirstApp.instance.filmInteractor
+    init {
+        Log.i(TAG, "ViewModel created $currentPage")
+    }
+
+    private val filmInteractor: FilmInteractor = App.instance.filmInteractor
 
     val films: LiveData<ArrayList<Film>>
         get() = filmsLiveData
 
-    val error: LiveData<String>
+    val error: LiveData<Event<String>>
         get() = errorLiveData
 
     val selectedFilm: LiveData<Film>
@@ -33,28 +41,44 @@ class FilmsViewModel : ViewModel() {
     val favoriteFilms: LiveData<ArrayList<Film>>
         get() = favoriteFilmsLiveData
 
-
-    fun getTopFilms(page: Int) {
+    private fun getTopFilms(page: Int) {
         filmInteractor.getTopFilms(API_KEY, page,
-            object : GetTopFilmsCallback {
-                override fun onSuccess(films: ArrayList<Film>) {
-                    filmsLiveData.postValue(films)
-                }
+        object : GetTopFilmsCallback {
+            override fun onSuccess(films: ArrayList<Film>) {
+                filmsLiveData.postValue(films)
+            }
 
-                override fun onError(error: String) {
-                    errorLiveData.postValue(error)
-                }
-            })
+            override fun onError(error: String) {
+                errorLiveData.postValue(Event("${error} "))
+            }
+        })
+    }
+
+    fun startGetTopFilms() {
+        currentPage = 1
+        Log.i(TAG, "startOverGetTopFilms $currentPage")
+        return getTopFilms(currentPage)
+
+    }
+
+    fun resetCache() {
+        filmInteractor.clearFilms()
+        filmsLiveData.postValue(arrayListOf())
     }
 
     fun getTopFilmsNextPage() {
+        Log.i(TAG, "getTopFilmsNextPage $currentPage")
         return getTopFilms(++currentPage)
-        Log.i(FilmsListFragment.TAG, "++currentpage")
+    }
+
+    fun retryTopFilms() {
+        Log.i(TAG, "retryTopFilms $currentPage")
+        return getTopFilms(currentPage)
     }
 
     fun getFavoriteFilms() {
         val films = filmInteractor.getFilms()
-        val likedFilms = films.filter { it.like } as ArrayList<Film>
+        val likedFilms = films.filter { it.fav } as ArrayList<Film>
         favoriteFilmsLiveData.postValue(likedFilms)
     }
 
@@ -64,9 +88,18 @@ class FilmsViewModel : ViewModel() {
     }
 
     fun likeFilm(film: Film) : Boolean {
-        return film.like()
+        film.fav()
+        val fav = Fav(film.id, film.fav)
+        Db.getInstance()?.getFavDao()?.insert(fav)
+        return film.fav
     }
 
+    fun updateError () {
 
+    }
+
+    companion object {
+        const val TAG = "FilmsViewModel"
+    }
 }
 

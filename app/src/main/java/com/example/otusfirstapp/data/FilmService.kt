@@ -23,7 +23,7 @@ interface FilmService {
         @Path("id")
         id: Int,
 
-        @Query("api-key")
+        @Query("api_key")
         apiKey: String
     ): Call<Film>
 }

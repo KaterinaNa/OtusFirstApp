@@ -10,6 +10,7 @@
     <string name="favorites_title">Favorites</string>
     <string name="filmslist_title">Films list</string>
     <string name="added_to_favorites">Added to favorite</string>
+    <string name="cash_problem">Update problem</string>
     <string name="deleted_from_favorites">Deleted from favorites</string>
     <string name="share_into">Share</string>
     <string name="exit_ask">Are you sure you want to exit?</string>
