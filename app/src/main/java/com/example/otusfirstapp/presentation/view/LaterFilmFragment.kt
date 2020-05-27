@@ -70,11 +70,11 @@ class LaterFilmFragment : Fragment() {
     private fun initViewModel(view: View) {
         viewModel = ViewModelProvider(activity!!).get(FilmsViewModel::class.java)
 
-        viewModel!!.laterFilms.observe(
-            viewLifecycleOwner,
-            Observer<ArrayList<Film>> { films ->
-                adapter!!.setItems(films)
-            })
+        val laterFilmsObserver = viewModel!!.laterFilmsSubject.subscribe({ films ->
+            adapter!!.setItems(films)
+        }){
+            Log.e(TAG, it.toString())
+        }
     }
 
     private fun initSwipe(view: View) {
@@ -94,8 +94,8 @@ class LaterFilmFragment : Fragment() {
         }
         val detailsListener = { film: Film ->
             Log.i(TAG, "Details clicked $film")
-            viewModel!!.openDetails(film)
             listener?.openFilmDetailed()
+            viewModel!!.openDetails(film)
         }
 
         val laterListener = { film: Film ->

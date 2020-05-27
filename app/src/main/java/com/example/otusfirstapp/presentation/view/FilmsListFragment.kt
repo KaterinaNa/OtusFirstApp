@@ -13,7 +13,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
@@ -75,9 +74,9 @@ class FilmsListFragment : Fragment() {
             val film = it.intent.getParcelableExtra<Film>("film")
             Log.i(TAG, "film $film")
             if (film != null) {
-                viewModel!!.openDetails(film)
                 viewModel!!.deleteLaterFilm(film)
                 listener?.openFilmDetailed()
+                viewModel!!.openDetails(film)
                 adapter?.notifyItemChanged(film)
                 it.intent.replaceExtras(Bundle())
             }
@@ -98,22 +97,22 @@ class FilmsListFragment : Fragment() {
     private fun initViewModel(view: View) {
         viewModel = ViewModelProvider(activity!!).get(FilmsViewModel::class.java)
 
-        viewModel!!.films.observe(
-            viewLifecycleOwner,
-            Observer<ArrayList<Film>> { films ->
-                adapter!!.setItems(films)
-                Log.i(TAG, "films update ${films.size}")
-                if (films.size > 0) swipeLayout?.isRefreshing = false
-            })
-        viewModel!!.error.observe(
-            viewLifecycleOwner,
-            Observer {
-                it.getContentIfNotHandled().let {
-                    if (it != null) snackBarError(it)
-                    swipeLayout?.isRefreshing = false
-                }
+        val filmsObserver = viewModel!!.filmsSubject.subscribe({ films ->
+            adapter!!.setItems(films)
+            Log.i(TAG, "films update ${films.size}")
+            if (films.size > 0) swipeLayout?.isRefreshing = false
+        }){
+            Log.e(TAG, it.toString())
+        }
+
+        val errorObserver = viewModel!!.errorSubject.subscribe({
+            it.getContentIfNotHandled().let {
+                if (it != null) snackBarError(it)
+                swipeLayout?.isRefreshing = false
             }
-        )
+        }){
+            Log.e(TAG, it.toString())
+        }
     }
 
     private fun initSwipe(view: View) {
@@ -186,8 +185,8 @@ class FilmsListFragment : Fragment() {
 
         val detailsListener = { film: Film ->
             Log.i(TAG, "Details clicked $film")
-            viewModel!!.openDetails(film)
             listener?.openFilmDetailed()
+            viewModel!!.openDetails(film)
         }
 
         val layoutManager = GridLayoutManager(context, 2)

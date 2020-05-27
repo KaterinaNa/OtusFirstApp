@@ -13,15 +13,17 @@ import com.example.otusfirstapp.data.entity.Later
 import com.example.otusfirstapp.domain.FilmInteractor
 import com.example.otusfirstapp.domain.GetTopFilmsCallback
 import com.example.otusfirstapp.presentation.view.API_KEY
-import java.util.*
+import io.reactivex.Observable
+import io.reactivex.subjects.BehaviorSubject
+import io.reactivex.subjects.PublishSubject
 import kotlin.collections.ArrayList
 
 class FilmsViewModel : ViewModel() {
-    private val filmsLiveData = MutableLiveData<ArrayList<Film>>()
-    private val errorLiveData = MutableLiveData<Event<String>>()
-    private val selectedFilmLiveData = MutableLiveData<Film>()
-    private val favoriteFilmsLiveData = MutableLiveData<ArrayList<Film>>()
-    private val laterFilmsLiveData = MutableLiveData<ArrayList<Film>>()
+    val filmsSubject = PublishSubject.create<ArrayList<Film>>()
+    val errorSubject = PublishSubject.create<Event<String>>()
+    val selectedFilmSubject = BehaviorSubject.create<Film>()
+    val favoriteFilmsSubject = PublishSubject.create<ArrayList<Film>>()
+    val laterFilmsSubject = PublishSubject.create<ArrayList<Film>>()
 
     private var currentPage = 1
 
@@ -31,30 +33,17 @@ class FilmsViewModel : ViewModel() {
 
     private val filmInteractor: FilmInteractor = App.instance.filmInteractor
 
-    val films: LiveData<ArrayList<Film>>
-        get() = filmsLiveData
-
-    val error: LiveData<Event<String>>
-        get() = errorLiveData
-
-    val selectedFilm: LiveData<Film>
-        get() = selectedFilmLiveData
-
-    val favoriteFilms: LiveData<ArrayList<Film>>
-        get() = favoriteFilmsLiveData
-
-    val laterFilms: LiveData<ArrayList<Film>>
-        get() = laterFilmsLiveData
 
     private fun getTopFilms(page: Int) {
         filmInteractor.getTopFilms(API_KEY, page,
         object : GetTopFilmsCallback {
             override fun onSuccess(films: ArrayList<Film>) {
-                filmsLiveData.postValue(films)
+//                filmsObservable.doOnNext(films)
+                filmsSubject.onNext(films)
             }
 
             override fun onError(error: String) {
-                errorLiveData.postValue(Event("${error} "))
+                errorSubject.onNext(Event("${error} "))
             }
         })
     }
@@ -68,7 +57,7 @@ class FilmsViewModel : ViewModel() {
 
     fun resetCache() {
         filmInteractor.clearFilms()
-        filmsLiveData.postValue(arrayListOf())
+        filmsSubject.onNext(arrayListOf())
     }
 
     fun getTopFilmsNextPage() {
@@ -84,17 +73,17 @@ class FilmsViewModel : ViewModel() {
     fun getFavoriteFilms() {
         val films = filmInteractor.getFilms()
         val likedFilms = films.filter { it.fav } as ArrayList<Film>
-        favoriteFilmsLiveData.postValue(likedFilms)
+        favoriteFilmsSubject.onNext(likedFilms)
     }
 
 
     fun openDetails(film: Film) {
-        selectedFilmLiveData.postValue(film)
+        selectedFilmSubject.onNext(film)
     }
 
     fun openDetailsById(filmId: Int) {
         val film = filmInteractor.getFilmById(filmId)
-        selectedFilmLiveData.postValue(film)
+        selectedFilmSubject.onNext(film!!)
     }
 
     fun likeFilm(film: Film) : Boolean {
@@ -120,7 +109,7 @@ class FilmsViewModel : ViewModel() {
     fun getLaterFilms() {
         val films = filmInteractor.getFilms()
         val laterFilms = films.filter { it.showTime > 0} as ArrayList<Film>
-        laterFilmsLiveData.postValue(laterFilms)
+        laterFilmsSubject.onNext(laterFilms)
     }
 
     fun updateError () {

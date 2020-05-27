@@ -43,13 +43,12 @@ class MessagingService: FirebaseMessagingService() {
 
         }
 
-        // Check if message contains a notification payload.
+
         if (remoteMessage.notification != null) {
             Log.i(TAG, "Message Notification Body: " + remoteMessage.notification!!.body)
         }
 
-        // Also if you intend on generating your own notifications as a result of a received FCM
-        // message, here is where that should be initiated. See sendNotification method below.
+
         val filmId = remoteMessage.data.get("filmId")
         if (filmId == null) return
         val film = App.instance.filmInteractor.getFilmById(filmId.toInt())

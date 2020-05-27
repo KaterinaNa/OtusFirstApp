@@ -62,11 +62,11 @@ class FavoritesFragment : Fragment() {
     private fun initViewModel(view: View) {
         viewModel = ViewModelProvider(activity!!).get(FilmsViewModel::class.java)
 
-        viewModel!!.favoriteFilms.observe(
-            viewLifecycleOwner,
-            Observer<ArrayList<Film>> { films ->
+        val favoriteFilmObserver = viewModel!!.favoriteFilmsSubject.subscribe({ films ->
                 adapter!!.setItems(films)
-            })
+        }){
+            Log.e(TAG, it.toString())
+        }
     }
 
     private fun initSwipe(view: View) {
@@ -86,8 +86,8 @@ class FavoritesFragment : Fragment() {
         }
         val detailsListener = { film: Film ->
             Log.i(TAG, "Details clicked $film")
-            viewModel!!.openDetails(film)
             listener?.openFilmDetailed()
+            viewModel!!.openDetails(film)
         }
 
         val laterListener = { _: Film -> Unit }
