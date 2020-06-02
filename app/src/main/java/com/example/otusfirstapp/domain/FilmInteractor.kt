@@ -12,7 +12,10 @@ import retrofit2.Response
 import java.util.*
 import kotlin.collections.ArrayList
 
-class FilmInteractor(private val filmService: FilmService, private val filmRepository: FilmRepository) {
+class FilmInteractor(private val filmService: FilmService) {
+
+    @Inject
+    private val filmRepository: FilmRepository
 
     fun getTopFilms(apiKey: String, page: Int, callback: GetTopFilmsCallback) {
         callback.onSuccess(getFilms())
