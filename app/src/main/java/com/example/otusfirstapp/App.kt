@@ -48,8 +48,7 @@ class App : Application() {
         val filmRepository = FilmRepository()
 
         filmInteractor = FilmInteractor(
-            filmService,
-            filmRepository
+            filmService
         )
     }
 
