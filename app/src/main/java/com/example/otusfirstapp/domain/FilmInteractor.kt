@@ -13,12 +13,10 @@ import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
 
-class FilmInteractor() {
+class FilmInteractor( var filmService: FilmService) {
 
     @Inject
     lateinit var filmRepository: FilmRepository
-    @Inject
-    lateinit var filmService: FilmService
 
     fun getTopFilms(apiKey: String, page: Int, callback: GetTopFilmsCallback) {
         callback.onSuccess(getFilms())
