@@ -35,11 +35,19 @@
 
     <style name="button">
         <item name="android:layout_width">125dp</item>
-        <item name="android:layout_marginTop">24dp</item>
+        <item name="android:layout_marginTop">12dp</item>
         <item name="android:layout_marginBottom">24dp</item>
         <item name="android:layout_height">50dp</item>
         <item name="android:fontFamily">casual</item>
         <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="iconStyle">
+        <item name="android:layout_width">24dp</item>
+        <item name="android:layout_height">24dp</item>
+        <item name="android:layout_marginStart">24dp</item>
+        <item name="android:layout_marginEnd">48dp</item>
+        <item name="android:layout_marginTop">24dp</item>
     </style>
 
 </resources>

@@ -8,6 +8,7 @@
     <string name="addPoster">Add</string>
     <string name="delPoster">Delete</string>
     <string name="favorites_title">Favorites</string>
+    <string name="later_title">LaterList</string>
     <string name="filmslist_title">Films list</string>
     <string name="added_to_favorites">Added to favorite</string>
     <string name="cash_problem">Update problem</string>

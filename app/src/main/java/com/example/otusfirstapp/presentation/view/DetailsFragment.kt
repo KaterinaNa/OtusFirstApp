@@ -51,10 +51,11 @@ class DetailsFragment : Fragment() {
                 .into(filmImage)
         }
 
-        viewModel.selectedFilm.observe(
-            viewLifecycleOwner,
-            Observer<Film> { render(it) }
-        )
+        val selectedFilmObserval = viewModel.selectedFilmSubject.subscribe({
+            render(it)
+        }){
+            Log.e(TAG, it.toString())
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

@@ -10,9 +10,13 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
+import javax.inject.Inject
 import kotlin.collections.ArrayList
 
-class FilmInteractor(private val filmService: FilmService, private val filmRepository: FilmRepository) {
+class FilmInteractor( var filmService: FilmService) {
+
+    @Inject
+    lateinit var filmRepository: FilmRepository
 
     fun getTopFilms(apiKey: String, page: Int, callback: GetTopFilmsCallback) {
         callback.onSuccess(getFilms())
@@ -73,8 +77,8 @@ class FilmInteractor(private val filmService: FilmService, private val filmRepos
         filmRepository.clearCache()
     }
 
-    fun getFilmById(id: Int): Film {
-        return filmRepository.cachedOrFakeFilms[id]
+    fun getFilmById(id: Int): Film? {
+        return filmRepository.getFilmById(id)
     }
 
     companion object {

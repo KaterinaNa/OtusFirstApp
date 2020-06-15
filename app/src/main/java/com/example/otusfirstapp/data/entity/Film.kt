@@ -1,9 +1,10 @@
 package com.example.otusfirstapp.data.entity
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
-import androidx.room.PrimaryKey
+import kotlinx.android.parcel.Parcelize
 
-
+@Parcelize
 data class Film (
     val id: Int = 0,
 
@@ -20,8 +21,12 @@ data class Film (
     var sortOrder: Int = 0,
 
     @ColumnInfo(name = "fav")
-    var fav : Boolean = false
-) {
+    var fav : Boolean = false,
+
+    @ColumnInfo(name = "show_time")
+    var showTime : Long = 0
+): Parcelable {
+
     fun poster(): String {
         return "https://image.tmdb.org/t/p/w500$posterPath"
     }
@@ -32,6 +37,6 @@ data class Film (
     }
 
     override fun toString(): String {
-        return "Film{id=, title='$name', overview=$detail', poster_path='$posterPath', like='$fav'}"
+        return "Film{id=, title='$name', overview=$detail', poster_path='$posterPath', like='$fav', later='$showTime'}"
     }
 }
